@@ -70,12 +70,7 @@ export const PortfolioSection = () => {
         </div>
 
         <div className="text-center">
-          <Button
-            variant="outline"
-            className="border-gray-800 text-gray-800 hover:text-white hover:bg-gray-800"
-          >
-            View All Projects
-          </Button>
+          <Button>View All Projects</Button>
         </div>
       </div>
     </section>
