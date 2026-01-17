@@ -3,7 +3,7 @@ import { Button } from "../common/Button";
 
 export const BlogSection = () => {
   return (
-    <section id="blog" className="py-24 px-6">
+    <section id="blog" className="py-24 px-6 bg-texture-floral">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-16">
           <h2 className="text-4xl font-display">Our Decor Blog</h2>

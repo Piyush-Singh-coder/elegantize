@@ -2,7 +2,7 @@ import { services } from "../../data/content";
 
 export const ServicesGrid = () => {
   return (
-    <section id="services" className="py-24 px-6 bg-white">
+    <section id="services" className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-gray-900">

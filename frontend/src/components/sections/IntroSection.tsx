@@ -1,36 +1,45 @@
 export const IntroSection = () => {
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto text-center">
-      <h1 className="text-4xl md:text-6xl font-display leading-tight mb-8">
-        Luxury Wedding Decor & Design in New York <br /> & New Jersey
-      </h1>
-      <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg mb-8">
-        At Elegantize, we believe your wedding should feel as extraordinary as
-        your love story. Every couple is unique — and so should be their wedding
-        décor. Our design team blends creativity, technical expertise, and
-        luxury styling to produce weddings that are deeply personal and visually
-        breathtaking.
-      </p>
-      <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg mb-16">
-        Serving New York City, New Jersey, and surrounding areas, we work with
-        couples, planners, and venues to deliver wedding environments that feel
-        elegant, seamless, and unforgettable.
-      </p>
+    <section className="py-32 px-6 bg-stone-950 text-white relative overflow-hidden">
+      {/* Subtle Texture Overlay */}
+      <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
-      {/* Branding / Featured In Strip */}
-      <div className="border-t border-b border-gray-100 py-8">
-        <p className="text-xs uppercase tracking-[0.3em] mb-8 text-gray-400">
-          Also Featured In
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        <h1 className="text-4xl md:text-6xl font-display leading-tight mb-8">
+          Make Your Dreams <br /> Come True
+        </h1>
+        <p className="text-gray-300 max-w-2xl mx-auto leading-relaxed text-lg mb-12">
+          We specialize in creating breathtaking weddings that reflect the
+          unique vision of every couple we work with. From elegant garden
+          ceremonies to luxurious ballroom receptions, we make your dream
+          wedding a reality.
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-          <span className="text-xl md:text-2xl font-serif">
+
+        <div className="inline-block border border-primary/50 p-1">
+          <button className="bg-primary text-white px-8 py-3 uppercase tracking-widest text-xs font-bold hover:bg-white hover:text-black transition-all duration-500">
+            View Our Work
+          </button>
+        </div>
+      </div>
+
+      {/* Featured In Strip (Integrated into Dark Section) */}
+      <div className="mt-24 border-t border-white/10 pt-12">
+        <p className="text-xs uppercase tracking-[0.3em] mb-8 text-center text-gray-500">
+          As Seen In
+        </p>
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+          <span className="text-xl md:text-2xl font-serif text-white">
             Maharani Weddings
           </span>
-          <span className="text-xl md:text-2xl font-serif">WEZOREE</span>
-          <span className="text-xl md:text-2xl font-serif italic">
+          <span className="text-xl md:text-2xl font-serif text-white">
+            WEZOREE
+          </span>
+          <span className="text-xl md:text-2xl font-serif italic text-white">
             The Knot
           </span>
-          <span className="text-xl md:text-2xl font-serif">WeddingWire</span>
+          <span className="text-xl md:text-2xl font-serif text-white">
+            WeddingWire
+          </span>
         </div>
       </div>
     </section>

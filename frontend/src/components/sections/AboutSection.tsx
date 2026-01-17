@@ -56,7 +56,7 @@ export const AboutSection = () => {
       </section>
 
       {/* About Elegantize Weddings */}
-      <section className="py-24 px-6 max-w-7xl mx-auto relative overflow-hidden">
+      <section className="py-24 px-6 max-w-7xl mx-auto relative overflow-hidden bg-texture-floral">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
             <span className="text-primary text-xs font-bold uppercase tracking-widest">

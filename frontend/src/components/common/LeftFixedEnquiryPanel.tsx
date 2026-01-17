@@ -8,10 +8,10 @@ export const LeftFixedEnquiryPanel = () => {
   return (
     <>
       {/* Trigger Button (Vertical text) */}
-      <div className="fixed left-0 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
+      <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-primary text-white py-6 px-2 rounded-r-md shadow-lg hover:bg-opacity-90 transition-all font-bold uppercase tracking-widest text-xs writing-vertical rotate-180"
+          className="bg-primary text-white py-6 px-2 rounded-l-md shadow-lg hover:bg-opacity-90 transition-all font-bold uppercase tracking-widest text-xs writing-vertical"
           style={{ writingMode: "vertical-rl" }}
         >
           Enquire Now
@@ -20,7 +20,7 @@ export const LeftFixedEnquiryPanel = () => {
 
       {/* Panel */}
       <div
-        className={`fixed inset-y-0 left-0 w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 right-0 w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="h-full flex flex-col p-6 overflow-y-auto">
           <div className="flex justify-between items-center mb-8">

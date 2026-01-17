@@ -2,15 +2,15 @@ import { ArrowRight, Instagram, Facebook, Pin } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-100 py-16 px-6">
+    <footer className="bg-stone-950 border-t border-white/10 py-16 px-6 text-white text-texture">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <div className="text-2xl font-display font-bold tracking-tighter mb-6 text-gray-900">
+            <div className="text-2xl font-display font-bold tracking-tighter mb-6 text-white">
               ELEGANTIZE<span className="text-primary">.</span>
             </div>
-            <p className="text-xs text-gray-500 leading-relaxed uppercase tracking-widest">
+            <p className="text-xs text-gray-400 leading-relaxed uppercase tracking-widest">
               Luxury event design for the modern couple who seeks elegance,
               innovation, and artistry.
             </p>
@@ -18,10 +18,10 @@ export const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-gray-900">
+            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
               Navigation
             </h5>
-            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-500">
+            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   Home
@@ -56,10 +56,10 @@ export const Footer = () => {
 
           {/* Connect */}
           <div>
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-gray-900">
+            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
               Connect
             </h5>
-            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-500">
+            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400">
               <li>
                 <a
                   href="#"
@@ -89,17 +89,17 @@ export const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-gray-900">
+            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
               Newsletter
             </h5>
-            <p className="text-xs text-gray-500 mb-4 uppercase tracking-widest">
+            <p className="text-xs text-gray-400 mb-4 uppercase tracking-widest">
               Stay updated with decor trends.
             </p>
             <div className="flex">
               <input
                 type="email"
                 placeholder="Email"
-                className="bg-stone-100 border-none p-3 text-xs w-full focus:ring-1 focus:ring-primary focus:outline-none text-gray-600"
+                className="bg-white/10 border-none p-3 text-xs w-full focus:ring-1 focus:ring-primary focus:outline-none text-white placeholder-gray-500"
               />
               <button className="bg-primary text-white p-3 hover:bg-opacity-90 transition-all">
                 <ArrowRight size={16} />
@@ -109,7 +109,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-500">
           <p>© 2024 Elegantize Weddings. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-primary transition-colors">

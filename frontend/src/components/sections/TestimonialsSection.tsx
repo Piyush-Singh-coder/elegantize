@@ -1,6 +1,6 @@
 export const TestimonialsSection = () => {
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-texture-floral">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-3xl font-display mb-12">Real Clients Feedbacks</h2>
 

@@ -1,6 +1,6 @@
 export const WhyChooseSection = () => {
   return (
-    <section className="py-24 bg-primary text-white">
+    <section className="py-24 bg-texture-gold text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-display mb-12 text-center">
           Why Couples Choose Elegantize Weddings

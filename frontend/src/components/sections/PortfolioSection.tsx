@@ -19,26 +19,31 @@ const portfolios = [
     title: "Modern Minimalism",
     location: "Chengdu, China", // Keeping placeholder content variety
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBDOzrAwaA7aG2f6FmtvpL20EUtHfdcm62LdprEnmMowwmE9HAyxFF9TlpLdkPaToZfAkv775xVmOEPTT4obcOphGjDN92AhQKL1mN5JNu_uBkCOv30mFPNCJR12hO5L-WXVoVjuNnZcvO0SNU-8xooKx5_tD5rCmkzX_JuUkQ16q1Og-X6VHnSBrGQYZ5qGmu9CRXtXOK7GrcXz5KwGpwMQLxTOdLjX91mSyJ0jn8jMUH8U-wE8a0F6eZ0etGjisdfZ0iFMF1Ksqwj",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBDOzrAwaA7aG2f6FmtvpL20EUtHfdcm62LdprEnmMowwmE9HAyxFF9TlpLdkPaToZfAkv775xVmOEPTT4obcOphGjDN92AhQKL1mN5JNu_uBkCOv30mFPNCJR12hO5L-WXVoVjuNnZcvO0SNU-8xooKx5_tD5rCmkzX_JuUkQ16q1Og-X6VHnSBrGQYZ5qGmu9CRXtXOK7GrcXz5KwGpwMQLXTOdLjX91mSyJ0jn8jMUH8U-wE8a0F6eZ0etGjisdfZ0iFMF1Ksqwj",
     category: "Concept",
   },
 ];
 
 export const PortfolioSection = () => {
   return (
-    <section className="py-24 bg-stone-50" id="portfolio">
+    <section className="py-24 bg-texture-floral" id="portfolio">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display mb-6">
-            Real Weddings. Real Experiences.
+          <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-4">
+            Curated Collection
+          </p>
+          <h2 className="text-4xl md:text-5xl font-display mb-6 text-gray-900">
+            How Do You Envision <br /> Your Perfect Wedding?
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We take pride in creating weddings that are not only visually
-            stunning but deeply meaningful. Our portfolio features real couples,
-            real venues, and real celebrations across New York City, New Jersey,
-            and beyond — each designed with a unique story, color palette, and
-            cultural expression.
+            Explore our curated collection of featured weddings as inspiration
+            for your dream wedding.
           </p>
+          <div className="mt-8">
+            <Button className="bg-[#A68A64] text-white hover:bg-stone-800 border-none px-8 py-3">
+              View All Weddings
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">

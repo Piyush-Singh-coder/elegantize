@@ -32,29 +32,34 @@ export const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <div className="text-2xl font-display font-bold tracking-tighter text-gray-900">
-          ELEGANTIZE<span className="text-primary">.</span>
+        {/* Logo - Serif and lowercase/branded as in image "studio." -> "elegantize." */}
+        <div className="text-3xl font-display font-medium tracking-tight text-gray-900">
+          elegantize<span className="text-primary">.</span>
         </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-8 text-sm font-medium uppercase tracking-widest text-gray-800">
+        {/* Desktop Menu - Centered roughly */}
+        <div className="hidden lg:flex items-center space-x-10 text-xs font-bold uppercase tracking-widest text-gray-600">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="hover:text-primary transition-colors"
+              className="hover:text-primary transition-colors duration-300 relative group"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
         </div>
 
-        <a
-          href="#contact"
-          className="hidden lg:block bg-primary hover:bg-opacity-90 text-white px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all animate-pulse"
-        >
-          Book a Consultation
-        </a>
+        {/* CTA Button - Camel/Earth Gold */}
+        <div className="hidden lg:block">
+          <a
+            href="#contact"
+            className="bg-primary text-white px-8 py-3 text-xs uppercase tracking-widest font-bold hover:bg-stone-800 transition-all duration-300"
+          >
+            Get In Touch
+          </a>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
