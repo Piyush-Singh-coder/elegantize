@@ -1,9 +1,9 @@
 import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 import { useState, useRef } from "react";
 
-// Placeholder video URL
+// Optimized Video URL (HD 720p instead of 4K)
 const VIDEO_URL =
-  "https://videos.pexels.com/video-files/5803096/5803096-uhd_2560_1440_24fps.mp4"; // Wedding ambient video
+  "https://videos.pexels.com/video-files/5803096/5803096-hd_720_1280_24fps.mp4"; // Wedding ambient video (Lighter Version)
 
 interface VideoCardProps {
   id: number;
@@ -14,7 +14,26 @@ const VideoCard = ({ id }: VideoCardProps) => {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Facade Pattern: Only load video when user interacts
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Auto-pause other videos when this one plays (optional, but good for performance)
+  // For now, we keep it simple: Click -> Load & Play.
+
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLoaded(true);
+    // Timeout to allow video element to mount before playing
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }, 100);
+  };
+
   const togglePlay = () => {
+    if (!isLoaded) return;
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
@@ -26,7 +45,7 @@ const VideoCard = ({ id }: VideoCardProps) => {
   };
 
   const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent toggling play when clicking mute
+    e.stopPropagation();
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
       setIsMuted(!isMuted);
@@ -35,55 +54,73 @@ const VideoCard = ({ id }: VideoCardProps) => {
 
   return (
     <div
-      className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer bg-black"
+      className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer bg-stone-900"
       role="region"
       aria-label={`Short video card ${id}`}
+      onClick={!isLoaded ? handlePlayClick : undefined}
     >
-      <video
-        ref={videoRef}
-        src={VIDEO_URL}
-        loop
-        muted={isMuted}
-        className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
-        playsInline
-        onClick={togglePlay}
-      />
+      {!isLoaded ? (
+        /* FACADE: Static Image to eliminate scroll lag */
+        <div className="w-full h-full relative">
+          <img
+            src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600"
+            alt="Video Thumbnail"
+            className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+            <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-xl group-hover:scale-110 transition-transform">
+              <Play size={32} fill="white" className="text-white ml-1" />
+            </div>
+          </div>
+          <div className="absolute bottom-4 left-0 w-full text-center text-white/80 text-xs font-bold uppercase tracking-widest px-4">
+            Click to Watch
+          </div>
+        </div>
+      ) : (
+        /* ACTUAL VIDEO: Only rendered after click */
+        <>
+          <video
+            ref={videoRef}
+            src={VIDEO_URL}
+            loop
+            muted={isMuted}
+            className="w-full h-full object-cover"
+            playsInline
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePlay();
+            }}
+          />
+          {/* Controls Container - Only show controls when video is loaded */}
+          <div className="absolute bottom-4 right-4 flex flex-col gap-3 z-20">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                togglePlay();
+              }}
+              className="w-10 h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-all transform active:scale-95"
+              aria-label={isPlaying ? "Pause" : "Play"}
+            >
+              {isPlaying ? (
+                <Pause size={18} fill="currentColor" />
+              ) : (
+                <Play size={18} fill="currentColor" className="ml-0.5" />
+              )}
+            </button>
 
-      {/* Overlay Gradient for text readability if needed */}
+            <button
+              onClick={toggleMute}
+              className="w-10 h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-all transform active:scale-95"
+              aria-label={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Overlay Gradient */}
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-
-      {/* Controls Container */}
-      <div className="absolute bottom-4 right-4 flex flex-col gap-3 z-20">
-        {/* Play/Pause Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            togglePlay();
-          }}
-          className="w-10 h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-all transform active:scale-95"
-          aria-label={isPlaying ? "Pause" : "Play"}
-        >
-          {isPlaying ? (
-            <Pause size={18} fill="currentColor" />
-          ) : (
-            <Play size={18} fill="currentColor" className="ml-0.5" />
-          )}
-        </button>
-
-        {/* Mute/Unmute Button */}
-        <button
-          onClick={toggleMute}
-          className="w-10 h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-all transform active:scale-95"
-          aria-label={isMuted ? "Unmute" : "Mute"}
-        >
-          {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-        </button>
-      </div>
-
-      {/* Title Overlay (Optional, matching 'Kapok Stories' style if desired in future) */}
-      <div className="absolute top-6 left-1/2 -translate-x-1/2 text-center w-full px-4 z-20 pointer-events-none">
-        {/* <h4 className="text-white font-display text-xl drop-shadow-md">Story {id}</h4> */}
-      </div>
     </div>
   );
 };

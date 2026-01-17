@@ -18,11 +18,15 @@
 /* Texture Utilities */
 /* Texture Utilities */
 /* Texture Utilities */
+/* Texture Utilities */
 .bg-texture-floral {
   background-color: var(--color-background-light);
-  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E"),
-  radial-gradient(circle at 50% 50%, rgba(166, 138, 100, 0.05), transparent 70%);
-  background-size: cover;
+  /* Replaced expensive SVG filter with a static lightweight noise pattern + gradient */
+  background-image: 
+    url("https://www.transparenttextures.com/patterns/cream-paper.png"),
+    radial-gradient(circle at 50% 50%, rgba(166, 138, 100, 0.08), transparent 80%);
+  background-blend-mode: multiply;
+  background-size: auto, cover;
 }
 
 .bg-texture-marble {
