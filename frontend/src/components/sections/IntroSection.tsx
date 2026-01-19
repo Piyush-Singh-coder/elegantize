@@ -2,7 +2,7 @@ import { introContent } from "../../data/content";
 
 export const IntroSection = () => {
   return (
-    <section className="py-32 px-6 bg-stone-950 text-white relative overflow-hidden">
+    <section className="py-32 px-6 bg-grain-dark text-white relative overflow-hidden">
       {/* Subtle Texture Overlay */}
       <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
