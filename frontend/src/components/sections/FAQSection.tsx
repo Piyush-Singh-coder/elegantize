@@ -6,7 +6,10 @@ export const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 px-6 bg-wedding-slate text-white relative overflow-hidden">
+    <section
+      id="faq"
+      className="py-24 px-6 bg-wedding-slate text-white relative overflow-hidden"
+    >
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary rounded-full blur-[120px]"></div>

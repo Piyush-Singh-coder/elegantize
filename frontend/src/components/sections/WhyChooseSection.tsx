@@ -1,15 +1,47 @@
 import { whyChooseContent } from "../../data/content";
+import { motion, type Variants } from "framer-motion";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 export const WhyChooseSection = () => {
   return (
-    <section className="py-24 bg-texture-gold text-white relative overflow-hidden">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="py-24 bg-texture-gold text-white relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-display mb-12 text-center">
+        <motion.h2
+          variants={{
+            hidden: { opacity: 0, y: -20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+          }}
+          className="text-4xl md:text-5xl font-display mb-12 text-center"
+        >
           {whyChooseContent.heading}
-        </h2>
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          <div className="space-y-6">
+          <motion.div variants={itemVariants} className="space-y-6">
             <h3 className="text-xl font-bold uppercase tracking-widest border-b border-white/20 pb-4">
               Our Promise
             </h3>
@@ -27,9 +59,18 @@ export const WhyChooseSection = () => {
                 <span>{whyChooseContent.footer}</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, x: 30 },
+              visible: {
+                opacity: 1,
+                x: 0,
+                transition: { duration: 0.8, ease: "easeOut" },
+              },
+            }}
+          >
             <h3 className="text-xl font-bold uppercase tracking-widest border-b border-white/20 pb-4 mb-6">
               Key Highlights
             </h3>
@@ -41,9 +82,9 @@ export const WhyChooseSection = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

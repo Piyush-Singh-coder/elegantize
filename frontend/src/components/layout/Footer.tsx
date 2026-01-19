@@ -1,4 +1,12 @@
-import { Instagram, Facebook, Pin, Youtube, Phone, MapPin } from "lucide-react";
+import {
+  Instagram,
+  Facebook,
+  Pin,
+  Youtube,
+  Phone,
+  MapPin,
+  Mail,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Footer = () => {
@@ -32,23 +40,25 @@ export const Footer = () => {
       className="bg-stone-950 border-t border-white/10 py-16 px-6 text-white text-texture"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 ">
           {/* Brand */}
           <motion.div
             variants={itemVariants}
             className="col-span-1 md:col-span-1"
           >
-            <div className="text-2xl font-display font-bold tracking-tighter mb-3 text-white">
+            <div className="text-2xl font-display font-bold tracking-tighter mb-3  text-white">
               ELEGANTIZE<span className="text-primary">.</span>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed uppercase tracking-widest">
-              Luxury event design for the modern couple who seeks elegance,
-              innovation, and artistry.
+              Elegantize: Where weddings become legends! We’re not just a decor
+              company in New York or in New Jersey; we’re your VIP pass to
+              enchantment. From breathtaking florals to ceiling charm and vinyl
+              floor allure, we’ve got the magic touch.
             </p>
           </motion.div>
 
           {/* Navigation */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="ml-17">
             <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
               Navigation
             </h5>
@@ -60,10 +70,26 @@ export const Footer = () => {
               </li>
               <li>
                 <a
+                  href="#about"
+                  className="hover:text-primary transition-colors"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
                   href="#services"
                   className="hover:text-primary transition-colors"
                 >
                   Services
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#gallery"
+                  className="hover:text-primary transition-colors"
+                >
+                  Gallery
                 </a>
               </li>
               <li>
@@ -79,12 +105,26 @@ export const Footer = () => {
                   href="#blog"
                   className="hover:text-primary transition-colors"
                 >
-                  Journal
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-primary transition-colors">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  className="hover:text-primary transition-colors"
+                >
+                  Contact
                 </a>
               </li>
             </ul>
           </motion.div>
 
+          {/* Connect */}
           {/* Connect */}
           <motion.div variants={itemVariants}>
             <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
@@ -124,24 +164,45 @@ export const Footer = () => {
                 </a>
               </li>
             </ul>
+
+            
+            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400 mt-3">
+              <li className="hover:text-primary transition-colors flex items-center gap-2">
+                <Phone size={14} /> +1(347)686-4562
+              </li>
+              <li className="hover:text-primary transition-colors flex items-center gap-2">
+                <MapPin size={14} className="shrink-0" />
+                <span>10 Millers Lane New Hyde Park, NY 11040</span>
+              </li>
+              <li className="hover:text-primary transition-colors flex items-center gap-2">
+                <Mail size={14} /> info@elegantize.com
+              </li>
+            </ul>
           </motion.div>
 
           {/* Newsletter */}
           <motion.div variants={itemVariants}>
             <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
-              Contact
+              Newsletter
             </h5>
-            <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400">
-              <li className="hover:text-primary transition-colors flex items-center gap-2">
-                <Phone size={18} /> +1(347)686-456
-              </li>
-              <li className="hover:text-primary transition-colors flex items-center gap-2">
-                <span>
-                  <MapPin size={18} />
-                </span>
-                10 Millers Lane New Hyde Park, New York 11040
-              </li>
-            </ul>
+            <p className="text-xs text-gray-400 leading-relaxed uppercase tracking-widest mb-6">
+              Sign up for our newsletter to get the latest news and updates.
+            </p>
+            <form className="space-y-4">
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder="EMAIL ADDRESS"
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors uppercase tracking-wider"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-stone-100 text-stone-900 py-3 px-6 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300"
+              >
+                Subscribe
+              </button>
+            </form>
           </motion.div>
         </div>
 

@@ -1,31 +1,68 @@
 import { services } from "../../data/content";
+import { motion, type Variants } from "framer-motion";
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export const ServicesGrid = () => {
   return (
-    <section id="services" className="py-24 px-6 bg-gradient-soft">
+    <motion.section
+      id="services"
+      className="py-24 px-6 bg-gradient-soft"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={sectionVariants}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display text-gray-900">
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-display text-gray-900"
+          >
             Our Signature Wedding Decor Services
-          </h2>
-          <div className="w-24 h-0.5 bg-primary mx-auto mt-6"></div>
-          <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.div
+            variants={itemVariants}
+            className="w-24 h-0.5 bg-primary mx-auto mt-6"
+          ></motion.div>
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 text-gray-600 max-w-2xl mx-auto"
+          >
             We provide complete wedding décor and design services for
             ceremonies, receptions, and multi-day wedding celebrations.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={itemVariants}
               className="group relative overflow-hidden cursor-pointer h-[28rem]"
             >
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <div className="w-full h-full overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-colors" />
 
               <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
@@ -34,10 +71,10 @@ export const ServicesGrid = () => {
                   {service.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

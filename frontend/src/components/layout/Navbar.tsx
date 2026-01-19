@@ -17,10 +17,13 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "#" },
-    { name: "Portfolio", href: "#portfolio" },
+    { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
     { name: "Gallery", href: "#gallery" },
+    { name: "Portfolio", href: "#portfolio" },
     { name: "Blog", href: "#blog" },
+    { name: "FAQ", href: "#faq" },
+    
   ];
 
   return (

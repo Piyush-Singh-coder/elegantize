@@ -1,10 +1,26 @@
+import { motion } from "framer-motion";
+
 export const TestimonialsSection = () => {
   return (
     <section className="py-24 px-6 bg-texture-floral">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl font-display mb-12">Real Clients Feedbacks</h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-display mb-12"
+        >
+          Real Clients Feedbacks
+        </motion.h2>
 
-        <div className="bg-stone-50 p-12 shadow-sm border border-gray-100 relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="bg-stone-50 p-12 shadow-sm border border-gray-100 relative"
+        >
           <span className="absolute top-8 left-8 text-6xl text-primary font-serif opacity-30">
             "
           </span>
@@ -22,7 +38,7 @@ export const TestimonialsSection = () => {
               Married at The Plaza, NY
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

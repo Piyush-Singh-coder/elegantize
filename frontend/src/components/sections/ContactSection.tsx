@@ -1,4 +1,4 @@
-import { MapPin, Mail } from "lucide-react";
+import { MapPin, Mail, Phone } from "lucide-react";
 import { Button } from "../common/Button";
 import { ctaContent } from "../../data/content";
 
@@ -18,10 +18,18 @@ export const ContactSection = () => {
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
               <span className="p-2 bg-stone-100 rounded-full text-primary">
+                <Phone size={20} />
+              </span>
+              <span className="text-sm uppercase tracking-widest text-gray-800">
+                +1(347)686-4562
+              </span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="p-2 bg-stone-100 rounded-full text-primary">
                 <MapPin size={20} />
               </span>
               <span className="text-sm uppercase tracking-widest text-gray-800">
-                Manhattan, NY & Jersey City, NJ
+                10 Millers Lane New Hyde Park, New York 11040
               </span>
             </div>
             <div className="flex items-center space-x-4">
@@ -29,7 +37,7 @@ export const ContactSection = () => {
                 <Mail size={20} />
               </span>
               <span className="text-sm uppercase tracking-widest text-gray-800">
-                hello@elegantizeweddings.com
+                info@elegantize.com
               </span>
             </div>
           </div>

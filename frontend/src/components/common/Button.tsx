@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "outline" | "text";
   size?: "sm" | "md" | "lg";
   withIcon?: boolean;
+  icon?: React.ElementType;
 }
 
 export const Button = ({
@@ -13,6 +14,7 @@ export const Button = ({
   variant = "primary",
   size = "md",
   withIcon = false,
+  icon: Icon,
   children,
   ...props
 }: ButtonProps) => {
@@ -41,7 +43,11 @@ export const Button = ({
       {...props}
     >
       {children}
-      {withIcon && <ArrowRight size={16} className="ml-2" />}
+      {Icon ? (
+        <Icon size={16} className="ml-2" />
+      ) : (
+        withIcon && <ArrowRight size={16} className="ml-2" />
+      )}
     </button>
   );
 };

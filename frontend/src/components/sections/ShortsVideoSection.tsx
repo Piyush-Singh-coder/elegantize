@@ -1,26 +1,29 @@
 import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 import { useState, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
-
-// Optimized Video URL (HD 720p instead of 4K)
-const VIDEO_URL =
-  "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/Copy%20of%20Made%20for%20Me%20-%20Muni%20Long%20%20%20Dr.%20Violin%20Cover_3.mp4"; // Wedding ambient video (Lighter Version)
+import { shortVideos } from "../../data/content";
 
 interface VideoCardProps {
   id: number;
+  videoUrl: string;
+  thumbnail: string;
+  title: string;
   variants: Variants;
 }
 
-const VideoCard = ({ id, variants }: VideoCardProps) => {
+const VideoCard = ({
+  id,
+  videoUrl,
+  thumbnail,
+  title,
+  variants,
+}: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Facade Pattern: Only load video when user interacts
   const [isLoaded, setIsLoaded] = useState(false);
-
-  // Auto-pause other videos when this one plays (optional, but good for performance)
-  // For now, we keep it simple: Click -> Load & Play.
 
   const handlePlayClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -59,7 +62,7 @@ const VideoCard = ({ id, variants }: VideoCardProps) => {
       variants={variants}
       className="relative aspect-9/16 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer bg-stone-900"
       role="region"
-      aria-label={`Short video card ${id}`}
+      aria-label={`Short video: ${title}`}
       onClick={!isLoaded ? handlePlayClick : undefined}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
@@ -68,8 +71,8 @@ const VideoCard = ({ id, variants }: VideoCardProps) => {
         /* FACADE: Static Image to eliminate scroll lag */
         <div className="w-full h-full relative">
           <img
-            src="https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-600,f-auto"
-            alt="Video Thumbnail"
+            src={thumbnail}
+            alt={title}
             className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
@@ -78,7 +81,7 @@ const VideoCard = ({ id, variants }: VideoCardProps) => {
             </div>
           </div>
           <div className="absolute bottom-4 left-0 w-full text-center text-white/80 text-xs font-bold uppercase tracking-widest px-4">
-            Click to Watch
+            {title}
           </div>
         </div>
       ) : (
@@ -86,7 +89,7 @@ const VideoCard = ({ id, variants }: VideoCardProps) => {
         <>
           <video
             ref={videoRef}
-            src={VIDEO_URL}
+            src={videoUrl}
             loop
             muted={isMuted}
             className="w-full h-full object-cover"
@@ -151,6 +154,8 @@ export const ShortsVideoSection = () => {
     },
   };
 
+  const isScrollable = shortVideos.length > 4;
+
   return (
     <motion.section
       initial="hidden"
@@ -167,9 +172,28 @@ export const ShortsVideoSection = () => {
           Our Stories
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((item) => (
-            <VideoCard key={item} id={item} variants={itemVariants} />
+        <div
+          className={
+            isScrollable
+              ? "flex overflow-x-auto pb-8 gap-6 snap-x snap-mandatory scrollbar-hide -mx-6 px-6"
+              : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          }
+        >
+          {shortVideos.map((video) => (
+            <div
+              key={video.id}
+              className={
+                isScrollable ? "min-w-[280px] md:min-w-[320px] snap-center" : ""
+              }
+            >
+              <VideoCard
+                id={video.id}
+                videoUrl={video.videoUrl}
+                thumbnail={video.thumbnail}
+                title={video.title}
+                variants={itemVariants}
+              />
+            </div>
           ))}
         </div>
       </div>
