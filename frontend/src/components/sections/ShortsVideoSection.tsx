@@ -12,7 +12,6 @@ interface VideoCardProps {
 }
 
 const VideoCard = ({
-  id,
   videoUrl,
   thumbnail,
   title,
