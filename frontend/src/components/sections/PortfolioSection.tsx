@@ -1,25 +1,26 @@
 import { Button } from "../common/Button";
+import { portfolioContent } from "../../data/content";
 
 const portfolios = [
   {
-    title: "Enchanted Garden Ceremony",
-    location: "Central Park, New York",
+    title: "",
+    location: "",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDBuxrqT2JmlqP4KE5GlFe29ghIHCNN-meNViXJirwLNdu7wRvDrnBVXL_pW_Gs96gV4seTE3vkgD1oCCV2yE8Mri8qiOEr0WvDk9ScwF2ESOrwdCchf6igERBTRKah3QoK4Wk9vrhAkow1x8sHOwUFy3SaAJNJp9pOE0rhqzF9WJmca3fCRfjTbAi1-Wbc9kx_TKo4liew_RDjssACV11ZLsG2V2enVcF_Ebhy5tQBO5ivkTzWavrJiLsm5Q3nzkYR0qw9CAe58iCh",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.18.28.jpg?tr=w-800,f-auto",
     category: "Floral Design",
   },
   {
-    title: "Grand Ballroom Opulence",
-    location: "Jersey City Waterfront",
+    title: "",
+    location: "",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBnhlf_yvy_GjTOIXWLSFO8t0x4MOTn-JdZ_gu_ipLnKzxKUIM2NMZqd5Ra7atVs8KoorsuZWp3CM0gytj38dLjoEScspbXdgNI6Q7WQv6cw7sAxquTZiF3-qJh166tksdrGZI1NpFCm9B1P27fwyKX3CLYDIu9Gu3efra8b8Ucc9VzPCgPDro01XlbUCUCgSWPyRZ-ij2fhQwW1aAuHb69JJH6u1S5ks4BjjNewB03hLU-mZId67bKCLvxXy1gnR3-AVE8Rb9aJaxG",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Ayesha&George/Copy%20of%20Copy%20of%20DSC09906.jpg?tr=w-800,f-auto",
     category: "Lighting",
   },
   {
-    title: "Modern Minimalism",
-    location: "Chengdu, China", // Keeping placeholder content variety
+    title: "",
+    location: "", // Keeping placeholder content variety
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBDOzrAwaA7aG2f6FmtvpL20EUtHfdcm62LdprEnmMowwmE9HAyxFF9TlpLdkPaToZfAkv775xVmOEPTT4obcOphGjDN92AhQKL1mN5JNu_uBkCOv30mFPNCJR12hO5L-WXVoVjuNnZcvO0SNU-8xooKx5_tD5rCmkzX_JuUkQ16q1Og-X6VHnSBrGQYZ5qGmu9CRXtXOK7GrcXz5KwGpwMQLXTOdLjX91mSyJ0jn8jMUH8U-wE8a0F6eZ0etGjisdfZ0iFMF1Ksqwj",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Carolyn%20Mcfarlane/Copy%20of%20Copy%20of%20DSC01024.jpg?updatedAt=1768807830234&tr=w-800,f-auto",
     category: "Concept",
   },
 ];
@@ -33,14 +34,13 @@ export const PortfolioSection = () => {
             Curated Collection
           </p>
           <h2 className="text-4xl md:text-5xl font-display mb-6 text-gray-900">
-            How Do You Envision <br /> Your Perfect Wedding?
+            {portfolioContent.heading}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Explore our curated collection of featured weddings as inspiration
-            for your dream wedding.
+            {portfolioContent.description}
           </p>
           <div className="mt-8">
-            <Button className="bg-[#A68A64] text-white hover:bg-stone-800 border-none px-8 py-3">
+            <Button className="bg-primary text-white hover:bg-stone-800 border-none px-8 py-3">
               View All Weddings
             </Button>
           </div>
@@ -56,7 +56,7 @@ export const PortfolioSection = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest font-bold">
-                  {item.category}
+                  {/* {item.category} */}
                 </div>
               </div>
               <h3 className="font-display text-2xl group-hover:text-primary transition-colors">

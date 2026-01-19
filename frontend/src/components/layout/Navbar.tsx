@@ -16,8 +16,8 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "#" },
-    { name: "Services", href: "#services" },
     { name: "Portfolio", href: "#portfolio" },
+    { name: "Services", href: "#services" },
     { name: "Gallery", href: "#gallery" },
     { name: "Blog", href: "#blog" },
   ];

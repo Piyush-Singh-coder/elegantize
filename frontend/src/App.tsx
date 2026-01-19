@@ -14,6 +14,7 @@ import { ShortsVideoSection } from "./components/sections/ShortsVideoSection";
 import { WhyChooseSection } from "./components/sections/WhyChooseSection";
 import { TestimonialsSection } from "./components/sections/TestimonialsSection";
 import { ClientsStrip } from "./components/sections/ClientsStrip";
+import { FeaturedInStrip } from "./components/sections/FeaturedInStrip";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <HorizontalEnquiryForm />
 
       <IntroSection />
+      <FeaturedInStrip />
 
       <PortfolioSection />
       <ShortsVideoSection />

@@ -1,33 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-
-const faqs = [
-  {
-    question: "How far in advance should I book Elegantize?",
-    answer:
-      "For peak seasons in NY/NJ we recommend 9–12 months; for off-peak 4–6 months. Shorter timelines may be accommodated subject to availability.",
-  },
-  {
-    question: "Do you provide full installation and teardown?",
-    answer:
-      "Yes — full production, vendor coordination and post-event teardown are included in our standard packages.",
-  },
-  {
-    question: "Do you offer custom design packages?",
-    answer:
-      'Yes, every quote we provide is custom-tailored to your specific venue, guest count, and design requirements. We don\'t believe in "cookie-cutter" packages.',
-  },
-  {
-    question: "Do you work with wedding planners and venues?",
-    answer:
-      "Absolutely. We regularly collaborate with wedding planners, venues, photographers, and caterers to ensure smooth execution and seamless design.",
-  },
-  {
-    question: "What areas do you serve?",
-    answer:
-      "We primarily serve the Tri-State area (New York, New Jersey, and Connecticut) but are available for travel worldwide for destination weddings.",
-  },
-];
+import { faqs } from "../../data/content";
 
 export const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

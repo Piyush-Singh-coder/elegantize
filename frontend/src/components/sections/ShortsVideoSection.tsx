@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 
 // Optimized Video URL (HD 720p instead of 4K)
 const VIDEO_URL =
-  "https://videos.pexels.com/video-files/5803096/5803096-hd_720_1280_24fps.mp4"; // Wedding ambient video (Lighter Version)
+  "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/Copy%20of%20Made%20for%20Me%20-%20Muni%20Long%20%20%20Dr.%20Violin%20Cover_3.mp4"; // Wedding ambient video (Lighter Version)
 
 interface VideoCardProps {
   id: number;
@@ -63,7 +63,7 @@ const VideoCard = ({ id }: VideoCardProps) => {
         /* FACADE: Static Image to eliminate scroll lag */
         <div className="w-full h-full relative">
           <img
-            src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src="https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-600,f-auto"
             alt="Video Thumbnail"
             className="w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
           />

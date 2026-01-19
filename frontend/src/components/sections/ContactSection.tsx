@@ -1,19 +1,20 @@
 import { MapPin, Mail } from "lucide-react";
 import { Button } from "../common/Button";
+import { ctaContent } from "../../data/content";
 
 export const ContactSection = () => {
   return (
     <section className="py-24 px-6 relative" id="contact">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
         <div>
-          <h2 className="text-5xl font-display mb-8">
-            Ready to design <br />
-            <span className="italic">your day?</span>
-          </h2>
-          <p className="text-lg text-gray-600 mb-12">
-            Let's create something extraordinary together. Fill out the form to
-            schedule your initial design consultation.
-          </p>
+          <h2 className="text-5xl font-display mb-8">{ctaContent.heading}</h2>
+          <div className="text-lg text-gray-600 mb-12">
+            {ctaContent.text.map((p, i) => (
+              <p key={i} className="mb-4">
+                {p}
+              </p>
+            ))}
+          </div>
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
               <span className="p-2 bg-stone-100 rounded-full text-primary">
