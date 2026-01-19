@@ -1,5 +1,6 @@
 import { Volume2, VolumeX, Play, Pause } from "lucide-react";
 import { useState, useRef } from "react";
+import { motion, type Variants } from "framer-motion";
 
 // Optimized Video URL (HD 720p instead of 4K)
 const VIDEO_URL =
@@ -7,9 +8,10 @@ const VIDEO_URL =
 
 interface VideoCardProps {
   id: number;
+  variants: Variants;
 }
 
-const VideoCard = ({ id }: VideoCardProps) => {
+const VideoCard = ({ id, variants }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -53,11 +55,14 @@ const VideoCard = ({ id }: VideoCardProps) => {
   };
 
   return (
-    <div
-      className="relative aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer bg-stone-900"
+    <motion.div
+      variants={variants}
+      className="relative aspect-9/16 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer bg-stone-900"
       role="region"
       aria-label={`Short video card ${id}`}
       onClick={!isLoaded ? handlePlayClick : undefined}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3 }}
     >
       {!isLoaded ? (
         /* FACADE: Static Image to eliminate scroll lag */
@@ -120,25 +125,54 @@ const VideoCard = ({ id }: VideoCardProps) => {
       )}
 
       {/* Overlay Gradient */}
-      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-    </div>
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/60 to-transparent pointer-events-none" />
+    </motion.div>
   );
 };
 
 export const ShortsVideoSection = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="py-24 bg-texture-floral overflow-hidden">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="py-24 bg-texture-floral overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl font-display text-gray-900 mb-12 text-center">
+        <motion.h2
+          variants={itemVariants}
+          className="text-4xl font-display text-gray-900 mb-12 text-center"
+        >
           Our Stories
-        </h2>
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[1, 2, 3, 4].map((item) => (
-            <VideoCard key={item} id={item} />
+            <VideoCard key={item} id={item} variants={itemVariants} />
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

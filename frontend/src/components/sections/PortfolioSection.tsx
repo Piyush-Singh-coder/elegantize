@@ -1,5 +1,6 @@
 import { Button } from "../common/Button";
 import { portfolioContent } from "../../data/content";
+import { motion, type Variants } from "framer-motion";
 
 const portfolios = [
   {
@@ -25,35 +26,78 @@ const portfolios = [
   },
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
 export const PortfolioSection = () => {
   return (
-    <section className="py-24 bg-texture-floral" id="portfolio">
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+      className="py-24 bg-texture-floral"
+      id="portfolio"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-4">
+          <motion.p
+            variants={itemVariants}
+            className="text-xs uppercase tracking-[0.3em] text-gray-500 mb-4"
+          >
             Curated Collection
-          </p>
-          <h2 className="text-4xl md:text-5xl font-display mb-6 text-gray-900">
+          </motion.p>
+          <motion.h2
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-display mb-6 text-gray-900"
+          >
             {portfolioContent.heading}
-          </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className="text-gray-600 max-w-3xl mx-auto leading-relaxed"
+          >
             {portfolioContent.description}
-          </p>
+          </motion.p>
           <div className="mt-8">
-            <Button className="bg-primary text-white hover:bg-stone-800 border-none px-8 py-3">
-              View All Weddings
-            </Button>
+            <motion.div variants={itemVariants}>
+              <Button className="bg-primary text-white hover:bg-stone-800 border-none px-8 py-3">
+                View All Weddings
+              </Button>
+            </motion.div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {portfolios.map((item, index) => (
-            <div key={index} className="group cursor-pointer">
-              <div className="relative overflow-hidden aspect-[4/5] mb-6">
-                <img
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group cursor-pointer"
+            >
+              <div className="relative overflow-hidden aspect-4/5 mb-6">
+                <motion.img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.7 }}
+                  className="w-full h-full object-cover transition-transform duration-700"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest font-bold">
                   {/* {item.category} */}
@@ -65,14 +109,14 @@ export const PortfolioSection = () => {
               <p className="text-sm text-gray-500 mt-2 uppercase tracking-wide">
                 {item.location}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center">
+        <motion.div className="text-center" variants={itemVariants}>
           <Button>View All Projects</Button>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
