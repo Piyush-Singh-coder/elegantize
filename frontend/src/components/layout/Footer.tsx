@@ -58,7 +58,7 @@ export const Footer = () => {
           </motion.div>
 
           {/* Navigation */}
-          <motion.div variants={itemVariants} className="ml-17">
+          <motion.div variants={itemVariants} className="lg:ml-17">
             <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
               Navigation
             </h5>

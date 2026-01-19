@@ -17,7 +17,7 @@ export const TopBar = () => {
           >
             <Phone size={18} className="mr-1" /> +1(347)686-4562
           </a>
-          <div className="flex items-center hover:text-white transition-colors">
+          <div className="hidden md:flex items-center hover:text-white transition-colors">
             <MapPin size={18} className="mr-1" />
             <span className="hidden md:inline ">
               10 Millers Lane New Hyde Park, New York 11040
