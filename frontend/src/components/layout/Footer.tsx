@@ -165,7 +165,6 @@ export const Footer = () => {
               </li>
             </ul>
 
-            
             <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400 mt-3">
               <li className="hover:text-primary transition-colors flex items-center gap-2">
                 <Phone size={14} /> +1(347)686-4562
@@ -180,29 +179,43 @@ export const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Newsletter */}
+          {/* Featured Section */}
           <motion.div variants={itemVariants}>
             <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
-              Newsletter
+              Also Featured In
             </h5>
-            <p className="text-xs text-gray-400 leading-relaxed uppercase tracking-widest mb-6">
-              Sign up for our newsletter to get the latest news and updates.
-            </p>
-            <form className="space-y-4">
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="EMAIL ADDRESS"
-                  className="w-full bg-transparent border-b border-white/20 py-3 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors uppercase tracking-wider"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-stone-100 text-stone-900 py-3 px-6 text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300"
+            <div className="flex flex-row items-start gap-8">
+              <a
+                href="https://www.maharaniweddings.com/2025-04-15/16630-hartford-ct-indian-wedding-by-juniper-domantay?fbclid=PAY2xjawJre85leHRuA2FlbQIxMQABp0DZ6VuDwJI8ulfXC6hmCpEyA6lycLDJEtklxSls-mr0qe2L5xnAjDQvyj3O_aem_XMyyfUDnYZjHn39PUVibmw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-2 transition-transform hover:scale-105 group"
               >
-                Subscribe
-              </button>
-            </form>
+                <img
+                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/maharani-badge.png"
+                  alt="Maharani Weddings"
+                  className="h-20 w-auto object-contain"
+                />
+                <span className="text-[10px] text-gray-400 group-hover:text-primary transition-colors uppercase tracking-widest text-center">
+                  Maharani Weddings
+                </span>
+              </a>
+              <a
+                href="https://wezoree.com/real-weddings/urban-euphoria-adriana-kyle-s-magical-moments-at-ravel-hotel-1701964352/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center gap-2 transition-transform hover:scale-105 group"
+              >
+                <img
+                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/Logo_Wezoree_Black-01.png"
+                  alt="Wezoree"
+                  className="h-8 w-auto object-contain brightness-0 invert"
+                />
+                <span className="text-[10px] text-gray-400 group-hover:text-primary transition-colors uppercase tracking-widest text-center mt-2">
+                  Wezoree
+                </span>
+              </a>
+            </div>
           </motion.div>
         </div>
 

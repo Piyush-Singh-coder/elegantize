@@ -16,7 +16,9 @@ export const FeaturedInStrip = () => {
             alt="Maharani Weddings"
             className="h-28 w-auto object-contain"
           />
+          
           </a>
+          
         <a
           href="https://wezoree.com/real-weddings/urban-euphoria-adriana-kyle-s-magical-moments-at-ravel-hotel-1701964352/"
           target="_blank"
