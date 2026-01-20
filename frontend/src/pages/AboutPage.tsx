@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Plus, Minus } from "lucide-react";
 // import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
 import { ClientsStrip } from "../components/sections/ClientsStrip";
 import { ContactSection } from "../components/sections/ContactSection";
 import { AboutSection } from "../components/sections/AboutSection";
+
+const heroImages = [
+  "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-1920,f-auto",
+  "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
+  "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%2095261302.jpg?tr=w-1920,f-auto",
+  "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00644.jpg?tr=w-1920,f-auto",
+];
 
 export const AboutPage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -85,6 +92,15 @@ export const AboutPage = () => {
     },
   ];
 
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHeroSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   const nextSlide = () => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -137,13 +153,20 @@ export const AboutPage = () => {
   return (
     <div className="bg-stone-50 overflow-hidden">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-1920,f-auto"
-            alt="About Hero"
-            className="w-full h-full object-cover"
-          />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentHeroSlide}
+              src={heroImages[currentHeroSlide]}
+              alt="About Hero"
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }}
+              className="w-full h-full object-cover"
+            />
+          </AnimatePresence>
           <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="relative z-10 text-center text-white px-6">
@@ -181,12 +204,16 @@ export const AboutPage = () => {
             variants={fadeInRight}
             className="order-2 lg:order-1 relative"
           >
-            <div className="relative z-10 border border-white/20 p-2">
-              <img
-                src="https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00038.jpg?tr=w-800"
-                alt="Consultation"
-                className="w-full h-auto object-cover transition-all duration-700"
-              />
+            <div className="relative z-10 group">
+              {/* Offset Border Background */}
+              <div className="absolute top-6 left-6 w-full h-full border-2 border-white/40 z-0 transition-transform duration-700 group-hover:top-3 group-hover:left-3" />
+              <div className="relative z-10 shadow-2xl">
+                <img
+                  src="https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00038.jpg?tr=w-800"
+                  alt="Consultation"
+                  className="w-full h-auto object-cover grayscale-20 group-hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -247,12 +274,16 @@ export const AboutPage = () => {
             variants={fadeInRight}
             className="relative group"
           >
-            <div className="overflow-hidden rounded-none shadow-xl border-b-8 border-[#8ca18e]">
-              <img
-                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/farhan-wedding-carpenter-specialist.webp?tr=w-800"
-                alt="Farhan"
-                className="w-full h-auto object-cover aspect-4/5 transform group-hover:scale-105 transition-transform duration-700"
-              />
+            <div className="relative z-10 p-2">
+              {/* Offset Background Box */}
+              <div className="absolute top-4 -right-4 w-full h-full bg-[#8ca18e]/20 border border-[#8ca18e] z-0 transition-all duration-500 group-hover:top-2 group-hover:-right-2" />
+              <div className="relative z-10 overflow-hidden shadow-xl">
+                <img
+                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/farhan-wedding-carpenter-specialist.webp?tr=w-800"
+                  alt="Farhan"
+                  className="w-full h-auto object-cover aspect-4/5 transform group-hover:scale-105 transition-transform duration-700 grayscale-20 group-hover:grayscale-0"
+                />
+              </div>
             </div>
           </motion.div>
           <motion.div
@@ -288,12 +319,16 @@ export const AboutPage = () => {
             variants={fadeInRight}
             className="md:order-2 relative group"
           >
-            <div className="overflow-hidden rounded-none shadow-xl border-b-8 border-[#8ca18e]">
-              <img
-                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/karla-lead-florist.webp?tr=w-600"
-                alt="Karla"
-                className="w-full h-auto object-cover aspect-4/5 transform group-hover:scale-105 transition-transform duration-700"
-              />
+            <div className="relative z-10 p-2">
+              {/* Offset Background Box */}
+              <div className="absolute top-4 -left-4 w-full h-full bg-[#8ca18e]/20 border border-[#8ca18e] z-0 transition-all duration-500 group-hover:top-2 group-hover:-left-2" />
+              <div className="relative z-10 overflow-hidden shadow-xl">
+                <img
+                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/karla-lead-florist.webp?tr=w-600"
+                  alt="Karla"
+                  className="w-full h-auto object-cover aspect-4/5 transform group-hover:scale-105 transition-transform duration-700 grayscale-20 group-hover:grayscale-0"
+                />
+              </div>
             </div>
           </motion.div>
           <motion.div
