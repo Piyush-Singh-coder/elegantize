@@ -75,7 +75,7 @@ const VideoCard = ({
       />
 
       {/* Overlay Gradient */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/80 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
 
       {/* Title */}
       <div className="absolute bottom-6 left-0 w-full text-center z-20 px-4">

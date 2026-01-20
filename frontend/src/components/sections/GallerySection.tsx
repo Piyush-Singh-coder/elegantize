@@ -1,5 +1,7 @@
 import { Button } from "../common/Button";
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { useState } from "react";
 
 // Using placeholder images for gallery as specific gallery images weren't in the data file
 // I'll reuse some from content.ts and add typical placeholders where needed for the 4x3 grid mentioned in PDF
@@ -34,6 +36,8 @@ const itemVariants: Variants = {
 };
 
 export const GallerySection = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   return (
     <motion.section
       id="gallery"
@@ -66,8 +70,10 @@ export const GallerySection = () => {
           {galleryImages.map((src, index) => (
             <motion.div
               key={index}
+              layoutId={`gallery-image-${index}`}
               variants={itemVariants}
-              className="overflow-hidden h-64 group relative"
+              className="overflow-hidden h-64 group relative cursor-pointer"
+              onClick={() => setSelectedImage(src)}
             >
               <img
                 src={src}
@@ -78,6 +84,36 @@ export const GallerySection = () => {
             </motion.div>
           ))}
         </div>
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+              onClick={() => setSelectedImage(null)}
+            >
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-8 right-8 text-white hover:text-gray-300 transition-colors"
+                aria-label="Close"
+              >
+                <X size={40} />
+              </button>
+              <motion.img
+                layoutId={
+                  selectedImage
+                    ? `gallery-image-${galleryImages.indexOf(selectedImage)}`
+                    : undefined
+                }
+                src={selectedImage}
+                alt="Full screen"
+                className="max-w-full max-h-[90vh] object-contain rounded-sm"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <motion.div
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="mt-12"
