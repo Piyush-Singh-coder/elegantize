@@ -230,7 +230,7 @@ export const shortVideos = [
     id: 4,
     title: "",
     videoUrl:
-      "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/afterglowcreative_reel_12_18_2025_12_41_10%20AM3789793839939184915.mp4",
+      "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_12_29_2025_9_30_33%20PM3798394431771591975.mp4",
     thumbnail:
       "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-600,f-auto",
   },
