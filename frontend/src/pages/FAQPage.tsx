@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
 import { faqs } from "../data/content";
 import { Button } from "../components/common/Button";
+import { TestimonialsSection } from "../components/sections/TestimonialsSection";
+import NewsletterSection from "../components/sections/NewsletterSection";
 
 export const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -151,6 +153,11 @@ export const FAQPage = () => {
           </a>
         </div>
       </section>
+      <section className="py-1 bg-stone-950 text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/20 to-transparent" />
+        <NewsletterSection />
+      </section>
+      
     </div>
   );
 };
