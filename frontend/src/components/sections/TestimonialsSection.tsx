@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const TestimonialsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,6 +59,13 @@ export const TestimonialsSection = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentSlide]);
+
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? "100%" : "-100%",
@@ -77,104 +84,109 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row min-h-[70vh] bg-stone-50 overflow-hidden">
-      {/* LEFT COLUMN: IMAGE */}
-      <div className="w-full md:w-1/2 relative min-h-[400px] bg-stone-200 overflow-hidden group">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentSlide}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            className="absolute inset-0"
-          >
-            <img
-              src={slides[currentSlide].image}
-              alt="Highlight"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
+    <section className="bg-stone-50 pt-24">
+      {/* Main Mid Heading */}
+      <div className="text-center mb-12 px-6">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-stone-500 mb-3 block">
+          Client Stories
+        </span>
+        <h2 className="text-4xl md:text-6xl font-display text-stone-900">
+          Kind Words
+        </h2>
       </div>
 
-      {/* RIGHT COLUMN: TEXT */}
-      <div className="w-full md:w-1/2 bg-stone-200 flex flex-col justify-center p-8 md:p-20 relative">
-        <div className="max-w-xl mx-auto w-full">
-          {/* Section Heading */}
-          <div className="mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-stone-500 mb-2 block">
-              Client Stories
-            </span>
-            <h2 className="text-6xl font-display text-stone-900">Kind Words</h2>
-          </div>
+      {/* Split Content */}
+      <div className="flex flex-col md:flex-row sm:min-h-[70vh] lg:flex-row min-h-[50vh] lg:max-h-[70vh] w-full overflow-hidden border-t border-stone-200">
+        {/* LEFT COLUMN: IMAGE */}
+        <div className="w-full md:w-1/2 relative min-h-[400px] bg-stone-200 overflow-hidden group">
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={currentSlide}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+              }}
+              className="absolute inset-0"
+            >
+              <img
+                src={slides[currentSlide].image}
+                alt="Highlight"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-          <div className="relative">
-            {/* Decorative Opening Quote Mark */}
+        {/* RIGHT COLUMN: TEXT */}
+        <div className="w-full md:w-1/2 bg-stone-200 flex flex-col justify-center p-8 md:p-20 relative">
+          <div className="max-w-xl mx-auto w-full">
+            <div className="relative">
+              {/* Decorative Opening Quote Mark */}
 
-            {/* Fixed Height Container to prevent jumping */}
-            <div className="min-h-[330px] md:min-h-[280px] relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`text-${currentSlide}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0"
-                >
-                  <h3 className="text-xl md:text-2xl font-light italic leading-relaxed text-stone-800 font-serif relative z-10">
-                    <span className="text-4xl text-stone-900 mr-2 font-serif opacity-50 align-top">
-                      &ldquo;
-                    </span>
-                    {slides[currentSlide].quote}
-                    <span className="text-4xl text-stone-900 ml-2 font-serif opacity-50 align-top">
-                      &rdquo;
-                    </span>
-                  </h3>
-
-                  <div className="flex flex-col gap-2 border-l-2 mt-6 border-primary pl-6">
-                    <p className="text-2xl font-display tracking-wide font-bold text-stone-900">
-                      {slides[currentSlide].author}
-                    </p>
-                    <a
-                      href={slides[currentSlide].link}
-                      className="text-xs uppercase tracking-widest text-stone-500 hover:text-primary transition-colors font-medium flex items-center gap-2 group cursor-pointer"
-                    >
-                      View Gallery{" "}
-                      <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">
-                        →
+              {/* Fixed Height Container to prevent jumping */}
+              <div className="min-h-[330px] md:min-h-[280px] relative">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`text-${currentSlide}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0"
+                  >
+                    <h3 className="text-xl md:text-2xl font-light italic leading-relaxed text-stone-800 font-serif relative z-10">
+                      <span className="text-4xl text-stone-900 mr-2 font-serif opacity-50 align-top">
+                        &ldquo;
                       </span>
-                    </a>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                      {slides[currentSlide].quote}
+                      <span className="text-4xl text-stone-900 ml-2 font-serif opacity-50 align-top">
+                        &rdquo;
+                      </span>
+                    </h3>
+
+                    <div className="flex flex-col gap-2 border-l-2 mt-6 border-primary pl-6">
+                      <p className="text-2xl font-display tracking-wide font-bold text-stone-900">
+                        {slides[currentSlide].author}
+                      </p>
+                      <a
+                        href={slides[currentSlide].link}
+                        className="text-xs uppercase tracking-widest text-stone-500 hover:text-primary transition-colors font-medium flex items-center gap-2 group cursor-pointer"
+                      >
+                        View Gallery{" "}
+                        <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0 duration-300">
+                          →
+                        </span>
+                      </a>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Decorative Closing Quote Mark */}
             </div>
 
-            {/* Decorative Closing Quote Mark - Optional absolute if preferred, but inline is safer for text flow. I used inline above. */}
-          </div>
-
-          {/* CONTROLS - Moved outside relative container to be at bottom */}
-          <div className="flex items-center gap-4 mt-10 bg-stone-100/50 p-2 rounded-full w-max backdrop-blur-sm">
-            <button
-              onClick={prevSlide}
-              className="w-12 h-12 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 text-stone-600 bg-white"
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="w-12 h-12 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 text-stone-600 bg-white"
-              aria-label="Next Slide"
-            >
-              <ChevronRight size={20} />
-            </button>
+            {/* CONTROLS */}
+            <div className="flex items-center gap-4 mt-10 bg-stone-100/50 p-2 rounded-full w-max backdrop-blur-sm">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 text-stone-600 bg-white"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 rounded-full border border-stone-300 flex items-center justify-center hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all duration-300 text-stone-600 bg-white"
+                aria-label="Next Slide"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </div>
