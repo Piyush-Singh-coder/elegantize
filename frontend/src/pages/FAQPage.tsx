@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
 import { faqs } from "../data/content";
 import { Button } from "../components/common/Button";
-import { TestimonialsSection } from "../components/sections/TestimonialsSection";
 import NewsletterSection from "../components/sections/NewsletterSection";
 
 export const FAQPage = () => {
