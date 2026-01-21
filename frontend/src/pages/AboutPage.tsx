@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {  ChevronRight } from "lucide-react";
 // import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
 import { ClientsStrip } from "../components/sections/ClientsStrip";
 import { ContactSection } from "../components/sections/ContactSection";
 // import { AboutSection } from "../components/sections/AboutSection";
 import { aboutContent } from "../data/content";
+import NewsletterSection from "../components/sections/NewsletterSection";
+import { TestimonialsSection } from "../components/sections/TestimonialsSection";
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -35,53 +37,8 @@ const heroImages = [
 ];
 
 export const AboutPage = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
-
-  const slides = [
-    {
-      image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.17.56.jpg?tr=w-2000,f-auto",
-      quote:
-        "If you're fortunate enough to have Elegantize as your event decor specialist, consider yourselves truly blessed. We highly endorse their services!",
-      author: "Adrian & Kyle",
-      link: "#",
-    },
-    // {
-    //   image:
-    //     "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-1920,f-auto",
-    //   quote:
-    //     "Elegantize transformed our venue into a fairytale. The attention to detail was simply unmatched. Truly a magical experience!",
-    //   author: "Sarah & Mike",
-    //   link: "#",
-    // },
-    {
-      image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/kiran/Copy%20of%20KiranFritdjof-WeddingPhotos-1135.jpg?tr=w-2000,f-auto",
-      quote:
-        "Choosing Elegantize for our wedding decor was one of the best decisions we made. Their attention to detail and creative flair transformed our wedding venue in New York into a dream come true. Highly recommended!",
-      author: "Devan & Ashish",
-      link: "#",
-    },
-    {
-      image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/jaya/Copy%20of%20DSC00122.jpg?tr=w-2000,f-auto",
-      quote:
-        "Elegantize Weddings exceeded all our expectations and brought our vision to life in the most spectacular way. From the initial consultation to the final touches in our wedding, Elegantize team's professionalism and expertise shone through. We couldn't be happier with the results!",
-      author: "Judi & Chris",
-      link: "#",
-    },
-    // {
-    //   image:
-    //     "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00038.jpg?tr=w-1920,f-auto",
-    //   quote:
-    //     "From the initial consultation to the final reveal, the team at Elegantize exceeded all our expectations.",
-    //   author: "Amanda & Robert",
-    //   link: "#",
-    // },
-  ];
-
+  
   const faqs = [
     {
       question:
@@ -122,32 +79,7 @@ export const AboutPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
 
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
-      opacity: 1, // Ensure opacity is 1
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? "100%" : "-100%",
-      opacity: 1, // Keep opacity 1 so it doesn't fade
-    }),
-  };
 
   const toggleAccordion = (index: number) => {
     setActiveAccordion(activeAccordion === index ? null : index);
@@ -336,7 +268,7 @@ export const AboutPage = () => {
               experiences.
             </p>
             <a
-              href="/#contact"
+              href="/contact"
               className="group inline-flex items-center gap-2 text-stone-900 border-b border-stone-900 pb-1 text-xs font-bold uppercase tracking-widest hover:text-[#8ca18e] hover:border-[#8ca18e] transition-colors"
             >
               Get in touch{" "}
@@ -368,7 +300,7 @@ export const AboutPage = () => {
               <img
                 src="https://ik.imagekit.io/v6xwevpjp/Elegentize/farhan-wedding-carpenter-specialist.webp?tr=w-1200"
                 alt="Farhan"
-                className="w-full h-150 object-cover filter transition-all duration-1000 ease-out"
+                className="w-full h-full object-cover filter transition-all duration-1000 ease-out"
               />
             </motion.div>
             <div className="text-left px-4">
@@ -404,7 +336,7 @@ export const AboutPage = () => {
               <img
                 src="https://ik.imagekit.io/v6xwevpjp/Elegentize/karla-lead-florist.webp?tr=w-1200"
                 alt="Karla"
-                className="w-full h-150 object-cover filter transition-all duration-1000 ease-out"
+                className="w-full h-full object-cover filter transition-all duration-1000 ease-out"
               />
             </motion.div>
             <div className="text-left px-4">
@@ -432,72 +364,7 @@ export const AboutPage = () => {
       </section>
 
       {/* Testimonial Slider */}
-      <section className="relative h-[80vh] bg-stone-900 text-white overflow-hidden">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentSlide}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            className="absolute inset-0 z-0"
-          >
-            <img
-              src={slides[currentSlide].image}
-              alt="Highlight"
-              className="w-full h-full object-cover opacity-70"
-            />
-            {/* <div className="absolute inset-0 bg-black/40" /> */}
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="absolute inset-0 z-10 flex flex-col items-start justify-center px-6 md:px-20">
-          <motion.div
-            key={`text-${currentSlide}`}
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-xl bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl p-10 md:p-16 shadow-2xl relative overflow-hidden"
-          >
-            {/* Shine effect */}
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
-
-            <h3 className="text-xl md:text-xl font-serif italic leading-relaxed mb-6 text-white drop-shadow-lg text-left relative z-10">
-              "{slides[currentSlide].quote}"
-            </h3>
-            <div className="flex flex-col items-start gap-2 relative z-10">
-              <p className="text-sm md:text-base font-display tracking-widest uppercase text-white/90">
-                {slides[currentSlide].author}
-              </p>
-              <a
-                href={slides[currentSlide].link}
-                className="text-xs underline underline-offset-4 hover:text-primary transition-colors text-white/80"
-              >
-                View the wedding
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Slider Controls */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-4 rounded-full backdrop-blur-sm transition-all text-white z-20"
-        >
-          <ChevronLeft size={32} />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-4 rounded-full backdrop-blur-sm transition-all text-white z-20"
-        >
-          <ChevronRight size={32} />
-        </button>
-      </section>
+<TestimonialsSection />
 
       {/* FAQ Section - Clean Minimal */}
       <section className="py-32 px-6 bg-white text-stone-800">
@@ -552,44 +419,7 @@ export const AboutPage = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="relative py-32 flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/wedding-newsletter-signup-980x825.webp?tr=w-1920"
-            alt="Newsletter BG"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/60"/>
-        </div>
-
-        <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto">
-          <h5 className="text-xs uppercase tracking-[0.2em] opacity-80 mb-6">
-            Stay Inspired
-          </h5>
-          <h2 className="text-4xl md:text-5xl font-display mb-8">
-            Join Our Newsletter
-          </h2>
-          <p className="text-lg font-light opacity-90 mb-10">
-            Get exclusive access to our latest design concepts, wedding trends,
-            and insider tips.
-          </p>
-
-          <form className="flex flex-col md:flex-row gap-4">
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="flex-1 bg-white/10 backdrop-blur-sm border border-white/30 text-white placeholder-white/60 px-6 py-4 rounded-none focus:outline-none focus:bg-white/20 transition-all"
-            />
-            <button
-              type="submit"
-              className="bg-white text-stone-900 px-8 py-4 font-bold uppercase tracking-widest text-xs hover:bg-[#8ca18e] hover:text-white transition-colors"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div>
-      </section>
+        <NewsletterSection />
 
       <ClientsStrip />
       <ContactSection />
