@@ -556,11 +556,11 @@ export const AboutPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://ik.imagekit.io/v6xwevpjp/Portfolio/kiran/Copy%20of%20KiranFritdjof-WeddingPhotos-1135.jpg?tr=w-1920"
+            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/wedding-newsletter-signup-980x825.webp?tr=w-1920"
             alt="Newsletter BG"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/60"/>
         </div>
 
         <div className="relative z-10 text-center text-white px-6 max-w-2xl mx-auto">

@@ -23,17 +23,17 @@ export const FAQPage = () => {
   };
 
   return (
-    <div className="bg-stone-50 min-h-screen">
+    <div className="bg-stone-950 min-h-screen text-stone-200">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-stone-900 text-white">
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-stone-900 text-white">
         <div className="absolute inset-0 opacity-40">
           {/* Using a high-quality abstract or relevant background image */}
           <img
             src="https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-2000,f-auto"
             alt="FAQ Background"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover border-b-6 border-primary"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -62,6 +62,7 @@ export const FAQPage = () => {
 
       {/* FAQ Content Section */}
       <section className="py-24 px-6">
+        
         <motion.div
           className="max-w-4xl mx-auto"
           variants={containerVariants}
@@ -76,8 +77,8 @@ export const FAQPage = () => {
                 variants={itemVariants}
                 className={`group rounded-2xl border transition-all duration-300 overflow-hidden ${
                   openIndex === index
-                    ? "bg-white border-stone-200 shadow-xl"
-                    : "bg-white/50 border-transparent hover:bg-white hover:border-stone-200 hover:shadow-md"
+                    ? "bg-stone-900 border-stone-700 shadow-xl shadow-black/50"
+                    : "bg-stone-900/40 border-stone-800 hover:bg-stone-900 hover:border-stone-600 hover:shadow-md"
                 }`}
               >
                 <button
@@ -88,7 +89,9 @@ export const FAQPage = () => {
                 >
                   <span
                     className={`font-display text-xl transition-colors duration-300 ${
-                      openIndex === index ? "text-primary" : "text-stone-800"
+                      openIndex === index
+                        ? "text-primary-400"
+                        : "text-stone-200"
                     }`}
                   >
                     {faq.question}
@@ -97,7 +100,7 @@ export const FAQPage = () => {
                     className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${
                       openIndex === index
                         ? "bg-primary text-white rotate-180"
-                        : "bg-stone-100 text-stone-400 group-hover:bg-primary/10 group-hover:text-primary"
+                        : "bg-stone-800 text-stone-400 group-hover:bg-primary/20 group-hover:text-primary-400"
                     }`}
                   >
                     <ChevronDown size={20} />
@@ -113,8 +116,8 @@ export const FAQPage = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <div className="px-8 pb-8 pt-0">
-                        <div className="h-px w-full bg-stone-100 mb-6" />
-                        <p className="text-gray-600 leading-relaxed text-lg font-light">
+                        <div className="h-px w-full bg-stone-800 mb-6" />
+                        <p className="text-gray-300 leading-relaxed text-lg font-light">
                           {faq.answer}
                         </p>
                       </div>
@@ -128,20 +131,20 @@ export const FAQPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white text-center relative overflow-hidden">
+      <section className="py-24 bg-stone-950 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/20 to-transparent" />
         <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-8 text-primary shadow-sm">
+          <div className="w-16 h-16 bg-stone-900 rounded-full flex items-center justify-center mx-auto mb-8 text-primary-400 shadow-sm border border-stone-800">
             <MessageCircle size={32} />
           </div>
-          <h2 className="text-4xl font-display text-stone-900 mb-6">
+          <h2 className="text-4xl font-display text-white mb-6">
             Still have questions?
           </h2>
-          <p className="text-gray-500 mb-10 text-lg font-light">
+          <p className="text-gray-400 mb-10 text-lg font-light">
             Can't find the answer you're looking for? Please chat to our
             friendly team.
           </p>
-          <a href="/#contact">
+          <a href="/contact">
             <Button size="lg" icon={ArrowRight}>
               Contact Support
             </Button>
