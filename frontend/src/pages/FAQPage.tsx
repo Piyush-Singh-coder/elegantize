@@ -1,0 +1,153 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
+import { faqs } from "../data/content";
+import { Button } from "../components/common/Button";
+
+export const FAQPage = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  return (
+    <div className="bg-stone-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-stone-900 text-white">
+        <div className="absolute inset-0 opacity-40">
+          {/* Using a high-quality abstract or relevant background image */}
+          <img
+            src="https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-2000,f-auto"
+            alt="FAQ Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8 backdrop-blur-md">
+              <Sparkles size={14} className="text-yellow-200" />
+              <span className="text-xs uppercase tracking-[0.3em] font-semibold">
+                Support & Info
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-display mb-6 leading-tight">
+              Frequently Asked{" "}
+              <span className="text-white/50 italic font-serif">Questions</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto">
+              Everything you need to know about our services, process, and how
+              we bring your dream wedding to life.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Content Section */}
+      <section className="py-24 px-6">
+        <motion.div
+          className="max-w-4xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="grid gap-6">
+            {faqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`group rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  openIndex === index
+                    ? "bg-white border-stone-200 shadow-xl"
+                    : "bg-white/50 border-transparent hover:bg-white hover:border-stone-200 hover:shadow-md"
+                }`}
+              >
+                <button
+                  onClick={() =>
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
+                  className="w-full text-left px-8 py-8 flex justify-between items-center focus:outline-none"
+                >
+                  <span
+                    className={`font-display text-xl transition-colors duration-300 ${
+                      openIndex === index ? "text-primary" : "text-stone-800"
+                    }`}
+                  >
+                    {faq.question}
+                  </span>
+                  <span
+                    className={`relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${
+                      openIndex === index
+                        ? "bg-primary text-white rotate-180"
+                        : "bg-stone-100 text-stone-400 group-hover:bg-primary/10 group-hover:text-primary"
+                    }`}
+                  >
+                    <ChevronDown size={20} />
+                  </span>
+                </button>
+
+                <AnimatePresence>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="px-8 pb-8 pt-0">
+                        <div className="h-px w-full bg-stone-100 mb-6" />
+                        <p className="text-gray-600 leading-relaxed text-lg font-light">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-white text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/20 to-transparent" />
+        <div className="max-w-3xl mx-auto px-6 relative z-10">
+          <div className="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-8 text-primary shadow-sm">
+            <MessageCircle size={32} />
+          </div>
+          <h2 className="text-4xl font-display text-stone-900 mb-6">
+            Still have questions?
+          </h2>
+          <p className="text-gray-500 mb-10 text-lg font-light">
+            Can't find the answer you're looking for? Please chat to our
+            friendly team.
+          </p>
+          <a href="/#contact">
+            <Button size="lg" icon={ArrowRight}>
+              Contact Support
+            </Button>
+          </a>
+        </div>
+      </section>
+    </div>
+  );
+};

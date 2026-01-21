@@ -2,6 +2,7 @@ import { Button } from "../common/Button";
 import { motion, type Variants, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Using placeholder images for gallery as specific gallery images weren't in the data file
 // I'll reuse some from content.ts and add typical placeholders where needed for the 4x3 grid mentioned in PDF
@@ -118,7 +119,9 @@ export const GallerySection = () => {
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           className="mt-12"
         >
-          <Button variant="text">View All Projects</Button>
+          <Link to="/gallery">
+            <Button variant="text">View All Projects</Button>
+          </Link>
         </motion.div>
       </div>
     </motion.section>

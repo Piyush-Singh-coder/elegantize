@@ -167,30 +167,52 @@ export const blogPosts = [
 ];
 
 export const faqs = [
-  {
-    question: "How far in advance should I book Elegantize?",
+  {question:"What types of events decor do we specialize in?",
+    answer:"Elegantize Weddings specializes in a wide range of events in New York and New Jersey, including weddings, corporate functions, private celebrations, and more. Our services encompass floral design, ceiling design, centerpiece design, vinyl floor wraps, ceremony decor, and draping services, each tailored to fit the unique needs of your event. We combine creativity with attention to detail, ensuring every element—from the flowers to the floor wrap—is meticulously crafted to enhance the event’s atmosphere. Whether you envision a lavish wedding in New York or a sophisticated corporate gathering in New Jersey, our wedding decoration team brings your vision to life with personalized, stunning decor."
+    },
+    {question: "How far in advance should I book Elegantize?",
     answer:
-      "For peak seasons in NY/NJ we recommend 9–12 months; for off-peak 4–6 months. Shorter timelines may be accommodated subject to availability.",
+      "For weddings in New York and New Jersey or large-scale events, we recommend booking at least 6-12 months in advance to secure availability and allow ample time for our detailed planning and design process. Early booking allows us to understand your vision fully, customize each design element and coordinate every detail for a flawless event. Elegantize’s team works closely with you to craft a unique, elegant experience, ensuring every piece fits perfectly into your event’s theme and atmosphere.",
   },
   {
-    question: "Do you provide full installation and teardown?",
+    question: "Do you offer customizable wedding decoration options?",
     answer:
-      "Yes — full production, vendor coordination and post-event teardown are included in our standard packages.",
+      "Yes, Elegantize offers a variety of wedding packages, each designed to provide different levels of wedding decor services to match your vision and budget. Our packages can include floral design, ceiling design, centerpiece design, vinyl floor wraps, ceremony decor, and draping services, with each element crafted to enhance your wedding’s unique atmosphere. For couples seeking a more personalized touch, we also offer custom packages tailored to your specific needs. Whether you’re planning an intimate celebration or a grand affair, our Wedding Decoration team ensures every detail is thoughtfully curated to create a memorable, elegant experience.",
   },
   {
-    question: "Do you work with wedding planners and venues?",
+    question: "What does the process entail when booking decor service with Elegantize?",
     answer:
-      "Absolutely. We regularly collaborate with wedding planners, venues, photographers, and caterers to ensure smooth execution and seamless design.",
+      "The process begins with an initial consultation, where we sit down to understand your event’s vision, style, and specific needs. During this meeting, we discuss your preferences for decor, themes, colors, and any special elements you want to include. Next, our team creates a custom design plan tailored to your requirements, incorporating all the details we’ve discussed. Once the plan is finalized and approved, we move forward with planning and execution, coordinating all aspects of the decor, from floral arrangements to ceiling design and draping services. Our team ensures every detail is handled with care, making your event truly unforgettable.",
   },
   {
-    question: "Can you design for cultural and multi-day weddings?",
+    question: "Can you accommodate an Outdoor Wedding Event?",
     answer:
-      "Yes. We specialize in Indian, Pakistani, Christian, fusion, and multicultural weddings, including multi-day celebrations and destination events.",
+      "Absolutely! At Elegantize, we have extensive experience in decorating outdoor wedding events, ensuring every detail is both stunning and practical for outdoor settings. Our process begins with a detailed consultation to understand your vision and the unique aspects of your outdoor venue. We then create a custom design plan that aligns with your style, carefully considering elements like lighting, seating arrangements, and decor placement. Our team ensures that all aspects of the design are cohesive, enhancing the natural beauty of the venue while creating an unforgettable atmosphere for your special day.",
   },
   {
-    question: "Do you provide custom designs or packages?",
+    question: "How much will my decor cost?",
     answer:
-      "Every Elegantize wedding is custom-designed. We create personalized décor concepts based on your venue, guest count, budget, and vision.",
+      "Pricing is personalized to fit the unique needs of your event. The process begins with an initial consultation, where we discuss your vision, the scope of the event, and the specific decor elements you’d like to incorporate. Based on this information, we create a tailored proposal that outlines the services and decor options that best fit your style and budget. This allows us to provide a clear, customized pricing structure, ensuring you get the best value for your celebration. We work with you every step of the way to make your dream event a reality.",
+  },
+  {
+    question: "Does Elegantize offer wedding packages?",
+    answer:
+      "Yes, we offer a wide range of wedding packages, designed to accommodate various budgets and styles. Our packages include different levels of decor and design services, ensuring that each event receives the perfect combination of elegance and personalization. Whether you’re looking for a simple yet beautiful setup or a more elaborate design, we tailor our offerings to suit your vision. Additionally, we understand that every wedding is unique, so we also offer custom packages designed specifically to meet your individual needs. Whatever your dream wedding looks like, we’re here to bring it to life.",
+  },
+  {
+    question: "How involved can I be in the decor process?",
+    answer:
+      "At Elegantize, we strongly encourage client collaboration throughout the entire decor planning process. Your input is invaluable to us, as we believe your vision should be at the heart of every design decision. From the initial consultation to the final touches, we work closely with you, ensuring that your ideas and preferences are reflected in the decor. Our team listens carefully and provides expert guidance to enhance your vision, ensuring that every detail aligns perfectly with your expectations. With your collaboration, we create a truly personalized and memorable event that exceeds your dreams and captures your unique style.",
+  },
+  {
+    question: "What makes Elegantize different from other wedding decorators?",
+    answer:
+      "Elegantize focus on understanding your unique vision and tailoring every detail to make your celebration truly one-of-a-kind. With an unwavering attention to detail and a passion for trendsetting designs, we ensure that each aspect of your wedding reflects your personal style and creates an unforgettable atmosphere. Our goal is to craft elegant, memorable experiences that leave a lasting impression on both you and your guests. From the smallest detail to the grandest gesture, we strive to make every moment of your wedding day exceptional.",
+  },
+  {
+    question: "What Decorations are needed for a Wedding?",
+    answer:
+      "Essential wedding decorations include captivating centerpieces, romantic lighting, elegant draping, and personalized details like signage and favors. Our decoration expert designers at Elegantize Weddings will help you select the perfect elements to create a cohesive and unforgettable atmosphere for your special day.",
   },
 ];
 

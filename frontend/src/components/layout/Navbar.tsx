@@ -31,10 +31,10 @@ export const Navbar = () => {
     { name: "Home", href: "#", isRouterLink: true, path: "/" },
     { name: "About", href: "/about", isRouterLink: true, path: "/about" },
     { name: "Services", href: "#services" },
-    { name: "Gallery", href: "#gallery" },
+    { name: "Gallery", href: "/gallery", isRouterLink: true, path: "/gallery" },
     { name: "Portfolio", href: "#portfolio" },
     { name: "Blog", href: "#blog" },
-    { name: "FAQ", href: "#faq" },
+    { name: "FAQ", href: "/faq", isRouterLink: true, path: "/faq" },
   ];
 
   return (
@@ -102,12 +102,12 @@ export const Navbar = () => {
 
         {/* CTA Button */}
         <div className="hidden lg:block">
-          <a
-            href={location.pathname === "/" ? "#contact" : "/#contact"}
+          <Link
+            to="/contact"
             className="inline-block bg-primary text-white px-8 py-3 text-xs uppercase tracking-widest font-bold hover:bg-stone-800 transition-all duration-300 transform hover:scale-105 active:scale-95"
           >
             Get In Touch
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -163,13 +163,13 @@ export const Navbar = () => {
                   </a>
                 ),
               )}
-              <a
-                href={location.pathname === "/" ? "#contact" : "/#contact"}
+              <Link
+                to="/contact"
                 className="bg-primary text-white px-6 py-3 text-center text-xs font-bold uppercase tracking-widest mt-4 block"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Book a Consultation
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
