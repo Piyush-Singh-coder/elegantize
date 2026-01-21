@@ -73,15 +73,15 @@ export const AboutSection = () => {
           <img
             alt="About Elegantize"
             className="w-full h-full object-cover grayscale-20 opacity-90"
-            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1200"
+            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1600"
           />
         </motion.div>
         {/* Mobile Image Fallback */}
         <div className="w-full md:hidden mt-8">
           <img
             alt="About Elegantize"
-            className="w-full h-[400px] object-cover grayscale-20"
-            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-800"
+            className="w-full h-100 object-cover grayscale-20"
+            src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1200"
           />
         </div>
       </div>

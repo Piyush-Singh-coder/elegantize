@@ -3,7 +3,7 @@ export const heroSlides = [
     title: "Floral Design",
     subtitle: "Where Every Bloom Tells Your Love Story",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-2000,f-auto",
   },
   {
     title: "Ceiling Design",
@@ -146,7 +146,7 @@ export const blogPosts = [
     excerpt:
       "Discover the colors and blooms that are defining the modern luxury wedding scene...",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-2000,f-auto",
   },
   {
     title: "How to Choose Your Wedding Lighting",
@@ -208,7 +208,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_1_14_2026_8_30_00%20PM3809961602100004012.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-1200,f-auto",
   },
   {
     id: 2,
@@ -216,7 +216,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/djtm_official_reel_12_18_2025_3_23_36%20AM3789871397074796955.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00360.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00360.jpg?tr=w-1200,f-auto",
   },
   {
     id: 3,
@@ -224,7 +224,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_12_12_2024_10_30_00%20PM3521561008227581106.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01108.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01108.jpg?tr=w-1200,f-auto",
   },
   {
     id: 4,
@@ -232,7 +232,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_12_29_2025_9_30_33%20PM3798394431771591975.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-1200,f-auto",
   },
   {
     id: 5,
@@ -240,7 +240,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_12_29_2025_9_30_33%20PM3798394431771591975.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00326.jpg??tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00326.jpg??tr=w-1200,f-auto",
   },
   {
     id: 6,
@@ -248,7 +248,7 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_5_27_2022_1_07_26%20AM2846867921226300535.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC09019.jpg?updatedAt=1768802739198?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC09019.jpg?updatedAt=1768802739198?tr=w-1200,f-auto",
   },
   {
     id: 7,
@@ -256,6 +256,6 @@ export const shortVideos = [
     videoUrl:
       "https://ik.imagekit.io/v6xwevpjp/videos-Elegentize/elegantizeevents_reel_11_6_2025_8_30_00%20PM3759951878449372084.mp4",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/c3bc82a9-1671-4455-ad92-a47e6beb5e94.jpeg??tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/c3bc82a9-1671-4455-ad92-a47e6beb5e94.jpeg??tr=w-1200,f-auto",
   },
 ];

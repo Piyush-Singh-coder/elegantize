@@ -7,6 +7,26 @@ import { ContactSection } from "../components/sections/ContactSection";
 // import { AboutSection } from "../components/sections/AboutSection";
 import { aboutContent } from "../data/content";
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    },
+  },
+};
+
 const heroImages = [
   "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC09950.jpg?tr=w-1920,f-auto",
   "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
@@ -22,7 +42,7 @@ export const AboutPage = () => {
   const slides = [
     {
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.17.56.jpg?tr=w-1920,f-auto",
+        "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.17.56.jpg?tr=w-2000,f-auto",
       quote:
         "If you're fortunate enough to have Elegantize as your event decor specialist, consider yourselves truly blessed. We highly endorse their services!",
       author: "Adrian & Kyle",
@@ -38,7 +58,7 @@ export const AboutPage = () => {
     // },
     {
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/kiran/Copy%20of%20KiranFritdjof-WeddingPhotos-1135.jpg?tr=w-1920,f-auto",
+        "https://ik.imagekit.io/v6xwevpjp/Portfolio/kiran/Copy%20of%20KiranFritdjof-WeddingPhotos-1135.jpg?tr=w-2000,f-auto",
       quote:
         "Choosing Elegantize for our wedding decor was one of the best decisions we made. Their attention to detail and creative flair transformed our wedding venue in New York into a dream come true. Highly recommended!",
       author: "Devan & Ashish",
@@ -46,7 +66,7 @@ export const AboutPage = () => {
     },
     {
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/jaya/Copy%20of%20DSC00122.jpg?tr=w-1920,f-auto",
+        "https://ik.imagekit.io/v6xwevpjp/Portfolio/jaya/Copy%20of%20DSC00122.jpg?tr=w-2000,f-auto",
       quote:
         "Elegantize Weddings exceeded all our expectations and brought our vision to life in the most spectacular way. From the initial consultation to the final touches in our wedding, Elegantize team's professionalism and expertise shone through. We couldn't be happier with the results!",
       author: "Judi & Chris",
@@ -105,15 +125,6 @@ export const AboutPage = () => {
   const nextSlide = () => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
   };
 
   const prevSlide = () => {
@@ -209,14 +220,23 @@ export const AboutPage = () => {
 
       {/* Section 1: Elegantize Weddings */}
       <section id="about" className="py-32 px-6 max-w-7xl mx-auto relative">
-        <div className="flex flex-col md:flex-row items-center relative">
+        <div className="flex flex-col md:flex-row items-center relative min-h-150">
+          {/* Mobile Image Fallback - Shown First on Mobile */}
+          <div className="w-full md:hidden mb-8">
+            <img
+              alt="About Elegantize"
+              className="w-full h-100 object-cover grayscale-20"
+              src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1200"
+            />
+          </div>
+
           {/* Text Content */}
           <motion.div
             className="w-full md:w-3/5 z-10 md:pr-12"
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
-            transition={{ staggerChildren: 0.1 }}
+            variants={containerVariants}
           >
             <div className="bg-white p-8 md:p-16 shadow-xl border-l-4 border-[#8ca18e]">
               <motion.span
@@ -257,7 +277,7 @@ export const AboutPage = () => {
             </div>
           </motion.div>
 
-          {/* Abstract Image Composition */}
+          {/* Abstract Image Composition - Desktop Only */}
           <motion.div
             className="w-full md:w-1/2 absolute top-0 right-0 h-full hidden md:block z-0"
             initial={{ opacity: 0, x: 50 }}
@@ -265,27 +285,20 @@ export const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="w-full h-full bg-stone-100 absolute inset-0 -z-10 transform translate-x-12 translate-y-12" />
+            {/* Removed the offset background box to prevent overflow */}
+            <div className="w-full h-full bg-stone-100 absolute inset-0 -z-10" />
             <img
               alt="About Elegantize"
               className="w-full h-full object-cover grayscale-20 opacity-90"
-              src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1200"
+              src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-1600"
             />
           </motion.div>
-          {/* Mobile Image Fallback */}
-          <div className="w-full md:hidden mt-8">
-            <img
-              alt="About Elegantize"
-              className="w-full h-[400px] object-cover grayscale-20"
-              src="https://ik.imagekit.io/v6xwevpjp/Elegentize/raza-weding-decor-specialist-1.webp?tr=w-800"
-            />
-          </div>
         </div>
       </section>
 
       {/* Section 2: Consultation - Overlapping Layout */}
       <section className="py-32 px-6 bg-stone-100 text-stone-900 overflow-visible">
-        <div className="max-w-7xl mx-auto relative lg:h-[800px] flex items-center">
+        <div className="max-w-7xl mx-auto relative lg:h-[800px] flex flex-col lg:flex-row items-center">
           {/* Image Container - takes up 60% approx */}
           <motion.div
             initial="hidden"
@@ -353,9 +366,9 @@ export const AboutPage = () => {
               className="mb-8 relative"
             >
               <img
-                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/farhan-wedding-carpenter-specialist.webp?tr=w-800"
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/farhan-wedding-carpenter-specialist.webp?tr=w-1200"
                 alt="Farhan"
-                className="w-full h-[600px] object-cover filter transition-all duration-1000 ease-out"
+                className="w-full h-150 object-cover filter transition-all duration-1000 ease-out"
               />
             </motion.div>
             <div className="text-left px-4">
@@ -389,9 +402,9 @@ export const AboutPage = () => {
               className="mb-8 relative"
             >
               <img
-                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/karla-lead-florist.webp?tr=w-600"
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/karla-lead-florist.webp?tr=w-1200"
                 alt="Karla"
-                className="w-full h-[600px] object-cover filter transition-all duration-1000 ease-out"
+                className="w-full h-150 object-cover filter transition-all duration-1000 ease-out"
               />
             </motion.div>
             <div className="text-left px-4">

@@ -7,21 +7,21 @@ const portfolios = [
     title: "",
     location: "",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.18.28.jpg?tr=w-800,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20WhatsApp%20Image%202023-09-27%20at%2012.18.28.jpg?tr=w-1200,f-auto",
     category: "Floral Design",
   },
   {
     title: "",
     location: "",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Ayesha&George/Copy%20of%20Copy%20of%20DSC09906.jpg?tr=w-800,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Ayesha&George/Copy%20of%20Copy%20of%20DSC09906.jpg?tr=w-1200,f-auto",
     category: "Lighting",
   },
   {
     title: "",
     location: "", // Keeping placeholder content variety
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Carolyn%20Mcfarlane/Copy%20of%20Copy%20of%20DSC01024.jpg?updatedAt=1768807830234&tr=w-800,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Carolyn%20Mcfarlane/Copy%20of%20Copy%20of%20DSC01024.jpg?updatedAt=1768807830234&tr=w-1200,f-auto",
     category: "Concept",
   },
 ];

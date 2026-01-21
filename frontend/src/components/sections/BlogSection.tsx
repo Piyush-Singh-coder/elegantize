@@ -7,21 +7,21 @@ const blogPosts = [
     title: "10 Trending Wedding Themes for 2024",
     excerpt: "Discover the most popular wedding aesthetics...",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00360.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00360.jpg?tr=w-1200,f-auto",
     date: "Feb 10, 2024",
   },
   {
     title: "How to Choose the Perfect Floral Arrangements",
     excerpt: "A guide to selecting flowers that match your venue...",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01108.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01108.jpg?tr=w-1200,f-auto",
     date: "Jan 25, 2024",
   },
   {
     title: "Outdoor Wedding Lighting Tips",
     excerpt: "Create a magical ambiance with these lighting ideas...",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-600,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-1200,f-auto",
     date: "Jan 12, 2024",
   },
 ];
