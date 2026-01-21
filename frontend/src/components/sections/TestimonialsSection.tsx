@@ -118,7 +118,7 @@ export const TestimonialsSection = () => {
             {/* Decorative Opening Quote Mark */}
 
             {/* Fixed Height Container to prevent jumping */}
-            <div className="min-h-[280px] relative">
+            <div className="min-h-[330px] md:min-h-[280px] relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`text-${currentSlide}`}
