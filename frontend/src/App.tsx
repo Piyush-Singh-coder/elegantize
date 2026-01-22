@@ -7,6 +7,8 @@ import { FAQPage } from "./pages/FAQPage";
 
 import { ContactPage } from "./pages/ContactPage";
 import { GalleryPage } from "./pages/GalleryPage";
+import { BlogListingPage } from "./pages/BlogListingPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/blog" element={<BlogListingPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

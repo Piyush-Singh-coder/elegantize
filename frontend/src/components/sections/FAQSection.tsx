@@ -28,7 +28,6 @@ export const FAQSection = () => {
             Common <span className="text-primary italic">Questions</span>
           </h2>
         </div>
-
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div

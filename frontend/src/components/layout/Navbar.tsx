@@ -33,7 +33,7 @@ export const Navbar = () => {
     { name: "Services", href: "#services" },
     { name: "Gallery", href: "/gallery", isRouterLink: true, path: "/gallery" },
     { name: "Portfolio", href: "#portfolio" },
-    { name: "Blog", href: "#blog" },
+    { name: "Blog", href: "/blog", isRouterLink: true, path: "/blog" },
     { name: "FAQ", href: "/faq", isRouterLink: true, path: "/faq" },
   ];
 
