@@ -104,7 +104,7 @@ export const Navbar = () => {
         <div className="hidden lg:block">
           <Link
             to="/contact"
-            className="inline-block bg-primary text-white px-8 py-3 text-xs uppercase tracking-widest font-bold hover:bg-stone-800 transition-all duration-300 transform hover:scale-105 active:scale-95"
+            className="inline-block bg-[linear-gradient(to_right,theme(colors.primary)_50%,black_50%)] bg-[length:200%_100%] bg-left hover:bg-right text-white px-8 py-3 text-xs uppercase tracking-widest font-bold transition-all duration-500 transform hover:scale-105 active:scale-95"
           >
             Get In Touch
           </Link>

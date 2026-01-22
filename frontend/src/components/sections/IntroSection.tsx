@@ -1,4 +1,5 @@
 import { introContent } from "../../data/content";
+import { Button } from "../common/Button";
 
 export const IntroSection = () => {
   return (
@@ -20,9 +21,7 @@ export const IntroSection = () => {
         ))}
 
         <div className="inline-block border border-primary/50 p-1 mt-6">
-          <button className="bg-primary text-white px-8 py-3 uppercase tracking-widest text-xs font-bold hover:bg-white hover:text-black transition-all duration-500">
-            View Our Work
-          </button>
+          <Button className="px-8 py-3 w-full">View Our Work</Button>
         </div>
       </div>
     </section>

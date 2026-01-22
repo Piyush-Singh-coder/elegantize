@@ -14,12 +14,15 @@ import { WhyChooseSection } from "../components/sections/WhyChooseSection";
 import { TestimonialsSection } from "../components/sections/TestimonialsSection";
 import { ClientsStrip } from "../components/sections/ClientsStrip";
 import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
+import { StatsSection } from "../components/sections/StatsSection";
 
 export const HomePage = () => {
   return (
     <>
       <LeftFixedEnquiryPanel />
       <HeroSlider />
+
+      <StatsSection />
       <HorizontalEnquiryForm />
 
       <IntroSection />

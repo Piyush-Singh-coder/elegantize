@@ -22,7 +22,8 @@ export const Button = ({
     "inline-flex items-center justify-center font-bold uppercase tracking-widest transition-all duration-300";
 
   const variants = {
-    primary: "bg-primary text-white hover:bg-opacity-90",
+    primary:
+      "bg-[linear-gradient(to_right,theme(colors.primary)_50%,black_50%)] bg-[length:200%_100%] bg-left hover:bg-right text-white border-none",
     outline:
       "border border-white/40 hover:bg-white hover:text-black text-white",
     text: "border-b-2 border-primary pb-1 hover:text-primary text-gray-900 dark:text-white bg-transparent px-0 py-0",

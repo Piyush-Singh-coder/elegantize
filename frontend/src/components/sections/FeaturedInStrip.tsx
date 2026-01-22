@@ -1,7 +1,7 @@
 export const FeaturedInStrip = () => {
   return (
     <div className="bg-stone-950 border-t border-white/10 py-12">
-      <p className="text-xs uppercase tracking-[0.3em] mb-8 text-center text-gray-500">
+      <p className="text-lg font-bold uppercase tracking-[0.3em] mb-8 text-center text-gray-300">
         Also Featured In
       </p>
       <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24  hover:grayscale-0 transition-all duration-700">
@@ -16,9 +16,7 @@ export const FeaturedInStrip = () => {
             alt="Maharani Weddings"
             className="h-28 w-auto object-contain"
           />
-          
           </a>
-          
         <a
           href="https://wezoree.com/real-weddings/urban-euphoria-adriana-kyle-s-magical-moments-at-ravel-hotel-1701964352/"
           target="_blank"
