@@ -27,7 +27,7 @@ export const BlogPostPage = () => {
     <div className="pt-[100px] bg-white pb-24">
       {/* Hero Image */}
       <div className="h-[40vh] md:h-[60vh] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
         <img
           src={post.image}
           alt={post.title}
@@ -50,6 +50,17 @@ export const BlogPostPage = () => {
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={16} className="text-primary" /> 5 min read
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium">
+              <span className="flex items-center">
+                 Home<span> {" >>"} </span>
+              </span>
+              <span className="flex items-center ">
+                 <span>Blog {" >>"}</span>
+              </span>
+              <span className="flex items-center ">
+                 <span>{post.title}</span>
               </span>
             </div>
           </div>

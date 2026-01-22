@@ -1,37 +1,39 @@
 import { Search, Facebook, Instagram, Twitter } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "../common/Button";
 import { blogPosts } from "../../data/blogData";
 
-interface BlogSidebarProps {
-  searchQuery?: string;
-  setSearchQuery?: (query: string) => void;
-}
-
-export const BlogSidebar = ({
-  searchQuery = "",
-  setSearchQuery,
-}: BlogSidebarProps) => {
+export const BlogSidebar = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
   const recentPosts = blogPosts.slice(0, 4);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/blog?search=${encodeURIComponent(searchTerm)}`);
+  };
 
   return (
     <aside className="space-y-12">
       {/* Search */}
       <div className="bg-stone-50 p-6 border border-stone-200">
         <h3 className="font-display text-xl mb-4">Search</h3>
-        <div className="relative">
+        <form onSubmit={handleSearch} className="relative">
           <input
             type="text"
             placeholder="Search articles..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery?.(e.target.value)}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-white border border-gray-200 pl-4 pr-10 py-3 text-sm focus:border-primary focus:outline-none"
           />
-          <Search
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-            size={18}
-          />
-        </div>
+          <button
+            type="submit"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary transition-colors"
+          >
+            <Search size={18} />
+          </button>
+        </form>
       </div>
 
       {/* Recent Posts */}

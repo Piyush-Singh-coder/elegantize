@@ -8,10 +8,10 @@ interface BlogCardProps {
 
 export const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <article className="group mb-12 last:mb-0">
+    <article className="group border border-primary p-2.5 border-r-3 rounded-lg mb-12 last:mb-0">
       <Link
         to={`/blog/${post.slug}`}
-        className="block overflow-hidden mb-6 aspect-[16/9] md:aspect-[2/1] lg:aspect-[16/9] relative border-4 border-stone-100 shadow-sm"
+        className="block overflow-hidden mb-6 aspect-[16/9] md:aspect-[2/1] lg:aspect-[16/9] relative"
       >
         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
         <img

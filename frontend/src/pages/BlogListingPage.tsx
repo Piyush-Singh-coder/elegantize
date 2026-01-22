@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
 import { BlogCard } from "../components/blog/BlogCard";
 import { blogPosts } from "../data/blogData";
@@ -6,9 +7,11 @@ import { motion } from "framer-motion";
 
 export const BlogListingPage = () => {
   // Pagination Logic
+  // Pagination Logic
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") || "";
   const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPosts = blogPosts.filter(
     (post) =>
@@ -24,13 +27,12 @@ export const BlogListingPage = () => {
   );
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setCurrentPage(1);
-  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -67,7 +69,7 @@ export const BlogListingPage = () => {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-7xl  mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
         {/* Main Content (Articles) */}
         <main className="lg:col-span-2">
           <div className="space-y-16">
@@ -132,10 +134,7 @@ export const BlogListingPage = () => {
           <div className="sticky top-32">
             {" "}
             {/* Sticky sidebar */}
-            <BlogSidebar
-              searchQuery={searchQuery}
-              setSearchQuery={handleSearch}
-            />
+            <BlogSidebar />
           </div>
         </div>
       </div>
