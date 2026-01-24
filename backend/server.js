@@ -47,7 +47,8 @@ if (
   app.use(express.static(path.join(__dirname, "dist")));
 
   // Any other route that isn't an API route should be handled by the React app
-  app.get("*", (req, res) => {
+  // Any other route that isn't an API route should be handled by the React app
+  app.get(/(.*)/, (req, res) => {
     // Check if the request is for an API endpoint to avoid returning HTML for 404 API calls
     if (req.path.startsWith("/api")) {
       return res.status(404).json({ message: "API Endpoint not found" });
