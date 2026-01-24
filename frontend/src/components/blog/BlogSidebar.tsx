@@ -65,7 +65,7 @@ export const BlogSidebar = () => {
       </div>
 
       {/* Categories (Optional, adding for completeness) */}
-      <div className="bg-stone-50 p-6 border border-stone-200">
+      {/* <div className="bg-stone-50 p-6 border border-stone-200">
         <h3 className="font-display text-xl mb-4">Categories</h3>
         <ul className="space-y-2 text-sm text-gray-600">
           <li className="hover:text-primary cursor-pointer transition-colors border-b border-gray-100 pb-2 flex justify-between">
@@ -85,7 +85,7 @@ export const BlogSidebar = () => {
             <span className="text-gray-400">(5)</span>
           </li>
         </ul>
-      </div>
+      </div> */}
 
       {/* Get In Touch */}
       <div className="bg-stone-900 text-white p-8 text-center bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] relative overflow-hidden">

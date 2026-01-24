@@ -15,6 +15,7 @@ import { TestimonialsSection } from "../components/sections/TestimonialsSection"
 import { ClientsStrip } from "../components/sections/ClientsStrip";
 import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
 import { StatsSection } from "../components/sections/StatsSection";
+import { InstagramFeed } from "../components/sections/InstagramFeed";
 
 export const HomePage = () => {
   return (
@@ -45,6 +46,7 @@ export const HomePage = () => {
       <HorizontalEnquiryForm />
 
       <BlogSection />
+      <InstagramFeed />
       <ClientsStrip />
       <FAQSection />
       <ContactSection />

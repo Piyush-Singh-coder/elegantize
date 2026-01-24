@@ -1,16 +1,56 @@
 import { useParams, Link } from "react-router-dom";
-import { blogPosts } from "../data/blogData.js";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
 import { ArrowLeft, Clock, Calendar, User, Tag } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import type { BlogPost } from "../data/blogData"; // For type definition
+import { API_BASE_URL } from "../config";
 
 export const BlogPostPage = () => {
   const { slug } = useParams();
-  const post = blogPosts.find((p) => p.slug === slug);
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blogs/${slug}`);
+        if (response.ok) {
+          const data = await response.json();
+          const formattedPost: BlogPost = {
+            id: data.id,
+            title: data.title,
+            slug: data.slug,
+            excerpt: data.excerpt,
+            content: data.content,
+            date: new Date(data.createdAt).toLocaleDateString(),
+            author: data.author,
+            category: data.category,
+            image: data.image_url
+              ? `${API_BASE_URL}${data.image_url}`
+              : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
+          };
+          setPost(formattedPost);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+        setLoading(false);
+      }
+    };
+
     window.scrollTo(0, 0);
+    if (slug) fetchPost();
   }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-40 flex flex-col items-center justify-center">
+        <h2 className="text-xl font-display text-gray-500">
+          Loading Article...
+        </h2>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -52,16 +92,20 @@ export const BlogPostPage = () => {
                 <Clock size={16} className="text-primary" /> 5 min read
               </span>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium">
-              <span className="flex items-center">
-                 Home<span> {" >>"} </span>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium mt-4">
+              <span className="flex items-center text-gray-400">
+                <Link to="/" className="hover:text-white transition-colors">
+                  Home
+                </Link>
+                <span className="mx-2">{">>"}</span>
               </span>
-              <span className="flex items-center ">
-                 <span>Blog {" >>"}</span>
+              <span className="flex items-center text-gray-400">
+                <Link to="/blog" className="hover:text-white transition-colors">
+                  Blog
+                </Link>
+                <span className="mx-2">{">>"}</span>
               </span>
-              <span className="flex items-center ">
-                 <span>{post.title}</span>
-              </span>
+              <span className="text-primary">{post.title}</span>
             </div>
           </div>
         </div>

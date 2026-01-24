@@ -2,16 +2,50 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
 import { BlogCard } from "../components/blog/BlogCard";
-import { blogPosts } from "../data/blogData";
 import { motion } from "framer-motion";
+import type { BlogPost } from "../data/blogData";
+import { API_BASE_URL } from "../config";
 
 export const BlogListingPage = () => {
-  // Pagination Logic
-  // Pagination Logic
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
+
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const itemsPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blogs`);
+        const data = await response.json();
+
+        const formattedPosts: BlogPost[] = data.map((post: any) => ({
+          id: post.id,
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt,
+          content: post.content,
+          date: new Date(post.createdAt).toLocaleDateString(),
+          author: post.author,
+          category: post.category,
+          image: post.image_url
+            ? `${API_BASE_URL}${post.image_url}`
+            : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
+        }));
+
+        setBlogPosts(formattedPosts);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   const filteredPosts = blogPosts.filter(
     (post) =>
@@ -38,21 +72,6 @@ export const BlogListingPage = () => {
     setCurrentPage(page);
   };
 
-  // Logic: User requested "pagination only 7 blog will be on the page and rest will be get load if user needs them"
-  // This sounds like "Load More" button or Infinite Scroll rather than classic page numbers?
-  // "rest will be get load if user needs them" -> Load More button is safer UX than scroll.
-
-  // Let's refine: Show initial 7. Button "Load More" appends next 7? Or replaces?
-  // "pagination only 7 blog will be on the page" usually implies 1-7. Next page 8-14.
-  // BUT "rest will be get load" might imply appending.
-  // Standard blog is pagination. I'll implement standard pagination (Prev/Next) or Load More?
-  // User said "pagination only 7 blog... rest will be get load".
-  // I will implement "Load More" style (appending) as it's more modern and fits "get load if user needs them".
-  // Wait, if I append, the list gets long.
-  // Let's stick to standard slicing for "Pagination" if they said "Pagination".
-  // Actually, "rest will be get load" implies lazy loading or button.
-  // I'll do "Load More" button that shows more items.
-
   return (
     <div className="pt-[100px] md:pt-[120px] pb-24 px-6 bg-white">
       {/* Page Header */}
@@ -72,24 +91,34 @@ export const BlogListingPage = () => {
       <div className="max-w-7xl  mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
         {/* Main Content (Articles) */}
         <main className="lg:col-span-2">
-          <div className="space-y-16">
-            {" "}
-            {/* Increased gap for readability */}
-            {displayedPosts.map((post) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <BlogCard post={post} />
-              </motion.div>
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-20 text-gray-400">
+              Loading articles...
+            </div>
+          ) : displayedPosts.length === 0 ? (
+            <div className="text-center py-20 text-gray-400">
+              No articles found.
+            </div>
+          ) : (
+            <div className="space-y-16">
+              {" "}
+              {/* Increased gap for readability */}
+              {displayedPosts.map((post) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <BlogCard post={post} />
+                </motion.div>
+              ))}
+            </div>
+          )}
 
           {/* Pagination */}
-          {totalPages > 1 && (
+          {!loading && totalPages > 1 && (
             <div className="mt-16 flex justify-center items-center space-x-4">
               {/* Previous */}
               <button
