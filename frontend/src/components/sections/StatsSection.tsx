@@ -1,7 +1,6 @@
 import {
   CalendarClock,
   Gem,
-  Landmark,
   PencilRuler,
   HandPlatter,
   Building2,
@@ -17,10 +16,6 @@ export const StatsSection = () => {
       icon: Gem,
       label: "500+ Luxury Weddings",
       isCustomIcon: false,
-    },
-    {
-      icon: Landmark,
-      label: "South Asian Wedding Specialists",
     },
     {
       icon: PencilRuler,
@@ -51,7 +46,7 @@ export const StatsSection = () => {
                   className="flex flex-col items-center text-center w-[160px] md:w-auto flex-1 min-w-[140px] p-6 transition-all duration-500  hover:bg-stone-900 hover:text-white  hover:rounded-xl hover:shadow-xl hover:cursor-pointer group cursor-pointer"
                 >
                   <div className="mb-4 text-[#976f38] transition-colors duration-500">
-                    <Icon strokeWidth={1} size={40} />
+                    <Icon strokeWidth={1} size={50} />
                   </div>
                   <h4 className="text-stone-500 font-serif text-sm md:text-base leading-tight max-w-[150px] transition-colors duration-500 group-hover:text-white">
                     {stat.label}
