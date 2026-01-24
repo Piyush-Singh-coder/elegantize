@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { servicesData } from "../data/servicesData";
 import { ContactSection } from "../components/sections/ContactSection";
-import { ArrowRight, Check, X, ZoomIn } from "lucide-react";
+import { Check, X, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { getOptimizedImage } from "../utils/imageUtils";
 
@@ -289,7 +289,7 @@ export const ServiceDetailPage = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <ZoomIn className="text-white w-8 h-8" />
+                  <ArrowRight className="text-white w-8 h-8 -rotate-45" />
                 </div>
               </motion.div>
             ))}
