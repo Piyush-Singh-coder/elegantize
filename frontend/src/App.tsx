@@ -10,7 +10,6 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { ServiceDetailPage } from "./pages/ServiceDetailPage";
 import { GalleryPage } from "./pages/GalleryPage";
 import { BlogListingPage } from "./pages/BlogListingPage";
-import { BlogPostPage } from "./pages/BlogPostPage";
 import { PortfolioDetailPage } from "./pages/PortfolioDetailPage";
 import { PortfolioListingPage } from "./pages/PortfolioListingPage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";

@@ -1,14 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "../data/portfolioData";
-import {
-  ArrowRight,
-  MapPin,
-  Calendar,
-  Play,
-  X,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, MapPin, Calendar, X } from "lucide-react";
 import { useState } from "react";
 import { getOptimizedImage } from "../utils/imageUtils";
 import { ContactSection } from "../components/sections/ContactSection";

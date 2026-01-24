@@ -65,7 +65,7 @@ export const PortfolioSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {portfolioData.slice(0, 3).map((item, index) => (
+          {portfolioData.slice(0, 3).map((item) => (
             <motion.div
               key={item.id}
               variants={itemVariants}

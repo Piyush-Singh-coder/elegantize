@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { portfolioData } from "../data/portfolioData";
 import { getOptimizedImage } from "../utils/imageUtils";
 import { ContactSection } from "../components/sections/ContactSection";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -14,7 +14,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
