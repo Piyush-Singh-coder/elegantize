@@ -81,7 +81,7 @@ export const PortfolioSection = () => {
                     className="w-full h-full object-cover transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest font-bold">
-                    {item.category}
+                    {item.services}
                   </div>
                 </div>
                 <h3 className="font-display text-2xl group-hover:text-primary transition-colors">

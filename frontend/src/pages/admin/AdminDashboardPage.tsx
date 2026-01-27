@@ -20,8 +20,16 @@ const AdminDashboardPage: React.FC = () => {
   const fetchPosts = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/blogs`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
-      setPosts(data);
+      if (Array.isArray(data)) {
+        setPosts(data);
+      } else {
+        console.error("Data is not an array:", data);
+        setPosts([]);
+      }
       setLoading(false);
     } catch (error) {
       console.error("Error fetching posts:", error);
