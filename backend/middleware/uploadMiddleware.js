@@ -1,27 +1,33 @@
+const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
-const path = require("path");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-// Set storage engine
-const storage = multer.diskStorage({
-  destination: "./uploads/",
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname),
-    );
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Set up Cloudinary storage for multer
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "elegantize-blog",
+    allowed_formats: ["jpg", "jpeg", "png", "webp", "gif"],
+    transformation: [{ width: 1200, crop: "limit", quality: "auto" }],
   },
 });
 
 // Check file type
 function checkFileType(file, cb) {
   const filetypes = /jpeg|jpg|png|gif|webp/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype = filetypes.test(file.mimetype);
 
-  if (mimetype && extname) {
+  if (mimetype) {
     return cb(null, true);
   } else {
-    cb("Error: Images Only!");
+    cb(new Error("Error: Images Only!"));
   }
 }
 

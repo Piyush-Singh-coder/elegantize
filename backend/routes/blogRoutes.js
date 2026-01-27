@@ -19,12 +19,11 @@ router.route("/:slug").get(getBlogBySlug);
 
 router.route("/:id").put(protect, updateBlog).delete(protect, deleteBlog);
 
-// Image Upload Route
+// Image Upload Route (Cloudinary)
 router.post("/upload", protect, upload.single("image"), (req, res) => {
   if (req.file) {
     res.json({
-      imageUrl: `/uploads/${req.file.filename}`,
-      filePath: req.file.path,
+      imageUrl: req.file.path, // Cloudinary returns full URL in path
     });
   } else {
     res.status(400).json({ message: "No file uploaded" });

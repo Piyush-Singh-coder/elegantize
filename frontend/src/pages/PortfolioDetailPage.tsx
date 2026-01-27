@@ -39,7 +39,7 @@ export const PortfolioDetailPage = () => {
             className="inline-flex items-center gap-2 mb-4 bg-white/10 backdrop-blur-sm px-4 py-1 rounded-full border border-white/20"
           >
             <span className="text-xs uppercase tracking-widest font-bold">
-              {portfolio.category}
+              {portfolio.services}
             </span>
           </motion.div>
           <motion.h1
@@ -176,7 +176,7 @@ export const PortfolioDetailPage = () => {
                   />
                   <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <span className="text-xs uppercase tracking-widest block mb-1">
-                      {p.category}
+                      {p.services}
                     </span>
                     <span className="font-display text-xl">{p.location}</span>
                   </div>

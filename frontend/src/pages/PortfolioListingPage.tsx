@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { portfolioData } from "../data/portfolioData";
 import { getOptimizedImage } from "../utils/imageUtils";
 import { ContactSection } from "../components/sections/ContactSection";
+import { ImageSlider } from "../components/common/ImageSlider";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -65,7 +66,7 @@ export const PortfolioListingPage = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 gap-16 max-w-5xl mx-auto"
           >
             {portfolioData.map((item) => (
               <motion.div
@@ -74,7 +75,7 @@ export const PortfolioListingPage = () => {
                 className="group cursor-pointer"
               >
                 <Link to={`/portfolio/${item.id}`}>
-                  <div className="relative overflow-hidden aspect-[3/4] mb-6 bg-gray-200">
+                  <div className="relative overflow-hidden aspect-[16/9] mb-3 bg-gray-200">
                     <motion.img
                       src={getOptimizedImage(item.heroImage, 800)}
                       alt={item.title}
@@ -83,13 +84,24 @@ export const PortfolioListingPage = () => {
                       className="w-full h-full object-cover transition-transform duration-700"
                     />
                     <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest font-bold">
-                      {item.category}
+                      {item.services}
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <span className="font-display text-2xl">
                         {item.location}
                       </span>
                     </div>
+                  </div>
+
+                  {/* Auto-sliding Image Gallery */}
+                  <div onClick={(e) => e.preventDefault()}>
+                    {/* Prevent link navigation when clicking slider area if desired, 
+                        but standard behavior is usually the whole card links. 
+                        If slider needs interaction (like lightbox), we'd need to stop propagation.
+                        For auto-slider, allow pass-through or just visual is fine. 
+                        To keep it clean, we'll let it be part of the link visually but non-interactive.
+                     */}
+                    <ImageSlider images={item.galleryImages} />
                   </div>
                   <h3 className="font-display text-2xl text-gray-900 group-hover:text-primary transition-colors">
                     {item.title}

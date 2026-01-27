@@ -6,42 +6,42 @@ const posts = [
   {
     id: 1,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC18469449.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC382098743.jpg",
     likes: 245,
     comments: 12,
   },
   {
     id: 2,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC02359.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC18469449.jpg",
     likes: 189,
     comments: 8,
   },
   {
     id: 3,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00653.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/elegantize_av-39.jpg",
     likes: 312,
     comments: 24,
   },
   {
     id: 4,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00095.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01084.jpg",
     likes: 156,
     comments: 5,
   },
   {
     id: 5,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00606.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC08998.jpg",
     likes: 278,
     comments: 18,
   },
   {
     id: 6,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00021.jpg",
     likes: 198,
     comments: 9,
   },

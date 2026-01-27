@@ -52,7 +52,11 @@ const BlogEditorPage: React.FC = () => {
           meta_keywords: data.meta_keywords || "",
         });
         if (data.image_url) {
-          setPreviewUrl(`${API_BASE_URL}${data.image_url}`);
+          setPreviewUrl(
+            data.image_url.startsWith("http")
+              ? data.image_url
+              : `${API_BASE_URL}${data.image_url}`,
+          );
         }
       } else {
         alert("Failed to fetch post");

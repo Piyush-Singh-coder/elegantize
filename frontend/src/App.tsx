@@ -10,6 +10,7 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { ServiceDetailPage } from "./pages/ServiceDetailPage";
 import { GalleryPage } from "./pages/GalleryPage";
 import { BlogListingPage } from "./pages/BlogListingPage";
+import { BlogPostPage } from "./pages/BlogPostPage";
 import { PortfolioDetailPage } from "./pages/PortfolioDetailPage";
 import { PortfolioListingPage } from "./pages/PortfolioListingPage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/services/:id" element={<ServiceDetailPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/blog" element={<BlogListingPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/portfolio/:id" element={<PortfolioDetailPage />} />
           <Route path="/portfolio" element={<PortfolioListingPage />} />
         </Route>

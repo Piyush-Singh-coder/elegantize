@@ -26,7 +26,9 @@ export const BlogPostPage = () => {
             author: data.author,
             category: data.category,
             image: data.image_url
-              ? `${API_BASE_URL}${data.image_url}`
+              ? data.image_url.startsWith("http")
+                ? data.image_url
+                : `${API_BASE_URL}${data.image_url}`
               : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
           };
           setPost(formattedPost);

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 const dotenv = require("dotenv");
 const sequelize = require("./config/db");
 // Import routes (to be created)
@@ -16,9 +17,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Serve uploaded images
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -42,30 +40,34 @@ if (
   process.env.NODE_ENV === "staging" ||
   true
 ) {
-  // Always serve for now to support the "Single Server" setup
-  // Set static folder
-  app.use(express.static(path.join(__dirname, "dist")));
+  // Check if dist folder exists (it won't on Render if only deploying backend)
+  const distPath = path.join(__dirname, "dist");
 
-  // Any other route that isn't an API route should be handled by the React app
-  // Any other route that isn't an API route should be handled by the React app
-  app.get(/(.*)/, (req, res) => {
-    // Check if the request is for an API endpoint to avoid returning HTML for 404 API calls
-    if (req.path.startsWith("/api")) {
-      return res.status(404).json({ message: "API Endpoint not found" });
-    }
+  if (fs.existsSync(distPath)) {
+    // Set static folder
+    app.use(express.static(distPath));
 
-    // Check if dist/index.html exists before sending it
-    const indexPath = path.resolve(__dirname, "dist", "index.html");
-    res.sendFile(indexPath, (err) => {
-      if (err) {
-        res
-          .status(500)
-          .send(
-            "Server Error: Frontend build not found. Did you run 'npm run build'?",
-          );
+    // Any other route that isn't an API route should be handled by the React app
+    app.get(/(.*)/, (req, res) => {
+      // Check if the request is for an API endpoint to avoid returning HTML for 404 API calls
+      if (req.path.startsWith("/api")) {
+        return res.status(404).json({ message: "API Endpoint not found" });
+      }
+
+      // Check if dist/index.html exists before sending it
+      const indexPath = path.resolve(distPath, "index.html");
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(500).send("Frontend build found but index.html is missing.");
       }
     });
-  });
+  } else {
+    // API-Only Mode (e.g. Render Backend)
+    app.get("/", (req, res) => {
+      res.send("Elegantize Backend API Running (No Frontend Build Found)");
+    });
+  }
 } else {
   app.get("/", (req, res) => {
     res.send("Elegantize Backend Running (Dev Mode)");

@@ -32,7 +32,9 @@ export const BlogListingPage = () => {
           author: post.author,
           category: post.category,
           image: post.image_url
-            ? `${API_BASE_URL}${post.image_url}`
+            ? post.image_url.startsWith("http")
+              ? post.image_url
+              : `${API_BASE_URL}${post.image_url}`
             : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
         }));
 

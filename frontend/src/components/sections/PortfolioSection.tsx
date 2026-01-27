@@ -97,7 +97,7 @@ export const PortfolioSection = () => {
 
         <motion.div className="text-center" variants={itemVariants}>
           <Link to="/portfolio">
-            <Button>View All Projects</Button>
+            <Button variant="primary">View All Projects</Button>
           </Link>
         </motion.div>
       </div>

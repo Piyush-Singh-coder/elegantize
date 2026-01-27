@@ -120,7 +120,7 @@ export const GallerySection = () => {
           className="mt-12"
         >
           <Link to="/gallery">
-            <Button variant="text">View All Projects</Button>
+            <Button variant="primary">View All Projects</Button>
           </Link>
         </motion.div>
       </div>
