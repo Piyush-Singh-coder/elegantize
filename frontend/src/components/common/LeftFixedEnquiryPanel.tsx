@@ -1,6 +1,7 @@
 import { Mail, Calendar, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../common/Button";
+import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 export const LeftFixedEnquiryPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,12 +34,45 @@ export const LeftFixedEnquiryPanel = () => {
             </button>
           </div>
 
-          <form className="space-y-4">
+          <form
+            className="space-y-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              const btn = form.querySelector(
+                "button[type=submit]",
+              ) as HTMLButtonElement;
+              const originalText = btn.innerText;
+              btn.disabled = true;
+              btn.innerText = "Sending...";
+
+              try {
+                await submitToGoogleSheets({
+                  name: formData.get("name") as string,
+                  email: formData.get("email") as string,
+                  phone: formData.get("phone") as string,
+                  eventDate: formData.get("eventDate") as string,
+                  serviceName: "Side Panel Enquiry",
+                });
+                alert("Enquiry sent!");
+                form.reset();
+                setIsOpen(false);
+              } catch {
+                alert("Failed to send.");
+              } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+              }
+            }}
+          >
             <div>
               <label className="block text-xs uppercase tracking-widest font-bold mb-2 text-gray-500">
                 Name
               </label>
               <input
+                name="name"
+                required
                 type="text"
                 className="w-full bg-stone-50 border border-gray-200 p-2 focus:border-primary focus:outline-none"
               />
@@ -48,6 +82,8 @@ export const LeftFixedEnquiryPanel = () => {
                 Email
               </label>
               <input
+                name="email"
+                required
                 type="email"
                 className="w-full bg-stone-50 border border-gray-200 p-2 focus:border-primary focus:outline-none"
               />
@@ -57,6 +93,7 @@ export const LeftFixedEnquiryPanel = () => {
                 Phone
               </label>
               <input
+                name="phone"
                 type="tel"
                 className="w-full bg-stone-50 border border-gray-200 p-2 focus:border-primary focus:outline-none"
               />
@@ -66,6 +103,7 @@ export const LeftFixedEnquiryPanel = () => {
                 Event Date
               </label>
               <input
+                name="eventDate"
                 type="date"
                 className="w-full bg-stone-50 border border-gray-200 p-2 focus:border-primary focus:outline-none text-gray-500"
               />

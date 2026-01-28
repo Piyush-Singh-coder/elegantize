@@ -3,6 +3,8 @@ import { MapPin, Mail, Phone, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "../components/common/Button";
 import { ctaContent } from "../data/content";
 
+import { submitToGoogleSheets } from "../utils/googleSheets";
+
 export const ContactPage = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -12,11 +14,6 @@ export const ContactPage = () => {
         staggerChildren: 0.1,
       },
     },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
@@ -134,8 +131,46 @@ export const ContactPage = () => {
           </div>
 
           {/* Contact Form */}
-          <motion.form
-            variants={itemVariants}
+          {/* Contact Form */}
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault();
+              // Rudimentary state handling for this page since it was static before
+              // ideally this should be a shared component, but respecting the file structure:
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              const data = {
+                firstName: formData.get("firstName") as string,
+                lastName: formData.get("lastName") as string,
+                email: formData.get("email") as string,
+                weddingDate: formData.get("weddingDate") as string,
+                message: formData.get("message") as string,
+              };
+
+              const btn = form.querySelector(
+                "button[type=submit]",
+              ) as HTMLButtonElement;
+              const originalText = btn.innerText;
+              btn.disabled = true;
+              btn.innerText = "Sending...";
+
+              try {
+                await submitToGoogleSheets({
+                  name: `${data.firstName} ${data.lastName}`,
+                  email: data.email,
+                  eventDate: data.weddingDate,
+                  message: data.message,
+                  serviceName: "Contact Page Form",
+                });
+                alert("Message sent successfully!");
+                form.reset();
+              } catch {
+                alert("Failed to send message.");
+              } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+              }
+            }}
             className="bg-white p-10 md:p-12 border border-t-4 border-stone-100 border-t-primary shadow-2xl rounded-sm space-y-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -144,7 +179,9 @@ export const ContactPage = () => {
                   First Name
                 </label>
                 <input
+                  name="firstName"
                   type="text"
+                  required
                   className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-4 transition-colors duration-300 hover:bg-stone-100 focus:bg-white"
                   placeholder="Jane"
                 />
@@ -154,6 +191,7 @@ export const ContactPage = () => {
                   Last Name
                 </label>
                 <input
+                  name="lastName"
                   type="text"
                   className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-4 transition-colors duration-300 hover:bg-stone-100 focus:bg-white"
                   placeholder="Doe"
@@ -165,7 +203,9 @@ export const ContactPage = () => {
                 Email Address
               </label>
               <input
+                name="email"
                 type="email"
+                required
                 className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-4 transition-colors duration-300 hover:bg-stone-100 focus:bg-white"
                 placeholder="jane@example.com"
               />
@@ -175,6 +215,7 @@ export const ContactPage = () => {
                 Wedding Date
               </label>
               <input
+                name="weddingDate"
                 type="date"
                 className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-4 text-gray-500 transition-colors duration-300 hover:bg-stone-100 focus:bg-white"
               />
@@ -184,6 +225,7 @@ export const ContactPage = () => {
                 Tell us about your vision
               </label>
               <textarea
+                name="message"
                 rows={5}
                 className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-4 transition-colors duration-300 hover:bg-stone-100 focus:bg-white"
                 placeholder="We are dreaming of..."
@@ -195,7 +237,7 @@ export const ContactPage = () => {
             >
               Request Consultation
             </Button>
-          </motion.form>
+          </form>
         </motion.div>
       </section>
 

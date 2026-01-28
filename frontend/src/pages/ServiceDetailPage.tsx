@@ -1,149 +1,248 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { servicesData } from "../data/servicesData";
-import { ContactSection } from "../components/sections/ContactSection";
-import { Check, X, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import {
+  ServiceAccordionNav,
+  ServiceComparisonTable,
+  ServiceTestimonialCard,
+  ServiceGalleryGrid,
+  ServiceEnquiryForm,
+} from "../components/services";
+import { FAQSection } from "../components/sections/FAQSection";
+import { Button } from "../components/common/Button";
+import {
+  Check,
+  ArrowRight,
+  Sparkles,
+  Target,
+  Palette,
+  MapPin,
+  Wrench,
+  Star,
+  ChevronDown,
+  DollarSign,
+} from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 import { getOptimizedImage } from "../utils/imageUtils";
+
+// Section IDs for accordion navigation
+const SECTIONS = [
+  { id: "overview", label: "Overview" },
+  { id: "styles", label: "Styles" },
+  { id: "process", label: "Process" },
+  { id: "real-weddings", label: "Real Weddings" },
+  { id: "pricing", label: "Pricing Approach" },
+  { id: "faq", label: "FAQs" },
+  { id: "enquiry", label: "Enquiry" },
+];
+
+// Process step icons
+const PROCESS_ICONS = [Target, Palette, Sparkles, MapPin, Wrench, Star];
 
 export const ServiceDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const service = servicesData.find((s) => s.id === id);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState("overview");
 
-  // If service not found, redirect to services index (or 404 page)
+  // Refs for scroll-to-section
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+
+  // Scroll to section handler
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+    const element = sectionRefs.current[sectionId];
+    if (element) {
+      const offset = 120; // Account for sticky nav
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+      for (const section of SECTIONS) {
+        const element = sectionRefs.current[section.id];
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section.id);
+            break;
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   if (!service) {
     return <Navigate to="/services" replace />;
   }
 
-  // Filter out the current service to show "Explore More"
-  const otherServices = servicesData.filter((s) => s.id !== id).slice(0, 4);
+  // Filter related services
+  const relatedServices = servicesData.filter((s) => s.id !== id).slice(0, 4);
+
+  // Comparison data
+  const comparisonData = [
+    {
+      feature: "Design Approach",
+      elegantize: "Bespoke designs only",
+      others: "Reused templates",
+    },
+    {
+      feature: "Team",
+      elegantize: "In-house design team",
+      others: "Vendor-based",
+    },
+    {
+      feature: "Coordination",
+      elegantize: "Venue coordination included",
+      others: "Client-managed",
+    },
+    {
+      feature: "Materials",
+      elegantize: "Luxury material sourcing",
+      others: "Standard inventory",
+    },
+  ];
+
+  // Value bullets for overview
+  const valueBullets = [
+    "Designed for luxury venues & private estates",
+    "Custom-built, never reused designs",
+    "Seamlessly coordinated with florals, lighting & draping",
+    "Trusted by NYC & NJ's top venues",
+  ];
 
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden z-0">
         <div className="absolute inset-0">
           <img
             src={getOptimizedImage(service.heroImage, 1920)}
             alt={service.heroTitle}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
+
         <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-4 leading-tight">
+            <span className="inline-block px-4 py-1 bg-white/10 backdrop-blur-sm text-white/90 text-xs uppercase tracking-widest font-medium mb-6 border border-white/20 rounded-full">
+              {service.title}
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-display mb-6 leading-tight">
               {service.heroTitle}
             </h1>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Intro Section */}
-      <section className="py-10 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-4">
-              {service.intro.heading}
-            </h2>
-            <p className="text-xl font-serif italic text-primary mb-6">
+            <p className="text-lg md:text-xl text-white/80 font-light max-w-3xl mx-auto mb-8 italic">
               {service.intro.subheading}
             </p>
-            <div className="space-y-4 text-gray-600 leading-relaxed text-lg font-light">
-              {service.intro.description.map((para, idx) => (
-                <p key={idx}>{para}</p>
-              ))}
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => scrollToSection("overview")}
+              >
+                Explore Service
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => scrollToSection("enquiry")}
+              >
+                Get Quote
+              </Button>
             </div>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          >
+            <ChevronDown className="w-8 h-8 text-white/50 animate-bounce" />
           </motion.div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-10 px-6 bg-stone-50">
+      {/* Horizontal Enquiry Form */}
+      <section className="py-6 px-4 md:px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
-              {service.whyChooseUs.title}
-            </h2>
-            <div className="w-16 h-px bg-primary mx-auto" />
-          </div>
-
-          {/* Changed to flex for centered orphan items */}
-          <div className="flex flex-wrap justify-center gap-8 text-center">
-            {service.whyChooseUs.items.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="bg-white p-8 shadow-sm border border-stone-100 flex-1 min-w-75 max-w-100 hover:shadow-md transition-shadow duration-300 rounded-xl"
-              >
-                <h3 className="text-xl font-display text-gray-900 mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 font-light">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          <ServiceEnquiryForm
+            serviceName={service.title}
+            variant="horizontal"
+          />
         </div>
       </section>
 
-      {/* Signature Services */}
-      <section className="py-16 px-6">
+      {/* Accordion Navigation */}
+      <ServiceAccordionNav
+        sections={SECTIONS}
+        activeSection={activeSection}
+        onSectionClick={scrollToSection}
+      />
+
+      {/* Overview Section */}
+      <section
+        id="overview"
+        ref={(el) => {
+          sectionRefs.current["overview"] = el;
+        }}
+        className="py-20 px-6"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
-              {service.signatureServices.title}
-            </h2>
-            <div className="w-16 h-px bg-primary mx-auto" />
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ">
-            <div>
-              <div className="space-y-6">
-                {service.signatureServices.items.map((item, idx) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Value Bullets */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-6">
+                {service.intro.heading}
+              </h2>
+              <div className="space-y-4 mb-8">
+                {valueBullets.map((bullet, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1, duration: 0.5 }}
-                    className="flex gap-4"
+                    transition={{ delay: idx * 0.1, duration: 0.4 }}
+                    className="flex items-start gap-3"
                   >
                     <div className="shrink-0 mt-1">
                       <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
                         <Check className="w-3 h-3 text-primary" />
                       </div>
                     </div>
-                    <div>
-                      <h4 className="text-lg font-bold text-gray-900 mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-gray-600 font-light text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-                      {item.features && (
-                        <ul className="list-disc pl-5 mt-2 space-y-1 text-gray-600 font-light text-sm leading-relaxed">
-                          {item.features.map((feature, fIdx) => (
-                            <li key={fIdx}>{feature}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                    <p className="text-lg text-gray-700 font-light">{bullet}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+              <div className="text-gray-600 space-y-4 font-light leading-relaxed">
+                {service.intro.description.map((para, idx) => (
+                  <p key={idx}>{para}</p>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Editorial Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -151,22 +250,79 @@ export const ServiceDetailPage = () => {
               transition={{ duration: 0.8 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-stone-100 translate-x-6 translate-y-6 -z-10" />
+              <div className="absolute inset-0 bg-primary/10 translate-x-6 translate-y-6 -z-10 rounded-xl" />
               <img
                 src={getOptimizedImage(
-                  service.portfolioImages[1] || service.heroImage,
+                  service.portfolioImages[0] || service.heroImage,
                   800,
                 )}
-                alt="Service Feature"
-                className="w-full aspect-4/3 object-cover shadow-lg"
+                alt="Service Overview"
+                className="w-full aspect-4/3 object-cover rounded-xl shadow-xl"
               />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-16 px-6 bg-stone-900 text-white">
+      {/* Styles Section */}
+      <section
+        id="styles"
+        ref={(el) => {
+          sectionRefs.current["styles"] = el;
+        }}
+        className="py-20 px-6 bg-stone-50"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
+              {service.signatureServices.title}
+            </h2>
+            <div className="w-16 h-px bg-primary mx-auto" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {service.signatureServices.items.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="bg-white p-8 rounded-xl shadow-lg border border-stone-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
+              >
+                <h3 className="text-xl font-display text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 font-light mb-4">
+                  {item.description}
+                </p>
+                {item.features && (
+                  <ul className="space-y-2">
+                    {item.features.map((feature, fIdx) => (
+                      <li
+                        key={fIdx}
+                        className="flex items-start gap-2 text-sm text-gray-500"
+                      >
+                        <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Timeline Section */}
+      <section
+        id="process"
+        ref={(el) => {
+          sectionRefs.current["process"] = el;
+        }}
+        className="py-20 px-6 bg-stone-900 text-white"
+      >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display mb-4">
@@ -177,167 +333,195 @@ export const ServiceDetailPage = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 text-center max-w-7xl mx-auto ">
-            {service.process.steps.map((step, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="relative border border-white/10 bg-white/5 hover:bg-white/10 transition-colors group rounded-xl p-8 shadow-sm flex-1 min-w-75 max-w-100 hover:shadow-md  duration-300"
-              >
-                <span className="absolute -top-2 left-8 text-5xl font-display text-white/5 select-none text-outline group-hover:text-white/10 transition-colors">
-                  0{idx + 1}
-                </span>
-                <h3 className="text-xl font-display mb-3 relative z-10">
-                  {step.title}
-                </h3>
-                <p className="text-white/60 font-light text-sm relative z-10 leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {service.process.steps.map((step, idx) => {
+              const Icon = PROCESS_ICONS[idx % PROCESS_ICONS.length];
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  className="relative border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 group rounded-xl p-8"
+                >
+                  {/* Step Number */}
+                  <span className="absolute -top-3 -right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-sm font-bold">
+                    {idx + 1}
+                  </span>
+
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
+                    <Icon className="w-6 h-6 text-primary" />
+                  </div>
+
+                  <h3 className="text-xl font-display mb-3">{step.title}</h3>
+                  <p className="text-white/60 font-light text-sm leading-relaxed">
+                    {step.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      {service.testimonials && service.testimonials.length > 0 && (
-        <section className="py-16 px-6 bg-stone-50 overflow-hidden">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-12 text-center">
-              What Our Couples Say
+        {/* Horizontal Enquiry Form */}
+      <section className="py-6 px-4 md:px-6 bg-stone-50">
+        <div className="max-w-7xl mx-auto">
+          <ServiceEnquiryForm
+            serviceName={service.title}
+            variant="horizontal"
+          />
+        </div>
+      </section>
+
+      {/* Real Weddings / Why Elegantize / Testimonials */}
+      <section
+        id="real-weddings"
+        ref={(el) => {
+          sectionRefs.current["real-weddings"] = el;
+        }}
+        className="py-20 px-6"
+      >
+        {/* Why Elegantize - Comparison Table */}
+        <div className="max-w-5xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
+              Why Choose Elegantize
             </h2>
-            <div className="flex flex-wrap justify-center gap-8">
+            <p className="text-gray-600 font-light">
+              See the difference that true luxury design makes
+            </p>
+          </div>
+          <ServiceComparisonTable items={comparisonData} />
+        </div>
+
+        {/* Testimonials */}
+        {service.testimonials && service.testimonials.length > 0 && (
+          <div className="max-w-7xl mx-auto mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
+                Love Stories
+              </h2>
+              <div className="w-16 h-px bg-primary mx-auto" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {service.testimonials.map((t, idx) => (
-                <motion.div
+                <ServiceTestimonialCard
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="bg-white p-8 shadow-sm relative flex-1 min-w-75 max-w-lg"
-                >
-                  <span className="text-5xl font-serif text-primary/20 absolute top-4 left-4">
-                    "
-                  </span>
-                  <p className="text-gray-600 italic mb-6 relative z-10 font-light">
-                    {t.quote}
-                  </p>
-                  <div>
-                    <p className="font-bold text-gray-900 text-sm">
-                      {t.author}
-                    </p>
-                    <p className="text-xs text-primary uppercase tracking-widest">
-                      {t.location}
-                    </p>
-                  </div>
-                </motion.div>
+                  quote={t.quote}
+                  author={t.author}
+                  location={t.location}
+                />
               ))}
             </div>
           </div>
-        </section>
-      )}
+        )}
 
-      {/* CTA Section */}
-      <section className="py-16 px-6 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-4">
-            Ready to Begin?
-          </h2>
-          <p className="text-xl text-gray-600 font-light mb-8">
-            Let’s create magic together. Contact us today to start designing
-            your dream event.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-primary text-white px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-stone-900 transition-colors hover:shadow-lg transform hover:-translate-y-1 duration-300"
-          >
-            Book Your Consultation
-          </Link>
-        </div>
-      </section>
-
-      {/* Portfolio Gallery */}
-      <section className="py-16 px-6 bg-stone-50">
+        {/* Gallery */}
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
-              Explore Our Portfolio
+              Real Weddings Gallery
             </h2>
             <p className="text-gray-500 font-light">
-              Discover how we’ve transformed weddings into masterpieces.
+              Moments we've had the honor of creating.
             </p>
           </div>
+          <ServiceGalleryGrid images={service.portfolioImages} />
+        </div>
+      </section>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {service.portfolioImages.map((img, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05, duration: 0.5 }}
-                whileHover={{ scale: 1.02, zIndex: 10 }}
-                className="relative aspect-square cursor-pointer group overflow-hidden bg-gray-200"
-                onClick={() => setSelectedImage(img)}
-              >
-                <img
-                  src={getOptimizedImage(img, 600)}
-                  alt="Portfolio"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <ArrowRight className="text-white w-8 h-8 -rotate-45" />
-                </div>
-              </motion.div>
-            ))}
+
+
+      {/* Pricing Approach */}
+      <section
+        id="pricing"
+        ref={(el) => {
+          sectionRefs.current["pricing"] = el;
+        }}
+        className="py-24 px-6 bg-stone-50"
+      >
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-stone-200 mb-6 shadow-sm">
+            <DollarSign size={14} className="text-primary" />
+            <span className="text-xs uppercase tracking-[0.3em] text-gray-500">
+              Investment
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">
+            Our Pricing Approach
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+            <div className="bg-white p-8 rounded-xl shadow-md border border-stone-100">
+              <h3 className="text-xl font-display text-gray-900 mb-4">
+                Transparent & Custom
+              </h3>
+              <p className="text-gray-600 font-light leading-relaxed">
+                We believe that every wedding is unique, and so are the
+                requirements. Instead of rigid packages, we build a custom
+                proposal tailored to your specific needs, venue scale, and
+                floral preferences. This ensures you only invest in what truly
+                matters to your vision.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-xl shadow-md border border-stone-100">
+              <h3 className="text-xl font-display text-gray-900 mb-4">
+                What's Included
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  "Detailed Design Consultation",
+                  "Premium Material Sourcing",
+                  "Full-Day Installation Team",
+                  "Breakdown & Cleanup",
+                  "Venue Coordination",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 text-gray-600 font-light"
+                  >
+                    <Check className="w-4 h-4 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <button className="absolute top-6 right-6 text-white p-2 hover:text-primary transition-colors">
-              <X size={32} />
-            </button>
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              src={selectedImage}
-              alt="Full Screen"
-              className="max-w-full max-h-[90vh] object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* FAQ Section - Reused Component */}
+      <div
+        ref={(el) => {
+          sectionRefs.current["faq"] = el;
+        }}
+      >
+        <FAQSection />
+      </div>
 
-      {/* Explore More Services */}
-      <section className="py-16 px-6 border-t border-gray-100">
+      {/* You May Also Love */}
+      <section className="py-20 px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-2xl font-display text-gray-900 mb-8 text-center">
-            Explore More Services
+          <h3 className="text-2xl md:text-3xl font-display text-gray-900 mb-8 text-center">
+            You May Also Love
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {otherServices.map((s) => (
+            {relatedServices.map((s) => (
               <Link key={s.id} to={`/services/${s.id}`} className="group block">
-                <div className="aspect-4/5 overflow-hidden mb-3 bg-gray-100 relative">
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10" />
+                <div className="aspect-4/5 overflow-hidden mb-3 bg-stone-200 rounded-lg relative">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10" />
                   <img
                     src={getOptimizedImage(s.heroImage, 400)}
                     alt={s.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
+                  <div className="absolute bottom-4 left-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="inline-flex items-center gap-1 text-white text-xs font-bold uppercase tracking-wider">
+                      Explore <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
                 </div>
                 <h4 className="text-sm font-bold uppercase tracking-widest text-gray-900 group-hover:text-primary transition-colors text-center">
                   {s.title}
@@ -348,7 +532,33 @@ export const ServiceDetailPage = () => {
         </div>
       </section>
 
-      <ContactSection />
+      {/* Final CTA + Enquiry Form */}
+      <section
+        id="enquiry"
+        ref={(el) => {
+          sectionRefs.current["enquiry"] = el;
+        }}
+        className="py-20 px-6 bg-stone-900 text-white"
+      >
+        <div className="max-w-4xl mx-auto text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-5xl font-display mb-4">
+              Your event deserves more than decoration.
+            </h2>
+            <p className="text-xl text-primary font-display italic">
+              It deserves design.
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <ServiceEnquiryForm serviceName={service.title} variant="full" />
+        </div>
+      </section>
     </div>
   );
 };

@@ -1,6 +1,14 @@
 import { useParams, Link } from "react-router-dom";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
-import { ArrowLeft, Clock, Calendar, User, Tag } from "lucide-react";
+import {
+  ArrowLeft,
+  Clock,
+  Calendar,
+  User,
+  Tag,
+  Facebook,
+  Twitter,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import type { BlogPost } from "../data/blogData"; // For type definition
 import { API_BASE_URL } from "../config";
@@ -107,15 +115,68 @@ export const BlogPostPage = () => {
                 </Link>
                 <span className="mx-2">{">>"}</span>
               </span>
-              <span className="text-primary">{post.title}</span>
+              <span className="text-white">{post.title}</span>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium mt-6">
+              <span className="text-white/80 mr-2">Share:</span>
+              <div className="flex gap-4">
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
+                      "_blank",
+                    )
+                  }
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  <Facebook size={20} />
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`,
+                      "_blank",
+                    )
+                  }
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  <Twitter size={20} />
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post.title)}`,
+                      "_blank",
+                    )
+                  }
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  <div className="w-5 h-5 border border-current flex items-center justify-center rounded-sm text-[10px] font-bold">
+                    in
+                  </div>
+                </button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://wa.me/?text=${encodeURIComponent(post.title + " " + window.location.href)}`,
+                      "_blank",
+                    )
+                  }
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  <div className="w-5 h-5 flex items-center justify-center border border-current rounded-full text-[10px] font-bold">
+                    WA
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
         {/* Main Content */}
-        <article className="lg:col-span-2">
+        <article className="lg:flex-1 min-w-0">
           <Link
             to="/blog"
             className="inline-flex items-center text-gray-500 hover:text-primary transition-colors mb-8 text-xs font-bold uppercase tracking-widest"
@@ -125,10 +186,11 @@ export const BlogPostPage = () => {
 
           {/* Content Injection - Safe for trusted content */}
           <div
-            className="prose prose-lg prose-stone max-w-none 
+            className="prose prose-lg prose-stone max-w-none overflow-x-hidden
                         prose-headings:font-display prose-headings:font-normal 
                         prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-                        prose-img:rounded-lg prose-img:shadow-lg"
+                        prose-img:rounded-lg prose-img:shadow-lg prose-img:w-full prose-img:h-auto
+                        [&_*]:max-w-full [&_*]:break-words"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
@@ -149,7 +211,7 @@ export const BlogPostPage = () => {
         </article>
 
         {/* Sidebar */}
-        <aside className="lg:col-span-1">
+        <aside className="w-full lg:w-[350px] shrink-0">
           <div className="sticky top-32">
             <BlogSidebar />
           </div>

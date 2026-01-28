@@ -1,11 +1,54 @@
+import { useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { Button } from "../common/Button";
 import { ctaContent } from "../../data/content";
+import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 export const ContactSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    weddingDate: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitToGoogleSheets({
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        eventDate: formData.weddingDate,
+        message: formData.message,
+        serviceName: "General Contact",
+      });
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          weddingDate: "",
+          message: "",
+        });
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-24 px-6 relative" id="contact">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+        {/* Contact Info (Left) - Unchanged */}
         <div>
           <h2 className="text-5xl font-display mb-8">{ctaContent.heading}</h2>
           <div className="text-lg text-gray-600 mb-12">
@@ -43,58 +86,98 @@ export const ContactSection = () => {
           </div>
         </div>
 
-        <form className="bg-white p-10 border border-t-4 border-gray-100 border-t-primary shadow-lg space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Contact Form (Right) */}
+        {!submitted ? (
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white p-10 border border-t-4 border-gray-100 border-t-primary shadow-lg space-y-6"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
+                  className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
+                  className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
+                />
+              </div>
+            </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                First Name
+                Email Address
               </label>
               <input
-                type="text"
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
               />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                Last Name
+                Wedding Date
               </label>
               <input
-                type="text"
-                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
+                type="date"
+                value={formData.weddingDate}
+                onChange={(e) =>
+                  setFormData({ ...formData, weddingDate: e.target.value })
+                }
+                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 text-gray-500"
               />
             </div>
+            <div>
+              <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+                Tell us about your vision
+              </label>
+              <textarea
+                rows={4}
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 resize-none"
+              ></textarea>
+            </div>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-4 tracking-[0.2em] disabled:opacity-70"
+            >
+              {isSubmitting ? "Sending..." : "Request Consultation"}
+            </Button>
+          </form>
+        ) : (
+          <div className="bg-primary/5 border border-primary/20 p-10 rounded-lg text-center">
+            <h3 className="text-2xl font-display mb-4">Message Sent!</h3>
+            <p className="text-gray-600 mb-6">
+              Thank you for contacting us. We will get back to you shortly.
+            </p>
+            <Button onClick={() => setSubmitted(false)}>Send Another</Button>
           </div>
-          <div>
-            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-              Email Address
-            </label>
-            <input
-              type="email"
-              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
-            />
-          </div>
-          <div>
-            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-              Wedding Date
-            </label>
-            <input
-              type="date"
-              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 text-gray-500"
-            />
-          </div>
-          <div>
-            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-              Tell us about your vision
-            </label>
-            <textarea
-              rows={4}
-              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
-            ></textarea>
-          </div>
-          <Button type="submit" className="w-full py-4 tracking-[0.2em]">
-            Request Consultation
-          </Button>
-        </form>
+        )}
       </div>
     </section>
   );

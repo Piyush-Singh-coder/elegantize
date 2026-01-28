@@ -19,7 +19,7 @@ const BlogEditorPage: React.FC = () => {
     excerpt: "",
     content: "",
     category: "Technology", // Default
-    author: "Piyush Singh", // Default
+    author: "Ahmad Hashsham", // Default
     image_url: "",
     image_alt_text: "",
     meta_title: "",
@@ -262,12 +262,34 @@ const BlogEditorPage: React.FC = () => {
           {/* Content - Rich Text Editor */}
           <div className="pb-12">
             <label className="block text-stone-400 mb-2">Content</label>
-            <div className="bg-stone-100 text-stone-900 rounded">
+            <div className="bg-stone-100 text-stone-900 rounded overflow-hidden">
               <ReactQuill
                 theme="snow"
                 value={formData.content}
                 onChange={(content) => setFormData({ ...formData, content })}
                 className="h-64 mb-12"
+                modules={{
+                  toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ["bold", "italic", "underline", "strike"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    ["blockquote"],
+                    ["link", "image"],
+                    ["clean"],
+                  ],
+                }}
+                formats={[
+                  "header",
+                  "bold",
+                  "italic",
+                  "underline",
+                  "strike",
+                  "list",
+                  "bullet",
+                  "blockquote",
+                  "link",
+                  "image",
+                ]}
               />
             </div>
           </div>

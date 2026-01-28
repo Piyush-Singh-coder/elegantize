@@ -1,13 +1,48 @@
 import { Search, Facebook, Instagram, Twitter } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../common/Button";
-import { blogPosts } from "../../data/blogData";
+import { API_BASE_URL } from "../../config";
+
+interface SidebarPost {
+  id: string;
+  title: string;
+  slug: string;
+  date: string;
+  image: string;
+}
 
 export const BlogSidebar = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [recentPosts, setRecentPosts] = useState<SidebarPost[]>([]);
   const navigate = useNavigate();
-  const recentPosts = blogPosts.slice(0, 4);
+
+  useEffect(() => {
+    const fetchRecentPosts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blogs`);
+        if (response.ok) {
+          const data = await response.json();
+          const formatted = data.slice(0, 4).map((post: any) => ({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            date: new Date(post.createdAt).toLocaleDateString(),
+            image: post.image_url
+              ? post.image_url.startsWith("http")
+                ? post.image_url
+                : `${API_BASE_URL}${post.image_url}`
+              : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
+          }));
+          setRecentPosts(formatted);
+        }
+      } catch (error) {
+        console.error("Error fetching recent posts:", error);
+      }
+    };
+
+    fetchRecentPosts();
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +50,7 @@ export const BlogSidebar = () => {
   };
 
   return (
-    <aside className="space-y-12">
+    <div className="space-y-12 relative">
       {/* Search */}
       <div className="bg-stone-50 p-6 border border-stone-200">
         <h3 className="font-display text-xl mb-4">Search</h3>
@@ -53,8 +88,8 @@ export const BlogSidebar = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div>
-                <h4 className="font-display text-sm leading-tight text-gray-900 group-hover:text-primary transition-colors">
+              <div className="min-w-0">
+                <h4 className="font-display text-sm leading-tight text-gray-900 group-hover:text-primary transition-colors break-words">
                   {post.title}
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">{post.date}</p>
@@ -118,6 +153,6 @@ export const BlogSidebar = () => {
           ))}
         </div>
       </div>
-    </aside>
+    </div>
   );
 };
