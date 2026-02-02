@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
+import BlotFormatter from "quill-blot-formatter";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/common/Button";
 import { API_BASE_URL } from "../../config";
+
+// Register BlotFormatter
+const Quill = (ReactQuill as any).Quill;
+if (Quill) {
+  Quill.register("modules/blotFormatter", BlotFormatter);
+}
 
 const BlogEditorPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +26,7 @@ const BlogEditorPage: React.FC = () => {
     excerpt: "",
     content: "",
     category: "Technology", // Default
-    author: "Ahmad Hashsham", // Default
+    author: "Elegantize", // Default
     image_url: "",
     image_alt_text: "",
     meta_title: "",
@@ -157,9 +164,9 @@ const BlogEditorPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-900 p-8">
-      <div className="max-w-4xl mx-auto bg-stone-800 p-8 rounded-lg border border-stone-700">
-        <h1 className="text-3xl font-serif text-stone-100 mb-6">
+    <div className="min-h-screen bg-stone-900 p-4 md:p-8">
+      <div className="max-w-4xl mx-auto bg-stone-800 p-4 md:p-8 rounded-lg border border-stone-700">
+        <h1 className="text-2xl md:text-3xl font-serif text-stone-100 mb-6">
           {isEditMode ? "Edit Blog Post" : "Create New Blog Post"}
         </h1>
 
@@ -193,7 +200,7 @@ const BlogEditorPage: React.FC = () => {
           </div>
 
           {/* Category & Author */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-stone-400 mb-2">Category</label>
               <input
@@ -215,8 +222,8 @@ const BlogEditorPage: React.FC = () => {
                   setFormData({ ...formData, author: e.target.value })
                 }
               >
-                <option value="Piyush Singh">Piyush Singh</option>
-                <option value="Guest Writer">Guest Writer</option>
+                <option value="Elegantize">Elegantize</option>
+                <option value="Ahmad Hashsham">Ahmad Hashsham</option>
               </select>
             </div>
           </div>
@@ -269,26 +276,42 @@ const BlogEditorPage: React.FC = () => {
                 onChange={(content) => setFormData({ ...formData, content })}
                 className="h-64 mb-12"
                 modules={{
+                  blotFormatter: {},
                   toolbar: [
-                    [{ header: [1, 2, 3, false] }],
+                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                    [{ font: [] }],
+                    [{ size: [] }],
                     ["bold", "italic", "underline", "strike"],
+                    [{ color: [] }, { background: [] }],
+                    [{ script: "sub" }, { script: "super" }],
+                    [{ align: [] }],
                     [{ list: "ordered" }, { list: "bullet" }],
-                    ["blockquote"],
-                    ["link", "image"],
+                    [{ indent: "-1" }, { indent: "+1" }],
+                    ["blockquote", "code-block"],
+                    ["link", "image", "video"],
                     ["clean"],
                   ],
                 }}
                 formats={[
                   "header",
+                  "font",
+                  "size",
                   "bold",
                   "italic",
                   "underline",
                   "strike",
+                  "color",
+                  "background",
+                  "script",
+                  "align",
                   "list",
                   "bullet",
+                  "indent",
                   "blockquote",
+                  "code-block",
                   "link",
                   "image",
+                  "video",
                 ]}
               />
             </div>

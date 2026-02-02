@@ -69,20 +69,22 @@ const AdminDashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-900 p-8">
+    <div className="min-h-screen bg-stone-900 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <h1 className="text-3xl font-serif text-stone-100">
             Admin Dashboard
           </h1>
-          <div className="flex gap-4">
-            <Link to="/admin/create">
-              <Button variant="primary">Create New Post</Button>
+          <div className="flex gap-4 w-full md:w-auto">
+            <Link to="/admin/create" className="flex-1 md:flex-none">
+              <Button variant="primary" className="w-full md:w-auto">
+                Create New Post
+              </Button>
             </Link>
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="text-stone-300 border-stone-600 hover:bg-stone-800"
+              className="text-stone-300 border-stone-600 hover:bg-stone-800 flex-1 md:flex-none text-center justify-center"
             >
               Logout
             </Button>
@@ -90,7 +92,8 @@ const AdminDashboardPage: React.FC = () => {
         </div>
 
         <div className="bg-stone-800 rounded-lg border border-stone-700 overflow-hidden">
-          <div className="grid grid-cols-12 gap-4 p-4 border-b border-stone-700 bg-stone-900/50 text-stone-400 font-medium text-sm">
+          {/* Table Header - Hidden on Mobile */}
+          <div className="hidden md:grid grid-cols-12 gap-4 p-4 border-b border-stone-700 bg-stone-900/50 text-stone-400 font-medium text-sm">
             <div className="col-span-6">Title</div>
             <div className="col-span-2">Category</div>
             <div className="col-span-2">Date</div>
@@ -109,26 +112,34 @@ const AdminDashboardPage: React.FC = () => {
             posts.map((post) => (
               <div
                 key={post.id}
-                className="grid grid-cols-12 gap-4 p-4 border-b border-stone-700/50 items-center hover:bg-stone-700/30 transition-colors text-stone-300"
+                className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 p-4 border-b border-stone-700/50 items-start md:items-center hover:bg-stone-700/30 transition-colors text-stone-300"
               >
-                <div className="col-span-6 font-medium truncate">
+                <div className="w-full md:col-span-6 font-medium md:truncate text-lg md:text-base text-white md:text-stone-300">
                   {post.title}
                 </div>
-                <div className="col-span-2 text-sm text-stone-400">
-                  {post.category}
+
+                {/* Mobile: Row for meta info */}
+                <div className="w-full flex md:contents justify-between text-sm text-stone-400 md:text-inherit">
+                  <div className="md:col-span-2 bg-stone-900/50 md:bg-transparent px-2 py-1 md:p-0 rounded md:rounded-none">
+                    {post.category}
+                  </div>
+                  <div className="md:col-span-2">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </div>
                 </div>
-                <div className="col-span-2 text-sm text-stone-500">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </div>
-                <div className="col-span-2 flex justify-end gap-2">
-                  <Link to={`/admin/edit/${post.id}`}>
-                    <button className="p-2 text-stone-400 hover:text-yellow-500 transition-colors">
+
+                <div className="w-full md:col-span-2 flex justify-start md:justify-end gap-2 mt-2 md:mt-0">
+                  <Link
+                    to={`/admin/edit/${post.id}`}
+                    className="flex-1 md:flex-none"
+                  >
+                    <button className="w-full md:w-auto p-2 bg-stone-700 md:bg-transparent rounded md:rounded-none text-center text-stone-300 md:text-stone-400 hover:text-yellow-500 transition-colors">
                       Edit
                     </button>
                   </Link>
                   <button
                     onClick={() => handleDelete(post.id)}
-                    className="p-2 text-stone-400 hover:text-red-500 transition-colors"
+                    className="flex-1 md:flex-none p-2 bg-stone-700 md:bg-transparent rounded md:rounded-none text-center text-stone-300 md:text-stone-400 hover:text-red-500 transition-colors"
                   >
                     Delete
                   </button>
