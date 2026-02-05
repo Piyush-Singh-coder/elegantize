@@ -1,12 +1,47 @@
 const BlogPost = require("../models/BlogPost");
 
-// @desc    Get all blogs
-// @route   GET /api/blogs
+// @desc    Get all blogs (with pagination)
+// @route   GET /api/blogs?page=1&limit=10
 // @access  Public
 const getBlogs = async (req, res) => {
   try {
-    const blogs = await BlogPost.findAll({ order: [["createdAt", "DESC"]] });
-    res.json(blogs);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    const search = req.query.search || "";
+
+    // Build where clause for search
+    const whereClause = search
+      ? {
+          [require("sequelize").Op.or]: [
+            { title: { [require("sequelize").Op.like]: `%${search}%` } },
+            { category: { [require("sequelize").Op.like]: `%${search}%` } },
+          ],
+        }
+      : {};
+
+    // Get total count for pagination
+    const totalCount = await BlogPost.count({ where: whereClause });
+    const totalPages = Math.ceil(totalCount / limit);
+
+    // Get paginated blogs
+    const blogs = await BlogPost.findAll({
+      where: whereClause,
+      order: [["createdAt", "DESC"]],
+      limit,
+      offset,
+    });
+
+    res.json({
+      blogs,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCount,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
