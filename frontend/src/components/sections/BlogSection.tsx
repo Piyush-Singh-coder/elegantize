@@ -1,30 +1,11 @@
 import { Button } from "../common/Button";
 import { ArrowRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-
-const blogPosts = [
-  {
-    title: "10 Trending Wedding Themes for 2024",
-    excerpt: "Discover the most popular wedding aesthetics...",
-    image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00360.jpg?tr=w-1200,f-auto",
-    date: "Feb 10, 2024",
-  },
-  {
-    title: "How to Choose the Perfect Floral Arrangements",
-    excerpt: "A guide to selecting flowers that match your venue...",
-    image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01108.jpg?tr=w-1200,f-auto",
-    date: "Jan 25, 2024",
-  },
-  {
-    title: "Outdoor Wedding Lighting Tips",
-    excerpt: "Create a magical ambiance with these lighting ideas...",
-    image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC05988.jpg?tr=w-1200,f-auto",
-    date: "Jan 12, 2024",
-  },
-];
+import { BlogCard } from "../blog/BlogCard";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../../config";
+import type { BlogPost } from "../../data/blogData";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -46,6 +27,55 @@ const itemVariants: Variants = {
 };
 
 export const BlogSection = () => {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blogs`);
+        const data = await response.json();
+
+        // Sort by date descending if API doesn't already, but assuming API returns latest first or we can sort here if needed.
+        // The API returns all posts. We map them to our BlogPost type.
+        const formattedPosts: BlogPost[] = data.map((post: any) => ({
+          id: post.id,
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt
+            ? post.excerpt
+                .replace(/<!--[\s\S]*?-->/g, "")
+                .replace(/<[^>]+>/g, "")
+                .substring(0, 300)
+            : "",
+          content: post.content,
+          date: new Date(post.createdAt).toLocaleDateString(),
+          author: post.author,
+          category: post.category,
+          image: post.image_url
+            ? post.image_url.startsWith("http")
+              ? post.image_url
+              : `${API_BASE_URL}${post.image_url}`
+            : "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Jaya%20&%20Kevin/Copy%20of%20DSC00085.jpg?updatedAt=1769514680652",
+        }));
+
+        setBlogPosts(formattedPosts);
+      } catch (error) {
+        console.error("Error fetching blog posts for home:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const recentPosts = blogPosts.slice(0, 3);
+
+  if (loading) {
+    return null; // Or a loader, but reducing layout shift is better handled by skeleton or min-height. Null is fine for now to avoid flash of wrong content.
+  }
+
   return (
     <motion.section
       id="blog"
@@ -72,51 +102,30 @@ export const BlogSection = () => {
             </motion.h2>
           </div>
           <motion.div variants={itemVariants} className="hidden md:block">
-            <Button variant="text" icon={ArrowRight}>
+            <Button
+              variant="text"
+              icon={ArrowRight}
+              onClick={() => (window.location.href = "/blog")}
+            >
               View All Articles
             </Button>
           </motion.div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {blogPosts.map((post, index) => (
-            <motion.article
-              key={index}
-              variants={itemVariants}
-              className="group cursor-pointer"
-            >
-              <div className="overflow-hidden mb-6 aspect-[4/3]">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex items-center space-x-4 text-xs text-gray-500 mb-3 uppercase tracking-widest">
-                <span>{post.date}</span>
-                <span className="w-8 h-px bg-gray-300"></span>
-                <span>Bridal Tips</span>
-              </div>
-              <h3 className="text-xl font-display mb-3 group-hover:text-primary transition-colors leading-tight">
-                {post.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                {post.excerpt}
-              </p>
-              <span className="text-xs font-bold uppercase tracking-widest text-primary border-b border-primary/20 pb-0.5 group-hover:border-primary transition-all">
-                Read More
-              </span>
-            </motion.article>
+          {recentPosts.map((post) => (
+            <motion.div key={post.id} variants={itemVariants}>
+              <BlogCard post={post} />
+            </motion.div>
           ))}
         </div>
 
-        <motion.div
-          variants={itemVariants}
-          className="mt-12 text-center md:hidden"
-        >
-          <Button variant="text" icon={ArrowRight}>
-            View All Articles
-          </Button>
+        <motion.div variants={itemVariants} className="mt-12 text-center">
+          <Link to="/blog">
+            <Button variant="primary" icon={ArrowRight}>
+              Read All Blogs
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </motion.section>

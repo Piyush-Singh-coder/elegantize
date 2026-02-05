@@ -28,7 +28,12 @@ export const BlogPostPage = () => {
             id: data.id,
             title: data.title,
             slug: data.slug,
-            excerpt: data.excerpt,
+            excerpt: data.excerpt
+              ? data.excerpt
+                  .replace(/<!--[\s\S]*?-->/g, "")
+                  .replace(/<[^>]+>/g, "")
+                  .substring(0, 150) + "..."
+              : "",
             content: data.content,
             date: new Date(data.createdAt).toLocaleDateString(),
             author: data.author,
@@ -91,15 +96,17 @@ export const BlogPostPage = () => {
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-display text-white leading-tight mb-6">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium">
-              <span className="flex items-center gap-2">
-                <User size={16} className="text-primary" /> {post.author}
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/90 text-xs md:text-sm font-medium">
+              <span className="flex items-center gap-2 max-w-[150px] md:max-w-none truncate">
+                <User size={14} className="text-primary shrink-0" />
+                <span className="truncate">{post.author}</span>
               </span>
               <span className="flex items-center gap-2">
-                <Calendar size={16} className="text-primary" /> {post.date}
+                <Calendar size={14} className="text-primary shrink-0" />{" "}
+                {post.date}
               </span>
               <span className="flex items-center gap-2">
-                <Clock size={16} className="text-primary" /> 5 min read
+                <Clock size={14} className="text-primary shrink-0" /> 5 min read
               </span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 text-white/90 text-sm font-medium mt-4">
@@ -176,7 +183,7 @@ export const BlogPostPage = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
         {/* Main Content */}
-        <article className="lg:flex-1 min-w-0">
+        <article className="lg:flex-1 min-w-0 w-full max-w-full overflow-hidden">
           <Link
             to="/blog"
             className="inline-flex items-center text-gray-500 hover:text-primary transition-colors mb-8 text-xs font-bold uppercase tracking-widest"
@@ -186,11 +193,13 @@ export const BlogPostPage = () => {
 
           {/* Content Injection - Safe for trusted content */}
           <div
-            className="prose prose-lg prose-stone max-w-none overflow-x-hidden
+            className="prose prose-sm md:prose-base lg:prose-lg prose-stone w-full max-w-full overflow-hidden
                         prose-headings:font-display prose-headings:font-normal 
                         prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                         prose-img:rounded-lg prose-img:shadow-lg prose-img:w-full prose-img:h-auto
-                        [&_*]:max-w-full [&_*]:break-words"
+                        [&_*]:!max-w-full [&_*]:!min-w-0 [&_*]:break-words 
+                        [&_img]:!h-auto [&_img]:object-contain
+                        [&_iframe]:w-full [&_video]:w-full"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 

@@ -6,21 +6,21 @@ const posts = [
   {
     id: 1,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC382098743.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Adriana%20&%20Kyle/Copy%20of%20A+K-202.jpg?updatedAt=1769514440360",
     likes: 245,
     comments: 12,
   },
   {
     id: 2,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC18469449.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg?updatedAt=1768802741982",
     likes: 189,
     comments: 8,
   },
   {
     id: 3,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/elegantize_av-39.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Puja%20&%20Kushal/Copy%20of%20WhatsApp%20Image%202024-08-16%20at%2015.52.24_b8120fea.jpg?updatedAt=1769514925886",
     likes: 312,
     comments: 24,
   },

@@ -1,34 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
 import { BlogCard } from "../components/blog/BlogCard";
 import { motion } from "framer-motion";
 import type { BlogPost } from "../data/blogData";
 import { API_BASE_URL } from "../config";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+interface PaginationData {
+  currentPage: number;
+  totalPages: number;
+  totalCount: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
 
 export const BlogListingPage = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
+  const pageParam = parseInt(searchParams.get("page") || "1");
 
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState<PaginationData>({
+    currentPage: 1,
+    totalPages: 1,
+    totalCount: 0,
+    hasNextPage: false,
+    hasPrevPage: false,
+  });
 
-  const itemsPerPage = 7;
-  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/blogs`);
-        const data = await response.json();
+  const fetchPosts = useCallback(async (page: number, search: string) => {
+    setLoading(true);
+    try {
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: itemsPerPage.toString(),
+      });
+      if (search) {
+        params.append("search", search);
+      }
 
-        const formattedPosts: BlogPost[] = data.map((post: any) => ({
+      const response = await fetch(`${API_BASE_URL}/api/blogs?${params}`);
+      const data = await response.json();
+
+      const formattedPosts: BlogPost[] = data.blogs.map(
+        (post: BlogPost & { image_url?: string; createdAt?: string }) => ({
           id: post.id,
           title: post.title,
           slug: post.slug,
-          excerpt: post.excerpt,
+          excerpt: post.excerpt
+            ? post.excerpt
+                .replace(/<!--[\s\S]*?-->/g, "")
+                .replace(/<[^>]+>/g, "")
+                .substring(0, 300)
+            : "",
           content: post.content,
-          date: new Date(post.createdAt).toLocaleDateString(),
+          date: new Date(post.createdAt || post.date).toLocaleDateString(),
           author: post.author,
           category: post.category,
           image: post.image_url
@@ -36,46 +66,68 @@ export const BlogListingPage = () => {
               ? post.image_url
               : `${API_BASE_URL}${post.image_url}`
             : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
-        }));
+        }),
+      );
 
-        setBlogPosts(formattedPosts);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
+      setBlogPosts(formattedPosts);
+      setPagination(data.pagination);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      setLoading(false);
+    }
   }, []);
 
-  const filteredPosts = blogPosts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.category.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  const totalPages = Math.ceil(filteredPosts.length / itemsPerPage);
-
-  const displayedPosts = filteredPosts.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
-
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery]);
-
-  useEffect(() => {
+    fetchPosts(pageParam, searchQuery);
     window.scrollTo(0, 0);
-  }, [currentPage]);
+  }, [pageParam, searchQuery, fetchPosts]);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", page.toString());
+    setSearchParams(newParams);
+  };
+
+  // Generate page numbers for mobile (show limited pages)
+  const getVisiblePages = () => {
+    const { currentPage, totalPages } = pagination;
+    const pages: (number | string)[] = [];
+
+    if (totalPages <= 5) {
+      // Show all pages if 5 or less
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+
+      if (currentPage > 3) {
+        pages.push("...");
+      }
+
+      // Show pages around current
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push("...");
+      }
+
+      // Always show last page
+      pages.push(totalPages);
+    }
+
+    return pages;
   };
 
   return (
-    <div className="pt-[100px] md:pt-[120px] pb-24 px-6 bg-white">
+    <div className="pt-[100px] md:pt-[120px] pb-24 px-4 md:px-6 bg-white">
       {/* Page Header */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
         <p className="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">
@@ -88,24 +140,27 @@ export const BlogListingPage = () => {
           Explore our latest stories, trends, and expert advice to help you plan
           your dream luxury wedding.
         </p>
+        {pagination.totalCount > 0 && (
+          <p className="text-sm text-gray-400 mt-4">
+            Showing {blogPosts.length} of {pagination.totalCount} articles
+          </p>
+        )}
       </div>
 
-      <div className="max-w-7xl  mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
         {/* Main Content (Articles) */}
         <main className="lg:col-span-2">
           {loading ? (
             <div className="text-center py-20 text-gray-400">
               Loading articles...
             </div>
-          ) : displayedPosts.length === 0 ? (
+          ) : blogPosts.length === 0 ? (
             <div className="text-center py-20 text-gray-400">
               No articles found.
             </div>
           ) : (
-            <div className="space-y-16">
-              {" "}
-              {/* Increased gap for readability */}
-              {displayedPosts.map((post) => (
+            <div className="space-y-12 md:space-y-16">
+              {blogPosts.map((post) => (
                 <motion.div
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -119,43 +174,61 @@ export const BlogListingPage = () => {
             </div>
           )}
 
-          {/* Pagination */}
-          {!loading && totalPages > 1 && (
-            <div className="mt-16 flex justify-center items-center space-x-4">
-              {/* Previous */}
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="text-xs uppercase font-bold tracking-widest text-gray-500 hover:text-primary disabled:opacity-50 disabled:hover:text-gray-500"
-              >
-                Prev
-              </button>
+          {/* Pagination - Mobile Optimized */}
+          {!loading && pagination.totalPages > 1 && (
+            <div className="mt-12 md:mt-16">
+              <div className="flex items-center justify-center gap-1 md:gap-2">
+                {/* Previous Button */}
+                <button
+                  onClick={() => handlePageChange(pagination.currentPage - 1)}
+                  disabled={!pagination.hasPrevPage}
+                  className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-lg border border-gray-200 text-gray-600 hover:border-primary hover:text-primary disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:text-gray-600 transition-colors"
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={18} />
+                </button>
 
-              {/* Numbers */}
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-8 h-8 flex items-center justify-center text-xs font-bold border transition-all ${
-                      currentPage === page
-                        ? "bg-primary text-white border-primary"
-                        : "bg-white text-gray-700 border-gray-200 hover:border-primary hover:text-primary"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ),
-              )}
+                {/* Page Numbers */}
+                <div className="flex items-center gap-1">
+                  {getVisiblePages().map((page, index) =>
+                    page === "..." ? (
+                      <span
+                        key={`ellipsis-${index}`}
+                        className="w-8 h-9 flex items-center justify-center text-gray-400 text-sm"
+                      >
+                        ...
+                      </span>
+                    ) : (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page as number)}
+                        className={`w-9 h-9 md:w-10 md:h-10 flex items-center justify-center text-sm font-medium rounded-lg border transition-all ${
+                          pagination.currentPage === page
+                            ? "bg-primary text-white border-primary"
+                            : "bg-white text-gray-700 border-gray-200 hover:border-primary hover:text-primary"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ),
+                  )}
+                </div>
 
-              {/* Next */}
-              <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="text-xs uppercase font-bold tracking-widest text-gray-500 hover:text-primary disabled:opacity-50 disabled:hover:text-gray-500"
-              >
-                Next
-              </button>
+                {/* Next Button */}
+                <button
+                  onClick={() => handlePageChange(pagination.currentPage + 1)}
+                  disabled={!pagination.hasNextPage}
+                  className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-lg border border-gray-200 text-gray-600 hover:border-primary hover:text-primary disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-gray-200 disabled:hover:text-gray-600 transition-colors"
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+
+              {/* Page Info */}
+              <p className="text-center text-xs text-gray-400 mt-4">
+                Page {pagination.currentPage} of {pagination.totalPages}
+              </p>
             </div>
           )}
         </main>
@@ -163,8 +236,6 @@ export const BlogListingPage = () => {
         {/* Sidebar */}
         <div className="lg:col-span-1">
           <div className="sticky top-32">
-            {" "}
-            {/* Sticky sidebar */}
             <BlogSidebar />
           </div>
         </div>

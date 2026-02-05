@@ -1,9 +1,11 @@
 import { Mail, Calendar, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../common/Button";
 import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 export const LeftFixedEnquiryPanel = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -55,9 +57,7 @@ export const LeftFixedEnquiryPanel = () => {
                   eventDate: formData.get("eventDate") as string,
                   serviceName: "Side Panel Enquiry",
                 });
-                alert("Enquiry sent!");
-                form.reset();
-                setIsOpen(false);
+                navigate("/thank-you");
               } catch {
                 alert("Failed to send.");
               } finally {

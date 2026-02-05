@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Calendar, User, Mail, Phone } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 interface ServiceEnquiryFormProps {
   serviceName: string;
@@ -11,6 +13,7 @@ export const ServiceEnquiryForm = ({
   serviceName,
   variant = "horizontal",
 }: ServiceEnquiryFormProps) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,34 +22,33 @@ export const ServiceEnquiryForm = ({
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      await fetch(import.meta.env.VITE_GOOGLE_SHEET_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify({
-          ...formData,
-          serviceName: serviceName || "Enquiry",
-          submittedAt: new Date().toISOString(),
-        }),
+      const result = await submitToGoogleSheets({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        eventDate: formData.eventDate,
+        message: formData.message,
+        serviceName: serviceName || "Enquiry",
       });
 
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        eventDate: "",
-        message: "",
-      });
+      if (result.success) {
+        navigate("/thank-you");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          eventDate: "",
+          message: "",
+        });
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     } catch (error) {
       console.error("Submission error:", error);
       alert("Something went wrong. Please try again.");
@@ -54,25 +56,6 @@ export const ServiceEnquiryForm = ({
       setIsSubmitting(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="bg-primary/10 border border-primary/30 rounded-xl p-8 text-center"
-      >
-        <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Send className="w-8 h-8 text-primary" />
-        </div>
-        <h3 className="text-2xl font-display text-gray-900 mb-2">Thank You!</h3>
-        <p className="text-gray-600">
-          We've received your enquiry for {serviceName}. Our team will contact
-          you within 24 hours.
-        </p>
-      </motion.div>
-    );
-  }
 
   if (variant === "horizontal") {
     return (
@@ -126,7 +109,7 @@ export const ServiceEnquiryForm = ({
             <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
             <input
               type="text"
-              placeholder="Event Date"
+              placeholder="Event Date (Optional)"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
               value={formData.eventDate}
@@ -196,6 +179,7 @@ export const ServiceEnquiryForm = ({
           </label>
           <input
             type="tel"
+            required
             value={formData.phone}
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })

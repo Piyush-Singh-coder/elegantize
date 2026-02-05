@@ -8,10 +8,10 @@ interface BlogCardProps {
 
 export const BlogCard = ({ post }: BlogCardProps) => {
   return (
-    <article className="group border border-primary p-2.5 border-r-3 rounded-lg mb-12 last:mb-0">
+    <article className="group border border-primary p-4 border-r-3 rounded-lg h-full flex flex-col bg-white">
       <Link
         to={`/blog/${post.slug}`}
-        className="block overflow-hidden mb-6 aspect-[16/9] md:aspect-[2/1] lg:aspect-[16/9] relative"
+        className="block overflow-hidden mb-6 aspect-[3/2] relative rounded-md"
       >
         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors z-10"></div>
         <img
@@ -21,21 +21,19 @@ export const BlogCard = ({ post }: BlogCardProps) => {
         />
       </Link>
 
-      <div className="flex items-center space-x-4 text-xs text-gray-500 mb-3 uppercase tracking-widest">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500 mb-4 uppercase tracking-widest">
         <span>{post.date}</span>
-        <span className="w-8 h-px bg-gray-300"></span>
-        <span className="text-primary">{post.category}</span>
-        <span className="w-8 h-px bg-gray-300"></span>
-        <span>By {post.author}</span>
+        <span className="w-px h-3 bg-gray-300"></span>
+        <span className="text-primary font-medium">{post.category}</span>
       </div>
 
-      <Link to={`/blog/${post.slug}`}>
-        <h2 className="text-2xl md:text-3xl font-display mb-4 text-gray-900 group-hover:text-primary transition-colors leading-tight">
+      <Link to={`/blog/${post.slug}`} className="block mb-3">
+        <h2 className="text-xl md:text-2xl font-display text-gray-900 group-hover:text-primary transition-colors leading-tight line-clamp-2">
           {post.title}
         </h2>
       </Link>
 
-      <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl">
+      <p className="text-gray-600 leading-relaxed mb-6 line-clamp-3 text-sm md:text-base flex-grow">
         {post.excerpt}
       </p>
 

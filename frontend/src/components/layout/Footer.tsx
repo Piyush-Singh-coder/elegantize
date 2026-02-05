@@ -8,6 +8,7 @@ import {
   Mail,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const containerVariants = {
@@ -226,12 +227,18 @@ export const Footer = () => {
         >
           <p>© 2024 Elegantize Weddings. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-primary transition-colors">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-primary transition-colors"
+            >
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-primary transition-colors">
+            </Link>
+            <Link
+              to="/terms-of-service"
+              className="hover:text-primary transition-colors"
+            >
               Terms of Service
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

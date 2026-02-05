@@ -13,14 +13,21 @@ import { BlogListingPage } from "./pages/BlogListingPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { PortfolioDetailPage } from "./pages/PortfolioDetailPage";
 import { PortfolioListingPage } from "./pages/PortfolioListingPage";
+import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
+import { TermsOfServicePage } from "./pages/TermsOfServicePage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import BlogEditorPage from "./pages/admin/BlogEditorPage";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
+import ScrollToTop from "./components/common/ScrollToTop";
+
+import ThankYouPage from "./pages/ThankYouPage";
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes wrapped in Layout */}
         <Route
@@ -41,6 +48,9 @@ function App() {
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/portfolio/:id" element={<PortfolioDetailPage />} />
           <Route path="/portfolio" element={<PortfolioListingPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
         </Route>
 
         {/* Admin Routes (No Layout or Custom Layout) */}

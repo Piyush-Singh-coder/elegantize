@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { Button } from "../common/Button";
 import { ctaContent } from "../../data/content";
 import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 export const ContactSection = () => {
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -29,14 +30,7 @@ export const ContactSection = () => {
       });
 
       if (result.success) {
-        setSubmitted(true);
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          weddingDate: "",
-          message: "",
-        });
+        navigate("/thank-you");
       } else {
         alert("Something went wrong. Please try again.");
       }
@@ -87,97 +81,87 @@ export const ContactSection = () => {
         </div>
 
         {/* Contact Form (Right) */}
-        {!submitted ? (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-10 border border-t-4 border-gray-100 border-t-primary shadow-lg space-y-6"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.firstName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, firstName: e.target.value })
-                  }
-                  className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  value={formData.lastName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, lastName: e.target.value })
-                  }
-                  className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
-                />
-              </div>
-            </div>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-10 border border-t-4 border-gray-100 border-t-primary shadow-lg space-y-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                Email Address
+                First Name
               </label>
               <input
-                type="email"
+                type="text"
                 required
-                value={formData.email}
+                value={formData.firstName}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setFormData({ ...formData, firstName: e.target.value })
                 }
                 className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
               />
             </div>
             <div>
               <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                Wedding Date
+                Last Name
               </label>
               <input
-                type="date"
-                value={formData.weddingDate}
+                type="text"
+                value={formData.lastName}
                 onChange={(e) =>
-                  setFormData({ ...formData, weddingDate: e.target.value })
+                  setFormData({ ...formData, lastName: e.target.value })
                 }
-                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 text-gray-500"
+                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
               />
             </div>
-            <div>
-              <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
-                Tell us about your vision
-              </label>
-              <textarea
-                rows={4}
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 resize-none"
-              ></textarea>
-            </div>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-4 tracking-[0.2em] disabled:opacity-70"
-            >
-              {isSubmitting ? "Sending..." : "Request Consultation"}
-            </Button>
-          </form>
-        ) : (
-          <div className="bg-primary/5 border border-primary/20 p-10 rounded-lg text-center">
-            <h3 className="text-2xl font-display mb-4">Message Sent!</h3>
-            <p className="text-gray-600 mb-6">
-              Thank you for contacting us. We will get back to you shortly.
-            </p>
-            <Button onClick={() => setSubmitted(false)}>Send Another</Button>
           </div>
-        )}
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+              Email Address
+            </label>
+            <input
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+              Wedding Date
+            </label>
+            <input
+              type="date"
+              value={formData.weddingDate}
+              onChange={(e) =>
+                setFormData({ ...formData, weddingDate: e.target.value })
+              }
+              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 text-gray-500"
+            />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest font-bold mb-2 text-gray-500">
+              Tell us about your vision
+            </label>
+            <textarea
+              rows={4}
+              value={formData.message}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+              className="w-full bg-stone-50 border border-gray-200 focus:outline-none focus:border-primary p-3 resize-none"
+            ></textarea>
+          </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-4 tracking-[0.2em] disabled:opacity-70"
+          >
+            {isSubmitting ? "Sending..." : "Request Consultation"}
+          </Button>
+        </form>
       </div>
     </section>
   );

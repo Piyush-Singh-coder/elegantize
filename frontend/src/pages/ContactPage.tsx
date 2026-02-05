@@ -3,9 +3,11 @@ import { MapPin, Mail, Phone, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "../components/common/Button";
 import { ctaContent } from "../data/content";
 
+import { useNavigate } from "react-router-dom";
 import { submitToGoogleSheets } from "../utils/googleSheets";
 
 export const ContactPage = () => {
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -162,7 +164,7 @@ export const ContactPage = () => {
                   message: data.message,
                   serviceName: "Contact Page Form",
                 });
-                alert("Message sent successfully!");
+                navigate("/thank-you");
                 form.reset();
               } catch {
                 alert("Failed to send message.");

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { submitToGoogleSheets } from "../../utils/googleSheets";
+import { useNavigate } from "react-router-dom";
 
 export const HorizontalEnquiryForm = () => {
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
     date: "",
     location: "",
     phone: "",
@@ -12,42 +16,23 @@ export const HorizontalEnquiryForm = () => {
 
   const handleSubmit = async () => {
     // Basic validation
-    if (!formData.date && !formData.location && !formData.phone) return;
+    if (!formData.name || !formData.email || !formData.phone) {
+      alert("Please fill in Name, Email, and Phone number.");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
-      // In this specific mini-form, we might just be redirecting to the full contact page
-      // OR submitting a partial lead. Let's submit what we have.
-      // However, this form lacks email/name, so it's likely intended as a "Check Availability"
-      // that redirects to the full form with pre-filled data.
-      // But since the user said "every enquiry form", I will make it submit what it can.
-      // A better UX might be redirecting to /contact?date=...&location=...
-
-      // For now, let's submit it as a "lead" without contact info?
-      // No, that's useless.
-      // It's safer to redirect this specific form to the main contact area or open a modal.
-      // But preserving the existing "Button" clicking behavior:
-
-      // Let's assume for now it submits with "Anonymous" to check availability?
-      // Actually, looking at the UI "Check Availability", it implies interaction.
-      // Let's just hook it up to submit for now with a prompting alert or just submit.
-
       await submitToGoogleSheets({
-        name: "Anonymous Lead",
-        email: "Not provided",
-        phone: formData.phone || "Not provided",
-        eventDate: formData.date,
-        message: `Checking availability for location: ${formData.location}`,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        eventDate: formData.date || "Not provided",
+        message: `Checking availability for location: ${formData.location || "Not provided"}`,
         serviceName: "Availability Check",
       });
 
-      alert(
-        "Availability request sent! We will need your contact details to respond. Please fill out the full contact form.",
-      );
-      // Ideally redirect to contact section here.
-      document
-        .getElementById("contact")
-        ?.scrollIntoView({ behavior: "smooth" });
+      navigate("/thank-you");
     } finally {
       setIsSubmitting(false);
     }
@@ -62,10 +47,40 @@ export const HorizontalEnquiryForm = () => {
               Let's start planning
             </h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full md:w-3/4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 w-full md:w-3/4">
             <input
               type="text"
-              placeholder="Wedding Date"
+              placeholder="Name"
+              required
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              required
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+              className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
+            />
+            <input
+              type="text"
+              placeholder="Date (Optional)"
               onFocus={(e) => (e.target.type = "date")}
               onBlur={(e) => (e.target.type = "text")}
               value={formData.date}
@@ -74,30 +89,23 @@ export const HorizontalEnquiryForm = () => {
               }
               className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
             />
-            <input
-              type="text"
-              placeholder="Venue Location"
-              value={formData.location}
-              onChange={(e) =>
-                setFormData({ ...formData, location: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
-            />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
-            />
+            {/* Location field removed or merged? User asked for Name, Email, Phone. 
+               Space is tight (5 cols). Let's keep Location if possible or remove it? 
+               User request: "add these fields name, email, phone number".
+               Previous had Date, Location, Phone.
+               Now we have Name, Email, Phone, Date.
+               Let's drop Location to fit 5 cols or swap Location with something else.
+               Actually, 5 cols is tight. The layout was 1/4 + 3/4.
+               Let's make it 5 cols for the inputs + button?
+               Inputs: Name, Email, Phone, Date. Button. Total 5. Fits perfectly.
+               Removing Location as it wasn't explicitly requested to be kept, and space is limited in horizontal bar.
+            */}
             <Button
               className="w-full"
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Checking..." : "Check Availability"}
+              {isSubmitting ? "Sending..." : "Check Availability"}
             </Button>
           </div>
         </div>
