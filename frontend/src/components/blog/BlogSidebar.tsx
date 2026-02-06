@@ -23,7 +23,8 @@ export const BlogSidebar = () => {
         const response = await fetch(`${API_BASE_URL}/api/blogs`);
         if (response.ok) {
           const data = await response.json();
-          const formatted = data.slice(0, 4).map((post: any) => ({
+          const posts = data.blogs || [];
+          const formatted = posts.slice(0, 4).map((post: any) => ({
             id: post.id,
             title: post.title,
             slug: post.slug,

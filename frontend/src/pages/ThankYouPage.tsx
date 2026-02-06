@@ -1,9 +1,38 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle, Home, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../components/common/Button";
 
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  }
+}
+
 const ThankYouPage = () => {
+  // Fire conversion event when Thank You page loads
+  useEffect(() => {
+    // Google Analytics 4 conversion event
+    if (window.gtag) {
+      window.gtag("event", "generate_lead", {
+        event_category: "form_submission",
+        event_label: "enquiry_form",
+        value: 1,
+      });
+    }
+
+    // Push to dataLayer for GTM triggers
+    if (window.dataLayer) {
+      window.dataLayer.push({
+        event: "form_submission_success",
+        formType: "enquiry",
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-stone-50 flex items-center justify-center px-6 py-24">
       <motion.div

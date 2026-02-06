@@ -8,6 +8,7 @@ export interface BlogPost {
   date: string;
   author: string;
   category: string;
+  tags?: string; // Comma-separated tags
 }
 
 export const blogPosts: BlogPost[] = [

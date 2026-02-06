@@ -33,31 +33,35 @@ export const BlogSection = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/blogs`);
+        // Fetch only 3 posts for homepage
+        const response = await fetch(`${API_BASE_URL}/api/blogs?limit=3`);
         const data = await response.json();
 
-        // Sort by date descending if API doesn't already, but assuming API returns latest first or we can sort here if needed.
-        // The API returns all posts. We map them to our BlogPost type.
-        const formattedPosts: BlogPost[] = data.map((post: any) => ({
-          id: post.id,
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt
-            ? post.excerpt
-                .replace(/<!--[\s\S]*?-->/g, "")
-                .replace(/<[^>]+>/g, "")
-                .substring(0, 300)
-            : "",
-          content: post.content,
-          date: new Date(post.createdAt).toLocaleDateString(),
-          author: post.author,
-          category: post.category,
-          image: post.image_url
-            ? post.image_url.startsWith("http")
-              ? post.image_url
-              : `${API_BASE_URL}${post.image_url}`
-            : "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Jaya%20&%20Kevin/Copy%20of%20DSC00085.jpg?updatedAt=1769514680652",
-        }));
+        // Handle both array format (old) and paginated object format (new)
+        const postsArray = Array.isArray(data) ? data : data.blogs || [];
+
+        const formattedPosts: BlogPost[] = postsArray.map(
+          (post: BlogPost & { image_url?: string; createdAt?: string }) => ({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt
+              ? post.excerpt
+                  .replace(/<!--[\s\S]*?-->/g, "")
+                  .replace(/<[^>]+>/g, "")
+                  .substring(0, 300)
+              : "",
+            content: post.content,
+            date: new Date(post.createdAt || post.date).toLocaleDateString(),
+            author: post.author,
+            category: post.category,
+            image: post.image_url
+              ? post.image_url.startsWith("http")
+                ? post.image_url
+                : `${API_BASE_URL}${post.image_url}`
+              : "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Jaya%20&%20Kevin/Copy%20of%20DSC00085.jpg?updatedAt=1769514680652",
+          }),
+        );
 
         setBlogPosts(formattedPosts);
       } catch (error) {

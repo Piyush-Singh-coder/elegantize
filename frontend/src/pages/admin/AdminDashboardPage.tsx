@@ -19,15 +19,20 @@ const AdminDashboardPage: React.FC = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/blogs`);
+      // Fetch all posts for admin (with high limit to get all)
+      const response = await fetch(`${API_BASE_URL}/api/blogs?limit=1000`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+
+      // Handle both array format (old) and paginated object format (new)
       if (Array.isArray(data)) {
         setPosts(data);
+      } else if (data.blogs && Array.isArray(data.blogs)) {
+        setPosts(data.blogs);
       } else {
-        console.error("Data is not an array:", data);
+        console.error("Unexpected data format:", data);
         setPosts([]);
       }
       setLoading(false);
@@ -94,7 +99,8 @@ const AdminDashboardPage: React.FC = () => {
         <div className="bg-stone-800 rounded-lg border border-stone-700 overflow-hidden">
           {/* Table Header - Hidden on Mobile */}
           <div className="hidden md:grid grid-cols-12 gap-4 p-4 border-b border-stone-700 bg-stone-900/50 text-stone-400 font-medium text-sm">
-            <div className="col-span-6">Title</div>
+            <div className="col-span-1">S.No</div>
+            <div className="col-span-5">Title</div>
             <div className="col-span-2">Category</div>
             <div className="col-span-2">Date</div>
             <div className="col-span-2 text-right">Actions</div>
@@ -109,12 +115,19 @@ const AdminDashboardPage: React.FC = () => {
               No blog posts found. Create one to get started!
             </div>
           ) : (
-            posts.map((post) => (
+            posts.map((post, index) => (
               <div
                 key={post.id}
                 className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-4 p-4 border-b border-stone-700/50 items-start md:items-center hover:bg-stone-700/30 transition-colors text-stone-300"
               >
-                <div className="w-full md:col-span-6 font-medium md:truncate text-lg md:text-base text-white md:text-stone-300">
+                {/* SNO - Hidden on Mobile, shown inline */}
+                <div className="hidden md:block md:col-span-1 text-stone-500 font-medium">
+                  {index + 1}
+                </div>
+                <div className="w-full md:col-span-5 font-medium md:truncate text-lg md:text-base text-white md:text-stone-300">
+                  <span className="md:hidden text-stone-500 mr-2">
+                    #{index + 1}
+                  </span>
                   {post.title}
                 </div>
 

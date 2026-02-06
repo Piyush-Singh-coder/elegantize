@@ -27,6 +27,7 @@ const BlogEditorPage: React.FC = () => {
     content: "",
     category: "Technology", // Default
     author: "Elegantize", // Default
+    tags: "", // Comma-separated tags
     image_url: "",
     image_alt_text: "",
     meta_title: "",
@@ -52,6 +53,7 @@ const BlogEditorPage: React.FC = () => {
           content: data.content,
           category: data.category,
           author: data.author,
+          tags: data.tags || "",
           image_url: data.image_url || "",
           image_alt_text: data.image_alt_text || "",
           meta_title: data.meta_title || "",
@@ -226,6 +228,22 @@ const BlogEditorPage: React.FC = () => {
                 <option value="Ahmad Hashsham">Ahmad Hashsham</option>
               </select>
             </div>
+          </div>
+
+          {/* Tags */}
+          <div>
+            <label className="block text-stone-400 mb-2">
+              Tags (comma-separated)
+            </label>
+            <input
+              type="text"
+              placeholder="e.g. wedding decor, indian weddings, new york"
+              className="w-full bg-stone-900 border border-stone-700 text-stone-100 rounded px-4 py-2"
+              value={formData.tags}
+              onChange={(e) =>
+                setFormData({ ...formData, tags: e.target.value })
+              }
+            />
           </div>
 
           {/* Image Upload */}
