@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import BlotFormatter from "quill-blot-formatter";
@@ -17,6 +17,7 @@ const BlogEditorPage: React.FC = () => {
   const isEditMode = !!id;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(isEditMode); // Start fetching immediately if edit mode
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -36,45 +37,50 @@ const BlogEditorPage: React.FC = () => {
   });
 
   useEffect(() => {
-    if (isEditMode) {
-      fetchPost();
-    }
-  }, [id]);
-
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/blogs/id/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setFormData({
-          title: data.title,
-          slug: data.slug,
-          excerpt: data.excerpt || "",
-          content: data.content,
-          category: data.category,
-          author: data.author,
-          tags: data.tags || "",
-          image_url: data.image_url || "",
-          image_alt_text: data.image_alt_text || "",
-          meta_title: data.meta_title || "",
-          meta_description: data.meta_description || "",
-          meta_keywords: data.meta_keywords || "",
-        });
-        if (data.image_url) {
-          setPreviewUrl(
-            data.image_url.startsWith("http")
-              ? data.image_url
-              : `${API_BASE_URL}${data.image_url}`,
-          );
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/blogs/id/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Fetched post data:", data); // Debug log
+          setFormData({
+            title: data.title || "",
+            slug: data.slug || "",
+            excerpt: data.excerpt || "",
+            content: data.content || "",
+            category: data.category || "Technology",
+            author: data.author || "Elegantize",
+            tags: data.tags || "",
+            image_url: data.image_url || "",
+            image_alt_text: data.image_alt_text || "",
+            meta_title: data.meta_title || "",
+            meta_description: data.meta_description || "",
+            meta_keywords: data.meta_keywords || "",
+          });
+          if (data.image_url) {
+            setPreviewUrl(
+              data.image_url.startsWith("http")
+                ? data.image_url
+                : `${API_BASE_URL}${data.image_url}`,
+            );
+          }
+        } else {
+          alert("Failed to fetch post");
+          navigate("/admin/dashboard");
         }
-      } else {
-        alert("Failed to fetch post");
-        navigate("/admin/dashboard");
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      } finally {
+        setIsFetching(false);
       }
-    } catch (error) {
-      console.error("Error fetching post:", error);
+    };
+
+    if (isEditMode && id) {
+      fetchPost();
+    } else {
+      setIsFetching(false);
     }
-  };
+  }, [id, isEditMode, navigate]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -135,6 +141,8 @@ const BlogEditorPage: React.FC = () => {
       image_url: finalImageUrl,
     };
 
+    console.log("Saving post with data:", postData); // Debug log
+
     const token = localStorage.getItem("adminToken");
     const url = isEditMode
       ? `${API_BASE_URL}/api/blogs/${id}`
@@ -164,6 +172,16 @@ const BlogEditorPage: React.FC = () => {
       setLoading(false);
     }
   };
+
+  if (isFetching) {
+    return (
+      <div className="min-h-screen bg-stone-900 flex items-center justify-center">
+        <div className="text-stone-100 text-xl font-serif">
+          Loading Editor...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-stone-900 p-4 md:p-8">
@@ -217,16 +235,15 @@ const BlogEditorPage: React.FC = () => {
             </div>
             <div>
               <label className="block text-stone-400 mb-2">Author</label>
-              <select
+              <input
+                type="text"
                 className="w-full bg-stone-900 border border-stone-700 text-stone-100 rounded px-4 py-2"
                 value={formData.author}
                 onChange={(e) =>
                   setFormData({ ...formData, author: e.target.value })
                 }
-              >
-                <option value="Elegantize">Elegantize</option>
-                <option value="Ahmad Hashsham">Ahmad Hashsham</option>
-              </select>
+                required
+              />
             </div>
           </div>
 
@@ -323,7 +340,6 @@ const BlogEditorPage: React.FC = () => {
                   "script",
                   "align",
                   "list",
-                  "bullet",
                   "indent",
                   "blockquote",
                   "code-block",

@@ -12,6 +12,8 @@ import {
 import { useEffect, useState } from "react";
 import type { BlogPost } from "../data/blogData"; // For type definition
 import { API_BASE_URL } from "../config";
+import { RelatedPosts } from "../components/blog/RelatedPosts";
+import { HorizontalEnquiryForm } from "../components/common/HorizontalEnquiryForm";
 
 export const BlogPostPage = () => {
   const { slug } = useParams();
@@ -137,7 +139,7 @@ export const BlogPostPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-12 lg:gap-20 items-start pb-24">
         {/* Main Content */}
         <article className="lg:flex-1 min-w-0 w-full max-w-full">
           {/* Content Injection */}
@@ -147,9 +149,9 @@ export const BlogPostPage = () => {
                         prose-p:font-sans prose-p:text-gray-700 prose-p:leading-loose prose-p:mb-6
                         prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
                         prose-strong:font-semibold prose-strong:text-gray-900
-                        prose-ul:list-disc prose-ul:font-sans prose-ul:text-gray-700 prose-ul:pl-6
-                        prose-ol:list-decimal prose-ol:font-sans prose-ol:text-gray-700 prose-ol:pl-6
-                        prose-li:marker:text-primary prose-li:my-2
+                        prose-ul:list-disc prose-ul:font-sans prose-ul:text-gray-700 prose-ul:pl-6 prose-ul:ml-4 [&_ul]:list-disc [&_ul]:!list-outside [&_ul]:pl-6
+                        prose-ol:list-decimal prose-ol:font-sans prose-ol:text-gray-700 prose-ol:pl-6 prose-ol:ml-4 [&_ol]:list-decimal [&_ol]:!list-outside [&_ol]:pl-6
+                        prose-li:marker:text-primary prose-li:my-2 [&_li]:list-item [&_li]:ml-4
                         prose-img:rounded-xl prose-img:shadow-md prose-img:w-full prose-img:h-auto prose-img:my-10
                         prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:font-display prose-blockquote:text-xl prose-blockquote:text-gray-800
                         [&_*]:!max-w-full [&_*]:!min-w-0 [&_*]:break-words 
@@ -186,7 +188,9 @@ export const BlogPostPage = () => {
                   <button
                     onClick={() =>
                       window.open(
-                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
+                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                          window.location.href,
+                        )}`,
                         "_blank",
                       )
                     }
@@ -197,7 +201,9 @@ export const BlogPostPage = () => {
                   <button
                     onClick={() =>
                       window.open(
-                        `https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`,
+                        `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                          window.location.href,
+                        )}&text=${encodeURIComponent(post.title)}`,
                         "_blank",
                       )
                     }
@@ -208,7 +214,9 @@ export const BlogPostPage = () => {
                   <button
                     onClick={() =>
                       window.open(
-                        `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(post.title)}`,
+                        `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+                          window.location.href,
+                        )}&title=${encodeURIComponent(post.title)}`,
                         "_blank",
                       )
                     }
@@ -238,6 +246,11 @@ export const BlogPostPage = () => {
           </div>
         </aside>
       </div>
+
+      {post && (
+        <RelatedPosts currentPostId={post.id} category={post.category} />
+      )}
+      <HorizontalEnquiryForm />
     </div>
   );
 };

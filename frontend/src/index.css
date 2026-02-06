@@ -80,3 +80,33 @@
         radial-gradient(circle at 50% 0%, rgba(166, 138, 100, 0.08), transparent 70%),
         linear-gradient(to bottom, #FFFFFF, #F9F8F4);
 }
+
+/* Fix bullet points in prose */
+.prose ul {
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+    padding-left: 1.5rem !important;
+    margin-left: 1rem !important;
+}
+
+.prose ol {
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+    padding-left: 1.5rem !important;
+    margin-left: 1rem !important;
+}
+
+.prose li {
+    display: list-item !important;
+    margin: 0.5rem 0 !important;
+}
+
+.prose ul ul,
+.prose ol ul {
+    list-style-type: circle !important;
+}
+
+.prose ul ul ul,
+.prose ol ul ul {
+    list-style-type: square !important;
+}
