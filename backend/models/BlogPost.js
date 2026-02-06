@@ -54,6 +54,10 @@ const BlogPost = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    tags: {
+      type: DataTypes.TEXT, // Comma-separated tags
+      allowNull: true,
+    },
   },
   {
     timestamps: true,
