@@ -12,8 +12,8 @@ export const ServiceGalleryGrid = ({ images }: ServiceGalleryGridProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-        {images.map((img, idx) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {images.slice(0, 6).map((img, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -25,7 +25,7 @@ export const ServiceGalleryGrid = ({ images }: ServiceGalleryGridProps) => {
           >
             {/* Image */}
             <img
-              src={getOptimizedImage(img, 400)}
+              src={getOptimizedImage(img, 800)}
               alt={`Gallery ${idx + 1}`}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

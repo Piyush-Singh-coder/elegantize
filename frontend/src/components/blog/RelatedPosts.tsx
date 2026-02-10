@@ -19,13 +19,13 @@ export const RelatedPosts = ({
     const fetchRelatedPosts = async () => {
       try {
         // 1. Try fetching by category first
-        let url = `${API_BASE_URL}/api/blogs?search=${encodeURIComponent(
+        const url = `${API_BASE_URL}/api/blogs?search=${encodeURIComponent(
           category || "",
         )}&limit=4`;
 
-        let response = await fetch(url);
-        let data = await response.json();
-        let postsArray = Array.isArray(data) ? data : data.blogs || [];
+        const response = await fetch(url);
+        const data = await response.json();
+        const postsArray = Array.isArray(data) ? data : data.blogs || [];
 
         // Filter out current post
         let filteredPosts = postsArray.filter(

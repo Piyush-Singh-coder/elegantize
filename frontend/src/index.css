@@ -110,3 +110,7 @@
 .prose ol ul ul {
     list-style-type: square !important;
 }
+
+.perspective-1000 {
+  perspective: 1000px;
+}

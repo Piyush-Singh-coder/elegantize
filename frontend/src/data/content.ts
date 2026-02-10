@@ -3,43 +3,43 @@ export const heroSlides = [
     title: "Floral Design",
     subtitle: "Where Every Bloom Tells Your Love Story",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-2000,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/Play-with-White-Pink-Bookeventz.jpg?tr=w-2000,f-auto",
   },
   {
     title: "Ceiling Design",
     subtitle: "Turn Your Venue Into a Work of Art Above",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%2095261302.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
   },
   {
     title: "Centerpiece Design",
     subtitle: "Because Every Table Deserves a Touch of Elegance",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20Copy%20of%20DSC00606.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/noivaansiosa.avif?tr=w-1920,f-auto",
   },
   {
     title: "Vinyl Floor Wraps",
     subtitle: "Make Your First Dance Unforgettable",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20A+K-202.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/il_1588xN.3666063238_qsa7.webp?tr=w-1920,f-auto",
   },
   {
     title: "Ceremony Decor",
     subtitle: "Where Forever Begins in Beautiful Surroundings",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00620.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Adriana%20&%20Kyle/Copy%20of%20DSC02592.jpg?tr=w-1920,f-auto",
   },
   {
     title: "Draping Service",
     subtitle: "Soft Fabrics. Timeless Romance.",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/4da02ecaa4ae7e295ff13ff1900ba116.jpg?tr=w-1920,f-auto",
   },
   {
     title: "Mandap Design",
     subtitle: "Tradition Reimagined with Modern Luxury",
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/DSC09718.jpg?tr=w-1920,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC03995.jpg?tr=w-1920,f-auto",
   },
   {
     title: "Stage Design",

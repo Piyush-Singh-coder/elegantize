@@ -1,7 +1,9 @@
 import { introContent } from "../../data/content";
 import { Button } from "../common/Button";
+import { useNavigate } from "react-router-dom";
 
 export const IntroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-32 px-6 bg-grain-dark text-white relative overflow-hidden">
       {/* Subtle Texture Overlay */}
@@ -21,7 +23,7 @@ export const IntroSection = () => {
         ))}
 
         <div className="inline-block border border-primary/50 p-1 mt-6">
-          <Button className="px-8 py-3 w-full">View Our Work</Button>
+          <Button onClick={() => {navigate("/portfolio")}} className="px-8 py-3 w-full">View Our Work</Button>
         </div>
       </div>
     </section>

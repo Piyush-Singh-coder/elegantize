@@ -24,11 +24,17 @@ const itemVariants: Variants = {
   },
 };
 
+import { SEO } from "../components/common/SEO";
+
 export const PortfolioListingPage = () => {
   return (
-    <div className="bg-stone-50 min-h-screen">
+    <div className="bg-white min-h-screen pt-[60px] md:pt-[50px]">
+      <SEO
+        title="Our Portfolio - Real Weddings"
+        description="View our portfolio of real weddings and events designed by Elegantize in New York and New Jersey."
+      />
       {/* Header */}
-      <section className="bg-stone-900 text-white py-32 px-6 text-center relative overflow-hidden">
+      <section className="bg-stone-900 text-white py-60 px-6 text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <img
             src={getOptimizedImage(

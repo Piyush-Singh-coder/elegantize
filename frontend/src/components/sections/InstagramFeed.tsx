@@ -6,42 +6,42 @@ const posts = [
   {
     id: 1,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Adriana%20&%20Kyle/Copy%20of%20A+K-202.jpg?updatedAt=1769514440360",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171357.png",
     likes: 245,
     comments: 12,
   },
   {
     id: 2,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg?updatedAt=1768802741982",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171204.png",
     likes: 189,
     comments: 8,
   },
   {
     id: 3,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Puja%20&%20Kushal/Copy%20of%20WhatsApp%20Image%202024-08-16%20at%2015.52.24_b8120fea.jpg?updatedAt=1769514925886",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171508.png",
     likes: 312,
     comments: 24,
   },
   {
     id: 4,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC01084.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171258.png",
     likes: 156,
     comments: 5,
   },
   {
     id: 5,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC08998.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171320.png",
     likes: 278,
     comments: 18,
   },
   {
     id: 6,
     image:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00021.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/instagram/Screenshot%202026-02-07%20171436.png",
     likes: 198,
     comments: 9,
   },

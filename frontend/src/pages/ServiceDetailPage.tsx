@@ -1,9 +1,9 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { SEO } from "../components/common/SEO";
 import { motion } from "framer-motion";
 import { servicesData } from "../data/servicesData";
 import {
   ServiceAccordionNav,
-  ServiceComparisonTable,
   ServiceTestimonialCard,
   ServiceGalleryGrid,
   ServiceEnquiryForm,
@@ -20,7 +20,6 @@ import {
   Wrench,
   Star,
   ChevronDown,
-  DollarSign,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { getOptimizedImage } from "../utils/imageUtils";
@@ -28,12 +27,14 @@ import { getOptimizedImage } from "../utils/imageUtils";
 // Section IDs for accordion navigation
 const SECTIONS = [
   { id: "overview", label: "Overview" },
+  { id: "gallery", label: "Gallery" },
   { id: "styles", label: "Styles" },
   { id: "process", label: "Process" },
-  { id: "real-weddings", label: "Real Weddings" },
+  { id: "why-us", label: "Why Choose Us" },
+  { id: "testimonials", label: "Love Stories" },
   { id: "pricing", label: "Pricing Approach" },
   { id: "faq", label: "FAQs" },
-  { id: "enquiry", label: "Enquiry" },
+  { id: "enquiry", label: "Inquiry" },
 ];
 
 // Process step icons
@@ -87,40 +88,13 @@ export const ServiceDetailPage = () => {
   // Filter related services
   const relatedServices = servicesData.filter((s) => s.id !== id).slice(0, 4);
 
-  // Comparison data
-  const comparisonData = [
-    {
-      feature: "Design Approach",
-      elegantize: "Bespoke designs only",
-      others: "Reused templates",
-    },
-    {
-      feature: "Team",
-      elegantize: "In-house design team",
-      others: "Vendor-based",
-    },
-    {
-      feature: "Coordination",
-      elegantize: "Venue coordination included",
-      others: "Client-managed",
-    },
-    {
-      feature: "Materials",
-      elegantize: "Luxury material sourcing",
-      others: "Standard inventory",
-    },
-  ];
-
-  // Value bullets for overview
-  const valueBullets = [
-    "Designed for luxury venues & private estates",
-    "Custom-built, never reused designs",
-    "Seamlessly coordinated with florals, lighting & draping",
-    "Trusted by NYC & NJ's top venues",
-  ];
-
   return (
     <div className="bg-white">
+      <SEO
+        title={`${service.title} - Wedding Services`}
+        description={service.intro.description[0]}
+        image={service.heroImage}
+      />
       {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden z-0">
         <div className="absolute inset-0">
@@ -202,7 +176,7 @@ export const ServiceDetailPage = () => {
         ref={(el) => {
           sectionRefs.current["overview"] = el;
         }}
-        className="py-20 px-6"
+        className="py-12 px-6"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -217,7 +191,7 @@ export const ServiceDetailPage = () => {
                 {service.intro.heading}
               </h2>
               <div className="space-y-4 mb-8">
-                {valueBullets.map((bullet, idx) => (
+                {service.whyChooseUs.items.map((item, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: -20 }}
@@ -231,7 +205,9 @@ export const ServiceDetailPage = () => {
                         <Check className="w-3 h-3 text-primary" />
                       </div>
                     </div>
-                    <p className="text-lg text-gray-700 font-light">{bullet}</p>
+                    <p className="text-lg text-gray-700 font-light">
+                      {item.title}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -264,13 +240,28 @@ export const ServiceDetailPage = () => {
         </div>
       </section>
 
+      {/* Real Weddings Gallery - Moved after Overview */}
+      <section className="py-12 px-6 bg-stone-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
+              Real Weddings Gallery
+            </h2>
+            <p className="text-gray-500 font-light">
+              Moments we've had the honor of creating.
+            </p>
+          </div>
+          <ServiceGalleryGrid images={service.portfolioImages} />
+        </div>
+      </section>
+
       {/* Styles Section */}
       <section
         id="styles"
         ref={(el) => {
           sectionRefs.current["styles"] = el;
         }}
-        className="py-20 px-6 bg-stone-50"
+        className="py-12 px-6 bg-stone-50"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -280,7 +271,7 @@ export const ServiceDetailPage = () => {
             <div className="w-16 h-px bg-primary mx-auto" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {service.signatureServices.items.map((item, idx) => (
               <motion.div
                 key={idx}
@@ -288,7 +279,7 @@ export const ServiceDetailPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.5 }}
-                className="bg-white p-8 rounded-xl shadow-lg border border-stone-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
+                className="w-full md:w-[45%] bg-white p-8 rounded-xl shadow-lg border border-stone-100 hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
               >
                 <h3 className="text-xl font-display text-gray-900 mb-3 group-hover:text-primary transition-colors">
                   {item.title}
@@ -321,7 +312,7 @@ export const ServiceDetailPage = () => {
         ref={(el) => {
           sectionRefs.current["process"] = el;
         }}
-        className="py-20 px-6 bg-stone-900 text-white"
+        className="py-12 px-6 bg-stone-900 text-white"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -333,7 +324,7 @@ export const ServiceDetailPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {service.process.steps.map((step, idx) => {
               const Icon = PROCESS_ICONS[idx % PROCESS_ICONS.length];
               return (
@@ -343,7 +334,7 @@ export const ServiceDetailPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className="relative border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 group rounded-xl p-8"
+                  className="w-full md:w-[45%] lg:w-[30%] relative border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 group rounded-xl p-8"
                 >
                   {/* Step Number */}
                   <span className="absolute -top-3 -right-3 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-sm font-bold">
@@ -366,7 +357,7 @@ export const ServiceDetailPage = () => {
         </div>
       </section>
 
-        {/* Horizontal Enquiry Form */}
+      {/* Horizontal Enquiry Form */}
       <section className="py-6 px-4 md:px-6 bg-stone-50">
         <div className="max-w-7xl mx-auto">
           <ServiceEnquiryForm
@@ -378,27 +369,54 @@ export const ServiceDetailPage = () => {
 
       {/* Real Weddings / Why Elegantize / Testimonials */}
       <section
-        id="real-weddings"
+        id="why-us"
         ref={(el) => {
-          sectionRefs.current["real-weddings"] = el;
+          sectionRefs.current["why-us"] = el;
         }}
-        className="py-20 px-6"
+        className="py-8 px-6"
       >
-        {/* Why Elegantize - Comparison Table */}
-        <div className="max-w-5xl mx-auto mb-20">
+        <div className="max-w-7xl mx-auto mb-5">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
-              Why Choose Elegantize
+              {service.whyChooseUs.title}
             </h2>
-            <p className="text-gray-600 font-light">
-              See the difference that true luxury design makes
-            </p>
+            <div className="w-10 h-px bg-primary mx-auto" />
           </div>
-          <ServiceComparisonTable items={comparisonData} />
-        </div>
 
-        {/* Testimonials */}
-        {service.testimonials && service.testimonials.length > 0 && (
+          <div className="flex flex-wrap justify-center gap-3">
+            {service.whyChooseUs.items.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="w-full md:w-[45%] lg:w-[30%] bg-white p-8 rounded-xl shadow-sm border border-stone-100/50 hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+                  <Check className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-display text-gray-900 mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 font-light leading-relaxed">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      {service.testimonials && service.testimonials.length > 0 && (
+        <section
+          id="testimonials"
+          ref={(el) => {
+            sectionRefs.current["testimonials"] = el;
+          }}
+          className="py-10 px-6 bg-stone-50"
+        >
           <div className="max-w-7xl mx-auto mb-20">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
@@ -406,7 +424,7 @@ export const ServiceDetailPage = () => {
               </h2>
               <div className="w-16 h-px bg-primary mx-auto" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               {service.testimonials.map((t, idx) => (
                 <ServiceTestimonialCard
                   key={idx}
@@ -417,23 +435,8 @@ export const ServiceDetailPage = () => {
               ))}
             </div>
           </div>
-        )}
-
-        {/* Gallery */}
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display text-gray-900 mb-3">
-              Real Weddings Gallery
-            </h2>
-            <p className="text-gray-500 font-light">
-              Moments we've had the honor of creating.
-            </p>
-          </div>
-          <ServiceGalleryGrid images={service.portfolioImages} />
-        </div>
-      </section>
-
-
+        </section>
+      )}
 
       {/* Pricing Approach */}
       <section
@@ -441,15 +444,9 @@ export const ServiceDetailPage = () => {
         ref={(el) => {
           sectionRefs.current["pricing"] = el;
         }}
-        className="py-24 px-6 bg-stone-50"
+        className="py-8 md:py-8 px-6 bg-stone-50"
       >
         <div className="max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-stone-200 mb-6 shadow-sm">
-            <DollarSign size={14} className="text-primary" />
-            <span className="text-xs uppercase tracking-[0.3em] text-gray-500">
-              Investment
-            </span>
-          </div>
           <h2 className="text-3xl md:text-5xl font-display text-gray-900 mb-8">
             Our Pricing Approach
           </h2>
@@ -513,7 +510,7 @@ export const ServiceDetailPage = () => {
                 <div className="aspect-4/5 overflow-hidden mb-3 bg-stone-200 rounded-lg relative">
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10" />
                   <img
-                    src={getOptimizedImage(s.heroImage, 400)}
+                    src={getOptimizedImage(s.heroImage, 800)}
                     alt={s.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />

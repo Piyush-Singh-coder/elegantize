@@ -20,7 +20,7 @@ export const TopBar = () => {
           <div className="hidden md:flex items-center hover:text-white transition-colors">
             <MapPin size={18} className="mr-1" />
             <span className="hidden md:inline ">
-              10 Millers Lane New Hyde Park, New York 11040
+              8 Di Tomas Ct, Copiague, NY, 11726
             </span>
           </div>
         </div>
@@ -44,7 +44,7 @@ export const TopBar = () => {
             <Facebook size={18} />
           </a>
           <a
-            href="www.youtube.com/@elegantize"
+            href="https://www.youtube.com/@elegantize"
             className="hover:text-white transition-colors flex items-center gap-2"
           >
             <Youtube size={18} />

@@ -3,6 +3,7 @@ import { MapPin, Mail, Phone, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "../components/common/Button";
 import { ctaContent } from "../data/content";
 
+import { SEO } from "../components/common/SEO";
 import { useNavigate } from "react-router-dom";
 import { submitToGoogleSheets } from "../utils/googleSheets";
 
@@ -19,7 +20,11 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="bg-stone-50 min-h-screen">
+    <div className="min-h-screen pt-24 pb-12 bg-stone-50">
+      <SEO
+        title="Contact Us - Schedule a Consultation"
+        description="Get in touch with Elegantize to start planning your dream wedding. We serve clients across New York and New Jersey."
+      />
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-stone-900 text-white">
         <div className="absolute inset-0 opacity-40">
@@ -107,7 +112,7 @@ export const ContactPage = () => {
                     Location
                   </p>
                   <span className="text-lg font-display text-gray-800">
-                    10 Millers Lane New Hyde Park, NY 11040
+                    8 Di Tomas Ct, Copiague, NY, 11726
                   </span>
                 </div>
               </motion.div>
@@ -253,7 +258,7 @@ export const ContactPage = () => {
           loading="lazy"
           allowFullScreen
           className="transition-all duration-1000 ease-in-out scale-100 group-hover:scale-105"
-          src="https://maps.google.com/maps?q=10%20Millers%20Ln%2C%20New%20Hyde%20Park%2C%20NY%2011040&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=8%20Di%20Tomas%20Ct%2C%20Copiague%2C%20NY%2C%2011726&t=&z=15&ie=UTF8&iwloc=&output=embed"
           title="Elegantize Location"
         ></iframe>
 
@@ -278,9 +283,9 @@ export const ContactPage = () => {
             <div className="flex items-start gap-4">
               <MapPin className="text-primary mt-1" size={20} />
               <p className="text-gray-700 leading-relaxed">
-                10 Millers Lane
+                8 Di Tomas Ct
                 <br />
-                New Hyde Park, NY 11040
+                Copiague, NY, 11726
               </p>
             </div>
             <div className="flex items-center gap-4">
@@ -289,7 +294,7 @@ export const ContactPage = () => {
             </div>
           </div>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=10+Millers+Lane+New+Hyde+Park,+NY+11040"
+            href="https://www.google.com/maps/search/?api=1&query=8+Di+Tomas+Ct,+Copiague,+NY,+11726"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary hover:text-stone-900 transition-colors group/link"

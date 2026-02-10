@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import type { BlogPost } from "../data/blogData";
 import { API_BASE_URL } from "../config";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { SEO } from "../components/common/SEO";
 
 interface PaginationData {
   currentPage: number;
@@ -127,7 +128,11 @@ export const BlogListingPage = () => {
   };
 
   return (
-    <div className="pt-[100px] md:pt-[120px] pb-24 px-4 md:px-6 bg-white">
+    <div className="pt-15 md:pt-12.5 pb-24 px-4 md:px-6 bg-white">
+      <SEO
+        title="Wedding Blog - Trends & Inspiration"
+        description="Explore our latest wedding stories, trends, decor tips, and expert advice to help you plan your dream wedding."
+      />
       {/* Page Header */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
         <p className="text-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">

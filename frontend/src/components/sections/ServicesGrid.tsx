@@ -18,7 +18,21 @@ const itemVariants: Variants = {
   },
 };
 
+import { Link } from "react-router-dom";
+
 export const ServicesGrid = () => {
+  // IDs must match servicesData.ts exactly
+  const SERVICE_IDS = [
+    "floral-design",
+    "ceiling-design",
+    "centerpiece-design",
+    "vinyl-floor-wrap",
+    "ceremony-decor",
+    "draping-services",
+    "mandap-design",
+    "stage-design",
+  ];
+
   return (
     <motion.section
       id="services"
@@ -50,29 +64,39 @@ export const ServicesGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative overflow-hidden cursor-pointer h-[28rem]"
-            >
-              <div className="w-full h-full overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-colors" />
+          {services.map((service, index) => {
+            const serviceId = SERVICE_IDS[index] || "";
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group relative overflow-hidden cursor-pointer h-[28rem]"
+              >
+                <Link
+                  to={`/services/${serviceId}`}
+                  className="block w-full h-full"
+                >
+                  <div className="w-full h-full overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-colors" />
 
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                <h4 className="font-display text-2xl mb-4">{service.title}</h4>
-                <p className="text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                    <h4 className="font-display text-2xl mb-4">
+                      {service.title}
+                    </h4>
+                    <p className="text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </motion.section>

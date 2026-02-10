@@ -34,12 +34,12 @@ export const servicesData: ServiceData[] = [
     id: "floral-design",
     title: "Floral Design",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC18469449.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/Play-with-White-Pink-Bookeventz.jpg?tr=w-2000,f-auto",
     heroTitle: "DISCOVER OUR WEDDING FLORAL DESIGN SERVICES IN NYC & NJ",
     intro: {
-      heading:
-        "DISCOVER OUR WEDDING FLORAL DESIGN SERVICES",
-      subheading: "Enchanting Floral Design in NY & NJ: Creating Magical Wedding Moments",
+      heading: "DISCOVER OUR WEDDING FLORAL DESIGN SERVICES",
+      subheading:
+        "Enchanting Floral Design in NY & NJ: Creating Magical Wedding Moments",
       description: [
         "At Elegantize Weddings, flowers aren’t just decorations—they’re storytellers. Each bloom reflects a chapter of your love story, and we take pride in crafting floral designs for wedding decoration that speak from the heart. As the best wedding floral designers in NYC, we create lush, artful arrangements inspired by nature’s timeless beauty and your unique vision.",
         "Our team thrives on bringing your dreams to life, blending colors, textures, and seasonal blooms to create unforgettable designs. Whether you envision a romantic garden-style wedding or a modern, elegant affair, our floral wedding designers will ensure every detail aligns perfectly with your dream celebration.",
@@ -126,8 +126,8 @@ export const servicesData: ServiceData[] = [
       },
     ],
     portfolioImages: [
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00021.jpg?updatedAt=1768806981678",
       "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC382098743.jpg",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00021.jpg?updatedAt=1768806981678",
       "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC8720274.png",
       "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC08934.jpg?updatedAt=1768806983988",
       "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00215.jpg?updatedAt=1768806983952",
@@ -138,12 +138,12 @@ export const servicesData: ServiceData[] = [
     id: "ceiling-design",
     title: "Ceiling Design",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00653.jpg?updatedAt=1768802742295",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
     heroTitle: "BREATHTAKING CEILING DESIGN SERVICES IN NYC & NJ",
     intro: {
-      heading:
-        "DISCOVER OUR WEDDING CEILING DESIGN SERVICES",
-      subheading: "Captivating Ceiling Designs: Elevate Your Venue Decor to New Heights",
+      heading: "DISCOVER OUR WEDDING CEILING DESIGN SERVICES",
+      subheading:
+        "Captivating Ceiling Designs: Elevate Your Venue Decor to New Heights",
       description: [
         "At Elegantize Weddings, we believe your love story deserves to be celebrated beneath a canopy of elegance and wonder. Our ceiling design for weddings in the United States transforms venues into magical spaces that captivate hearts and create lasting memories. Whether you envision cascading floral installations, draped fabrics, or glimmering chandeliers, our team specializes in curating wedding ceiling decor in New York and New Jersey that reflects your unique style and creates an immersive experience for you and your guests.",
       ],
@@ -242,7 +242,7 @@ export const servicesData: ServiceData[] = [
     id: "centerpiece-design",
     title: "Centerpiece Design",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00989.jpg?updatedAt=1768802740254",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/noivaansiosa.avif?tr=w-1920,f-auto",
     heroTitle: "DISCOVER OUR WEDDING CENTERPIECE DESIGN SERVICES IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR WEDDING CENTERPIECE DESIGN SERVICES",
@@ -370,7 +370,7 @@ export const servicesData: ServiceData[] = [
     id: "vinyl-floor-wrap",
     title: "Vinyl Floor Wraps",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20A+K-202.jpg?updatedAt=1768802743626",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/il_1588xN.3666063238_qsa7.webp?tr=w-1920,f-auto",
     heroTitle: "CUSTOM VINYL FLOOR WRAPS IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR WEDDING VINYL FLOOR WRAPS SERVICES",
@@ -473,7 +473,7 @@ export const servicesData: ServiceData[] = [
     id: "ceremony-decor",
     title: "Ceremony Decor",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00620.jpg?updatedAt=1768802742465",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Adriana%20&%20Kyle/Copy%20of%20DSC02592.jpg?tr=w-1920,f-auto",
     heroTitle: "UNFORGETTABLE CEREMONY DECOR IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR CEREMONY DECOR SERVICES",
@@ -581,7 +581,7 @@ export const servicesData: ServiceData[] = [
     id: "draping-services",
     title: "Draping Services",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg?updatedAt=1768802741982",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize/4da02ecaa4ae7e295ff13ff1900ba116.jpg?tr=w-1920,f-auto",
     heroTitle: "ELEGANT WEDDING DRAPING IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR DRAPING SERVICES IN NYC & NJ",
@@ -694,7 +694,7 @@ export const servicesData: ServiceData[] = [
     id: "mandap-design",
     title: "Mandap Design",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC02359.jpg?updatedAt=1769169763971",
+      "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC03995.jpg?tr=w-1920,f-auto",
     heroTitle: "DISCOVER OUR WEDDING MANDAP DESIGN SERVICES IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR WEDDING MANDAP DESIGN SERVICES",
@@ -802,11 +802,12 @@ export const servicesData: ServiceData[] = [
     id: "stage-design",
     title: "Stage Design",
     heroImage:
-      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00095.jpg?updatedAt=1768806983978",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20395791049.jpg?tr=w-1920,f-auto",
     heroTitle: "DISCOVER OUR WEDDING STAGE DESIGN SERVICES IN NYC & NJ",
     intro: {
       heading: "DISCOVER OUR WEDDING STAGE DESIGN SERVICES",
-      subheading: "Wedding Stage Decoration Experts in the USA – Modern, Creative & Customized Designs",
+      subheading:
+        "Wedding Stage Decoration Experts in the USA – Modern, Creative & Customized Designs",
       description: [
         "At Elegantize Wedding, we specialize in creating the most beautiful wedding stage decoration that reflects your style and vision. Our expert designers bring together creativity and elegance to craft stages that leave lasting impressions. From grand luxury setups to low cost wedding stage decoration options, we customize every detail to suit your budget. We focus on modern trends, personalized themes, and innovative designs that make your big day truly unforgettable.With us, your wedding stage becomes more than just décor – it becomes the centerpiece of your celebration in the USA.",
       ],
@@ -836,35 +837,32 @@ export const servicesData: ServiceData[] = [
       items: [
         {
           title: "Luxury Stage Designs for Unforgettable Weddings",
-          description:
-            "",
-            features: [
-              "Our luxury wedding stage decorations bring together breathtaking floral walls, cascading blooms, and statement chandeliers that immediately set the tone for elegance.",
-              "Crystal accents, metallic details, and customized lighting solutions ensure the stage radiates glamour and luxury while beautifully highlighting the couple.",
-              "Our luxury stage concepts are inspired by international wedding trends, offering couples in the USA a chance to enjoy décor that feels straight out of a bridal magazine. "
-            ]
+          description: "",
+          features: [
+            "Our luxury wedding stage decorations bring together breathtaking floral walls, cascading blooms, and statement chandeliers that immediately set the tone for elegance.",
+            "Crystal accents, metallic details, and customized lighting solutions ensure the stage radiates glamour and luxury while beautifully highlighting the couple.",
+            "Our luxury stage concepts are inspired by international wedding trends, offering couples in the USA a chance to enjoy décor that feels straight out of a bridal magazine. ",
+          ],
         },
         {
           title: "Affordable & Stylish Stage Decoration Options",
-          description:
-            "",
-            features: [
-              "Smart use of flowers, draping, and lighting for a stunning yet budget-friendly look.",
-              "Creative themes that balance beauty with practicality.",
-              "Ideal for couples looking for low cost wedding stage decoration without compromising style.",
-              "By incorporating sustainable décor pieces like reusable fabric drapes, artificial floral accents, and modular stage setups, we ensure you save money while also being eco-conscious."
-            ]
+          description: "",
+          features: [
+            "Smart use of flowers, draping, and lighting for a stunning yet budget-friendly look.",
+            "Creative themes that balance beauty with practicality.",
+            "Ideal for couples looking for low cost wedding stage decoration without compromising style.",
+            "By incorporating sustainable décor pieces like reusable fabric drapes, artificial floral accents, and modular stage setups, we ensure you save money while also being eco-conscious.",
+          ],
         },
         {
           title: "Personalized Themes & Customized Touches",
-          description:
-            "",
-            features: [
-              "Designs inspired by your love story, culture, or favorite trends.",
-              "Flexible options ranging from rustic chic, modern minimal, to traditional elegance.",
-              "A truly tailored approach that ensures your stage reflects your personality.",
-              "We use creative lighting, textures, and layout techniques to emphasize the theme, ensuring your stage stands out in photos and videos."
-            ]
+          description: "",
+          features: [
+            "Designs inspired by your love story, culture, or favorite trends.",
+            "Flexible options ranging from rustic chic, modern minimal, to traditional elegance.",
+            "A truly tailored approach that ensures your stage reflects your personality.",
+            "We use creative lighting, textures, and layout techniques to emphasize the theme, ensuring your stage stands out in photos and videos.",
+          ],
         },
       ],
     },

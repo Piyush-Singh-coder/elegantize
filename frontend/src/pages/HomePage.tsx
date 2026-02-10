@@ -17,9 +17,15 @@ import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
 import { StatsSection } from "../components/sections/StatsSection";
 import { InstagramFeed } from "../components/sections/InstagramFeed";
 
+import { SEO } from "../components/common/SEO";
+
 export const HomePage = () => {
   return (
     <>
+      <SEO
+        title="Luxury Wedding Decor & Design NY & NJ"
+        description="Premier wedding decor and event design in New York and New Jersey. We specialize in custom mandaps, floral arrangements, and luxury event styling."
+      />
       <LeftFixedEnquiryPanel />
       <HeroSlider />
 

@@ -66,7 +66,7 @@ export const ContactSection = () => {
                 <MapPin size={20} />
               </span>
               <span className="text-sm uppercase tracking-widest text-gray-800">
-                10 Millers Lane New Hyde Park, New York 11040
+                8 Di Tomas Ct, Copiague, NY, 11726
               </span>
             </div>
             <div className="flex items-center space-x-4">

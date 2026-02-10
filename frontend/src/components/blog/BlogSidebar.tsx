@@ -1,4 +1,4 @@
-import { Search, Facebook, Instagram, Twitter } from "lucide-react";
+import { Search, Facebook, Instagram, Pin, Youtube } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Button } from "../common/Button";
@@ -143,15 +143,40 @@ export const BlogSidebar = () => {
       <div>
         <h3 className="font-display text-xl mb-4">Follow Us</h3>
         <div className="flex gap-4">
-          {[Facebook, Instagram, Twitter].map((Icon, i) => (
+          <div className="flex gap-4">
             <a
-              key={i}
-              href="#"
+              href="https://www.facebook.com/people/Elegantize-Productions/100083099336478/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 bg-stone-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all duration-300 rounded-full"
             >
-              <Icon size={18} />
+              <Facebook size={18} />
             </a>
-          ))}
+            <a
+              href="https://www.instagram.com/elegantizeevents/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-stone-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all duration-300 rounded-full"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="https://in.pinterest.com/elegantizeevents/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-stone-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all duration-300 rounded-full"
+            >
+              <Pin size={18} />
+            </a>
+            <a
+              href="https://www.youtube.com/@elegantize"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 bg-stone-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-all duration-300 rounded-full"
+            >
+              <Youtube size={18} />
+            </a>
+          </div>
         </div>
       </div>
     </div>

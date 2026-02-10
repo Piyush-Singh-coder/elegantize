@@ -34,7 +34,7 @@ export const ServiceEnquiryForm = ({
         phone: formData.phone,
         eventDate: formData.eventDate,
         message: formData.message,
-        serviceName: serviceName || "Enquiry",
+        serviceName: serviceName || "Inquiry",
       });
 
       if (result.success) {
@@ -57,83 +57,113 @@ export const ServiceEnquiryForm = ({
     }
   };
 
+  // Horizontal Variant
+  // Horizontal Variant
   if (variant === "horizontal") {
     return (
-      <motion.form
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        onSubmit={handleSubmit}
-        className="bg-white shadow-xl p-6 md:p-8 border-t-4 border-primary flex flex-col gap-6"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-            <input
-              type="text"
-              placeholder="Name"
-              required
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
-            />
-          </div>
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-            <input
-              type="email"
-              placeholder="Email"
-              required
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
-            />
-          </div>
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-            <input
-              type="tel"
-              placeholder="Phone"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
-            />
-          </div>
-          <div className="relative">
-            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
-            <input
-              type="text"
-              placeholder="Event Date (Optional)"
-              onFocus={(e) => (e.target.type = "date")}
-              onBlur={(e) => (e.target.type = "text")}
-              value={formData.eventDate}
-              onChange={(e) =>
-                setFormData({ ...formData, eventDate: e.target.value })
-              }
-              className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-primary hover:bg-primary-dark text-white font-bold uppercase tracking-wider text-xs py-3 px-6 transition-all duration-300 hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
-          >
-            {isSubmitting ? (
-              "Sending..."
-            ) : (
-              <>
-                <Send className="w-3 h-3" /> Enquire
-              </>
-            )}
-          </button>
+      <div className="bg-white shadow-xl p-6 md:p-8 border-t-4 border-primary flex flex-col gap-6">
+        {/* Header / Message */}
+        <div>
+          <h3 className="font-display text-xl text-gray-900 mb-2">
+            Begin your inquiry
+          </h3>
+          <p className="text-sm text-gray-500">
+            Tell us about your event vision.
+          </p>
         </div>
-      </motion.form>
+
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+              <input
+                type="text"
+                placeholder="Name"
+                required
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
+              />
+            </div>
+            <div className="relative">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+              <input
+                type="email"
+                placeholder="Email"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
+              />
+            </div>
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+              <input
+                type="tel"
+                placeholder="Phone"
+                required
+                value={formData.phone}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
+              />
+            </div>
+            <div className="relative">
+              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
+              <input
+                type="text"
+                placeholder="Event Date *"
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => (e.target.type = "text")}
+                required
+                value={formData.eventDate}
+                onChange={(e) =>
+                  setFormData({ ...formData, eventDate: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none pl-10 pr-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
+              />
+            </div>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Your Message..."
+                required
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none pl-4 pr-10 py-3 focus:ring-1 focus:ring-primary text-gray-600 text-sm focus:outline-none"
+              />
+              <Send className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-primary hover:bg-primary-dark text-white font-bold uppercase tracking-wider text-xs py-3 px-6 transition-all duration-300 hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                "Processing..."
+              ) : (
+                <>
+                  <Send className="w-3 h-3" /> Submit Inquiry
+                </>
+              )}
+            </button>
+          </div>
+        </motion.form>
+      </div>
     );
   }
 
@@ -220,7 +250,7 @@ export const ServiceEnquiryForm = ({
         disabled={isSubmitting}
         className="w-full bg-primary hover:bg-primary-dark text-white font-bold uppercase tracking-[0.2em] text-xs py-4 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
       >
-        {isSubmitting ? "Sending Your Enquiry..." : <>Request Consultation</>}
+        {isSubmitting ? "Sending Your Inquiry..." : <>Request Consultation</>}
       </button>
     </motion.form>
   );

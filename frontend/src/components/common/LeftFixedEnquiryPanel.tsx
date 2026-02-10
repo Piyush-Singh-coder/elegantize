@@ -17,7 +17,7 @@ export const LeftFixedEnquiryPanel = () => {
           className="bg-primary text-white py-6 px-2 rounded-l-md shadow-lg hover:bg-opacity-90 transition-all font-bold uppercase tracking-widest text-xs writing-vertical"
           style={{ writingMode: "vertical-rl" }}
         >
-          Enquire Now
+          Inquire Now
         </button>
       </div>
 
@@ -27,7 +27,7 @@ export const LeftFixedEnquiryPanel = () => {
       >
         <div className="h-full flex flex-col p-6 overflow-y-auto">
           <div className="flex justify-between items-center mb-8">
-            <h3 className="font-display text-xl">Quick Enquiry</h3>
+            <h3 className="font-display text-xl">Quick Inquiry</h3>
             <button
               onClick={() => setIsOpen(false)}
               className="text-gray-400 hover:text-gray-800"
@@ -55,7 +55,7 @@ export const LeftFixedEnquiryPanel = () => {
                   email: formData.get("email") as string,
                   phone: formData.get("phone") as string,
                   eventDate: formData.get("eventDate") as string,
-                  serviceName: "Side Panel Enquiry",
+                  serviceName: "Side Panel Inquiry",
                 });
                 navigate("/thank-you");
               } catch {
@@ -116,7 +116,7 @@ export const LeftFixedEnquiryPanel = () => {
           <div className="mt-auto pt-8 border-t border-gray-100">
             <div className="flex items-center space-x-3 mb-4 text-sm text-gray-600">
               <Mail size={16} className="text-primary" />
-              <span>hello@elegantizeweddings.com</span>
+              <span>info@elegantize.com</span>
             </div>
             <div className="flex items-center space-x-3 text-sm text-gray-600">
               <Calendar size={16} className="text-primary" />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { SEO } from "../components/common/SEO";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import {  ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 // import { FeaturedInStrip } from "../components/sections/FeaturedInStrip";
 import { ClientsStrip } from "../components/sections/ClientsStrip";
 import { ContactSection } from "../components/sections/ContactSection";
@@ -38,7 +39,7 @@ const heroImages = [
 
 export const AboutPage = () => {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
-  
+
   const faqs = [
     {
       question:
@@ -79,8 +80,6 @@ export const AboutPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-
-
   const toggleAccordion = (index: number) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
@@ -104,7 +103,11 @@ export const AboutPage = () => {
   };
 
   return (
-    <div className="bg-stone-50 overflow-hidden">
+    <div className="bg-stone-50 min-h-screen">
+      <SEO
+        title="About Us - Luxury Wedding Planners"
+        description="Learn about Elegantize, the premier luxury wedding decor and design company serving New York and New Jersey."
+      />
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -364,7 +367,7 @@ export const AboutPage = () => {
       </section>
 
       {/* Testimonial Slider */}
-<TestimonialsSection />
+      <TestimonialsSection />
 
       {/* FAQ Section - Clean Minimal */}
       <section className="py-32 px-6 bg-white text-stone-800">
@@ -419,7 +422,7 @@ export const AboutPage = () => {
       </section>
 
       {/* Newsletter Section */}
-        <NewsletterSection />
+      <NewsletterSection />
 
       <ClientsStrip />
       <ContactSection />

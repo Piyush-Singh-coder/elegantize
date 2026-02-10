@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { SEO } from "../components/common/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "../data/portfolioData";
 import { ArrowRight, MapPin, Calendar, X } from "lucide-react";
@@ -21,6 +22,11 @@ export const PortfolioDetailPage = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen">
+      <SEO
+        title={`${portfolio.title} - Real Wedding Gallery`}
+        description={`Explore the ${portfolio.title} wedding at ${portfolio.location}, designed by Elegantize.`}
+        image={portfolio.heroImage}
+      />
       {/* 1. Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -168,13 +174,13 @@ export const PortfolioDetailPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {otherPortfolios.map((p) => (
               <Link key={p.id} to={`/portfolio/${p.id}`} className="group">
-                <div className="aspect-[3/4] overflow-hidden bg-gray-100 mb-4 relative">
+                <div className="aspect-3/4 overflow-hidden bg-gray-100 mb-4 relative">
                   <img
                     src={getOptimizedImage(p.heroImage, 600)}
                     alt={p.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute inset-x-0 bottom-0 p-6 bg-linear-to-t from-black/80 to-transparent text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <span className="text-xs uppercase tracking-widest block mb-1">
                       {p.services}
                     </span>

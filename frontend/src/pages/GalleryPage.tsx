@@ -1,9 +1,18 @@
 import { useState } from "react";
+import { SEO } from "../components/common/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Play, Image as ImageIcon } from "lucide-react";
+import { ContactSection } from "../components/sections/ContactSection";
 
 // Mock Data for YouTube Videos (replace with real IDs if available)
 const videoGallery = [
+  {
+    id: "PXJWdgfigUg",
+    title: "Adriana & Kyle's Ceremony & Reception Décor",
+    thumbnail:
+      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20A+K-196.jpg?updatedAt=1768906357275",
+    videoLength: "1:05",
+  },
   {
     id: "ALCysyBUBbg",
     title: "Elegance Unveiled: A Glimpse into Our Dazzling Decor ",
@@ -15,28 +24,22 @@ const videoGallery = [
     id: "VvkpCzqlJxI",
     title: "Nadia Mahadeo Reception Stage",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20Copy%20of%20DSC00606.jpg?tr=w-1200,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00215.jpg?tr=w-1200,f-auto",
     videoLength: "0:19",
   }, // YouTube Dev placeholder
-  {
-    id: "PXJWdgfigUg",
-    title: "Adriana & Kyle's Ceremony & Reception Décor",
-    thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Portfolio/Adriana&Kyle/Copy%20of%20A+K-196.jpg?updatedAt=1768906357275",
-    videoLength: "1:05",
-  }, // Psy placeholder
+   // Psy placeholder
   {
     id: "gfJpcRz8xpo",
     title: "Great Gatsby Theme Before And After",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20A+K-202.jpg?tr=w-1200,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/DSC01139.jpg?tr=w-1200,f-auto",
     videoLength: "0:30",
   },
   {
     id: "5HgrU-RK2Ec",
     title: "Judi & Chris Video Review",
     thumbnail:
-      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC09019.jpg?tr=w-1200,f-auto",
+      "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/DSC3W0A8577.jpg?tr=w-1200,f-auto",
     videoLength: "0:33",
   },
 ];
@@ -89,7 +92,12 @@ export const GalleryPage = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   return (
-    <div className="bg-stone-50 min-h-screen">
+    <div className="pt-[60px] md:pt-[50px] bg-white min-h-screen">
+      <SEO
+        title="Our Gallery - Wedding Decor Inspiration"
+        description="Browse our portfolio of stunning wedding decor, including mandaps, reception stages, and floral arrangements in NY & NJ."
+      />
+      {/* Hero Section */}
       {/* ------------------- IMAGE GALLERY SECTION ------------------- */}
 
       {/* 1. Big Image Header for Images */}
@@ -181,7 +189,7 @@ export const GalleryPage = () => {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center text-white"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+          {/* <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
             <Play
               size={16}
               className="text-secondary-300"
@@ -190,7 +198,7 @@ export const GalleryPage = () => {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-secondary-100">
               Cinematography
             </span>
-          </div>
+          </div> */}
           <h2 className="text-5xl md:text-7xl font-display uppercase tracking-widest text-shadow-lg">
             Video Gallery
           </h2>
@@ -329,6 +337,9 @@ export const GalleryPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ------------------- INQUIRY SECTION ------------------- */}
+      <ContactSection />
     </div>
   );
 };

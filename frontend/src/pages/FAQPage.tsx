@@ -4,6 +4,7 @@ import { ChevronDown, Sparkles, MessageCircle, ArrowRight } from "lucide-react";
 import { faqs } from "../data/content";
 import { Button } from "../components/common/Button";
 import NewsletterSection from "../components/sections/NewsletterSection";
+import { SEO } from "../components/common/SEO";
 
 export const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -25,6 +26,10 @@ export const FAQPage = () => {
 
   return (
     <div className="bg-stone-950 min-h-screen text-stone-200">
+      <SEO
+        title="Frequently Asked Questions"
+        description="Find answers to common questions about Elegantize wedding decor services, pricing, and our design process."
+      />
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-stone-900 text-white">
         <div className="absolute inset-0 opacity-40">
@@ -63,7 +68,6 @@ export const FAQPage = () => {
 
       {/* FAQ Content Section */}
       <section className="py-24 px-6">
-        
         <motion.div
           className="max-w-4xl mx-auto"
           variants={containerVariants}
@@ -156,7 +160,6 @@ export const FAQPage = () => {
         <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-primary/20 to-transparent" />
         <NewsletterSection />
       </section>
-      
     </div>
   );
 };

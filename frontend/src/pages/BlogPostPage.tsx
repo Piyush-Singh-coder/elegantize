@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { SEO } from "../components/common/SEO";
 import { BlogSidebar } from "../components/blog/BlogSidebar";
 import {
   ArrowLeft,
@@ -14,10 +15,18 @@ import type { BlogPost } from "../data/blogData"; // For type definition
 import { API_BASE_URL } from "../config";
 import { RelatedPosts } from "../components/blog/RelatedPosts";
 import { HorizontalEnquiryForm } from "../components/common/HorizontalEnquiryForm";
+import { ContactSection } from "../components/sections/ContactSection";
 
 export const BlogPostPage = () => {
   const { slug } = useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
+  const [post, setPost] = useState<
+    | (BlogPost & {
+        metaTitle?: string;
+        metaDescription?: string;
+        metaKeywords?: string;
+      })
+    | null
+  >(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +35,11 @@ export const BlogPostPage = () => {
         const response = await fetch(`${API_BASE_URL}/api/blogs/${slug}`);
         if (response.ok) {
           const data = await response.json();
-          const formattedPost: BlogPost = {
+          const formattedPost: BlogPost & {
+            metaTitle?: string;
+            metaDescription?: string;
+            metaKeywords?: string;
+          } = {
             id: data.id,
             title: data.title,
             slug: data.slug,
@@ -46,6 +59,9 @@ export const BlogPostPage = () => {
                 : `${API_BASE_URL}${data.image_url}`
               : "https://images.unsplash.com/photo-1499750310159-5b600cdf0325",
             tags: data.tags || "",
+            metaTitle: data.meta_title || "",
+            metaDescription: data.meta_description || "",
+            metaKeywords: data.meta_keywords || "",
           };
           setPost(formattedPost);
         }
@@ -73,6 +89,7 @@ export const BlogPostPage = () => {
   if (!post) {
     return (
       <div className="min-h-screen pt-40 flex flex-col items-center justify-center">
+        <SEO title="Article Not Found" />
         <h2 className="text-3xl font-display mb-4">Article Not Found</h2>
         <Link to="/blog" className="text-primary hover:underline">
           Return to Journal
@@ -82,7 +99,15 @@ export const BlogPostPage = () => {
   }
 
   return (
-    <div className="pt-[100px] md:pt-[120px] pb-24 bg-white">
+    <div className="pt-[60px] md:pt-[50px] pb-24 bg-white">
+      <SEO
+        title={post.metaTitle || post.title}
+        description={post.metaDescription || post.excerpt}
+        keywords={post.metaKeywords}
+        image={post.image}
+        url={`/blog/${post.slug}`}
+        type="article"
+      />
       <div className="max-w-4xl mx-auto px-6 mb-12 text-center">
         {/* Breadcrumb */}
         <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-gray-500 mb-6 font-medium">
@@ -130,12 +155,8 @@ export const BlogPostPage = () => {
 
       {/* Featured Image */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 mb-16">
-        <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl shadow-sm">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
+        <div className="w-full overflow-hidden rounded-2xl shadow-sm">
+          <img src={post.image} alt={post.title} className="w-full h-auto" />
         </div>
       </div>
 
@@ -152,7 +173,9 @@ export const BlogPostPage = () => {
                         prose-ul:list-disc prose-ul:font-sans prose-ul:text-gray-700 prose-ul:pl-6 prose-ul:ml-4 [&_ul]:list-disc [&_ul]:!list-outside [&_ul]:pl-6
                         prose-ol:list-decimal prose-ol:font-sans prose-ol:text-gray-700 prose-ol:pl-6 prose-ol:ml-4 [&_ol]:list-decimal [&_ol]:!list-outside [&_ol]:pl-6
                         prose-li:marker:text-primary prose-li:my-2 [&_li]:list-item [&_li]:ml-4
+                        prose-li:marker:text-primary prose-li:my-2 [&_li]:list-item [&_li]:ml-4
                         prose-img:rounded-xl prose-img:shadow-md prose-img:w-full prose-img:h-auto prose-img:my-10
+                        [&_img]:!my-10 [&_img]:!block
                         prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-gray-50 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:my-8 prose-blockquote:not-italic prose-blockquote:font-display prose-blockquote:text-xl prose-blockquote:text-gray-800
                         [&_*]:!max-w-full [&_*]:!min-w-0 [&_*]:break-words 
                         [&_iframe]:w-full [&_video]:w-full"
@@ -251,6 +274,7 @@ export const BlogPostPage = () => {
         <RelatedPosts currentPostId={post.id} category={post.category} />
       )}
       <HorizontalEnquiryForm />
+      <ContactSection />
     </div>
   );
 };

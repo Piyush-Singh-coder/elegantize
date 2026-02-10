@@ -12,6 +12,7 @@ import {
   TheaterIcon,
   ChevronRight,
 } from "lucide-react";
+import { SEO } from "../components/common/SEO";
 import NewsletterSection from "../components/sections/NewsletterSection";
 import { useState } from "react";
 import { getOptimizedImage } from "../utils/imageUtils";
@@ -63,7 +64,7 @@ export const ServicesPage = () => {
         "Unique Floral Installations",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC18469449.jpg",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize/Play-with-White-Pink-Bookeventz.jpg?tr=w-2000,f-auto",
     },
     {
       id: "ceiling-design",
@@ -78,7 +79,7 @@ export const ServicesPage = () => {
         "Custom Installations",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00653.jpg?updatedAt=1768802742295",
+        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20382098743.jpg?tr=w-1920,f-auto",
     },
     {
       id: "centerpiece-design",
@@ -93,7 +94,7 @@ export const ServicesPage = () => {
         "Seasonal & Thematic Centerpieces",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20DSC00989.jpg?updatedAt=1768802740254",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize/noivaansiosa.avif?tr=w-1920,f-auto",
     },
     {
       id: "vinyl-floor-wrap",
@@ -108,7 +109,7 @@ export const ServicesPage = () => {
         "Personalized Vinyl Floor Wrap",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20Copy%20of%20A+K-202.jpg?updatedAt=1768802743626",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize/il_1588xN.3666063238_qsa7.webp?tr=w-1920,f-auto",
     },
     {
       id: "ceremony-decor",
@@ -123,7 +124,7 @@ export const ServicesPage = () => {
         "Cultural & Traditional Designs",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00620.jpg?updatedAt=1768802742465",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Adriana%20&%20Kyle/Copy%20of%20DSC02592.jpg?tr=w-1920,f-auto",
     },
     {
       id: "draping-services",
@@ -138,7 +139,7 @@ export const ServicesPage = () => {
         "Custom Aisle and Ceremony Draping",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20DSC00644.jpg?updatedAt=1768802741982",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize/4da02ecaa4ae7e295ff13ff1900ba116.jpg?tr=w-1920,f-auto",
     },
     {
       id: "mandap-design",
@@ -153,7 +154,7 @@ export const ServicesPage = () => {
         // "Opulent & Emotional Décor",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC02359.jpg?updatedAt=1769169763971",
+        "https://ik.imagekit.io/v6xwevpjp/Elegentize-portfolio/Shivani%20&%20Carlos/Copy%20of%20DSC03995.jpg?tr=w-1920,f-auto",
     },
     {
       id: "stage-design",
@@ -168,7 +169,7 @@ export const ServicesPage = () => {
         // "Opulent & Emotional Décor",
       ],
       image:
-        "https://ik.imagekit.io/v6xwevpjp/Gallery-Elegantize/Gallery-Elegentize/DSC00095.jpg?updatedAt=1768806983978",
+        "https://ik.imagekit.io/v6xwevpjp/Home%20Page%20-%20Elegantize/Home%20Page%20Images/Home%20Page%20Images/Copy%20of%20395791049.jpg?tr=w-1920,f-auto",
     },
   ];
 
@@ -177,7 +178,11 @@ export const ServicesPage = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="pt-[60px] md:pt-[50px]">
+      <SEO
+        title="Our Services - Wedding Decor & Design"
+        description="Explore our comprehensive wedding services including floral design, mandaps, event planning, and custom styling."
+      />
       {/* Hero Section */}
       <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -250,10 +255,10 @@ export const ServicesPage = () => {
             >
               {/* Image Side */}
               <div className="w-full lg:w-1/2 relative group">
-                <div className="absolute inset-0 bg-primary/10 transform translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6" />
-                <div className="relative overflow-hidden aspect-[4/5] lg:aspect-[3/4]">
+                <div className="absolute inset-0 bg-[#8ca18e] transform translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6" />
+                <div className="relative overflow-hidden aspect-[5/6] lg:aspect-[4/5]">
                   <img
-                    src={getOptimizedImage(service.image, 800)}
+                    src={getOptimizedImage(service.image, 1200)}
                     alt={service.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
@@ -294,8 +299,7 @@ export const ServicesPage = () => {
                     to={`/services/${service.id}`}
                     className="inline-flex items-center text-primary uppercase text-xs font-bold tracking-widest hover:text-gray-900 transition-colors"
                   >
-                    {service.title}{" "}
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    {service.title} <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </div>
               </div>

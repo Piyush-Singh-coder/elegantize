@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../common/Button";
 import { heroSlides } from "../../data/content";
+import { useNavigate } from "react-router-dom";
 
 export const HeroSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -53,7 +55,7 @@ export const HeroSlider = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <span className="block text-sm sm:text-base uppercase tracking-[0.4em] mb-4">
-            {heroSlides[currentIndex].title}
+            {/* {heroSlides[currentIndex].title} */}
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display leading-tight mb-8 max-w-5xl">
             {heroSlides[currentIndex].subtitle}
@@ -63,9 +65,7 @@ export const HeroSlider = () => {
               variant="outline"
               size="lg"
               onClick={() =>
-                document
-                  .getElementById("portfolio")
-                  ?.scrollIntoView({ behavior: "smooth" })
+                navigate("/portfolio")
               }
             >
               View Portfolio
@@ -74,9 +74,7 @@ export const HeroSlider = () => {
               variant="primary"
               size="lg"
               onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
+                navigate("/contact")
               }
             >
               Book Now

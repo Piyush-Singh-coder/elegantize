@@ -60,18 +60,18 @@ export const Footer = () => {
 
           {/* Navigation */}
           <motion.div variants={itemVariants} className="lg:ml-17">
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
+            <h5 className="text-[14px] uppercase tracking-widest font-bold mb-6 text-white">
               Navigation
             </h5>
             <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400">
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <a href="/" className="hover:text-primary transition-colors">
                   Home
                 </a>
               </li>
               <li>
                 <a
-                  href="#about"
+                  href="/about"
                   className="hover:text-primary transition-colors"
                 >
                   About
@@ -79,7 +79,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#services"
+                  href="/services"
                   className="hover:text-primary transition-colors"
                 >
                   Services
@@ -87,7 +87,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#gallery"
+                  href="/gallery"
                   className="hover:text-primary transition-colors"
                 >
                   Gallery
@@ -95,7 +95,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#portfolio"
+                  href="/portfolio"
                   className="hover:text-primary transition-colors"
                 >
                   Portfolio
@@ -103,20 +103,20 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#blog"
+                  href="/blog"
                   className="hover:text-primary transition-colors"
                 >
                   Blog
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-primary transition-colors">
+                <a href="/faq" className="hover:text-primary transition-colors">
                   FAQ
                 </a>
               </li>
               <li>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="hover:text-primary transition-colors"
                 >
                   Contact
@@ -126,9 +126,8 @@ export const Footer = () => {
           </motion.div>
 
           {/* Connect */}
-          {/* Connect */}
           <motion.div variants={itemVariants}>
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
+            <h5 className="text-[14px] uppercase tracking-widest font-bold mb-6 text-white">
               Connect
             </h5>
             <ul className="text-xs space-y-4 uppercase tracking-widest text-gray-400">
@@ -172,7 +171,7 @@ export const Footer = () => {
               </li>
               <li className="hover:text-primary transition-colors flex items-center gap-2">
                 <MapPin size={14} className="shrink-0" />
-                <span>10 Millers Lane New Hyde Park, NY 11040</span>
+                <span>8 Di Tomas Ct, Copiague, NY, 11726</span>
               </li>
               <li className="hover:text-primary transition-colors flex items-center gap-2">
                 <Mail size={14} /> info@elegantize.com
@@ -182,40 +181,85 @@ export const Footer = () => {
 
           {/* Featured Section */}
           <motion.div variants={itemVariants}>
-            <h5 className="text-[10px] uppercase tracking-widest font-bold mb-6 text-white">
+            <h5 className="text-[14px] uppercase tracking-widest font-bold mb-6 text-white">
               Also Featured In
             </h5>
-            <div className="flex flex-row items-start gap-8">
-              <a
-                href="https://www.maharaniweddings.com/2025-04-15/16630-hartford-ct-indian-wedding-by-juniper-domantay?fbclid=PAY2xjawJre85leHRuA2FlbQIxMQABp0DZ6VuDwJI8ulfXC6hmCpEyA6lycLDJEtklxSls-mr0qe2L5xnAjDQvyj3O_aem_XMyyfUDnYZjHn39PUVibmw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-2 transition-transform hover:scale-105 group"
-              >
+            <div className="flex flex-wrap items-center gap-5">
+
+              {/* The Luxury Bride Magazine */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/Screenshot%202026-02-10%20205318.png"
+                alt="The Luxury Bride Magazine"
+                className="h-18 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+              />
+
+              {/* Maharani */}              
                 <img
-                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/maharani-badge.png"
+                  src="https://ik.imagekit.io/v6xwevpjp/Elegentize/maharani.png"
                   alt="Maharani Weddings"
-                  className="h-20 w-auto object-contain"
+                  className="h-12 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                 />
-                <span className="text-[10px] text-gray-400 group-hover:text-primary transition-colors uppercase tracking-widest text-center">
-                  Maharani Weddings
-                </span>
-              </a>
-              <a
-                href="https://wezoree.com/real-weddings/urban-euphoria-adriana-kyle-s-magical-moments-at-ravel-hotel-1701964352/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-2 transition-transform hover:scale-105 group"
-              >
+
+                
+              
+              
+
+              {/* Vogue Weddings */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/358054850_1645118269287715_7591891286819020443_n.jpg"
+                alt="Vogue Weddings"
+                className="h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 rounded-sm"
+              />
+
+              
+
+              {/* Brides */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/212027854_503914070828276_8392782795759379749_n.jpg"
+                alt="Brides"
+                className="h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 rounded-sm"
+              />
+
+              {/* Modern Luxury Weddings */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/497509931_18507082408031379_9071343399086700481_n.jpg"
+                alt="Modern Luxury Weddings"
+                className="h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 rounded-sm"
+              />
+
+
+              {/* Carats & Cakes */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/568631337_18538482400017750_8428615054160921167_n.jpg"
+                alt="Carats & Cakes"
+                className="h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 rounded-sm"
+              />
+
+
+              
+              {/* Elle Weddings */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/326374167_520572563502506_3682989526405299889_n.jpg"
+                alt="Elle Weddings"
+                className="h-16 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 rounded-sm"
+              />
+
+              {/* Munaluchi Bride */}
+              <img
+                src="https://ik.imagekit.io/v6xwevpjp/Elegentize/MUNALUCHI_Horizontal_Black-web.png"
+                alt="Munaluchi Bride"
+                className="h-10 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-all duration-500"
+              />
+              
+              {/* Wezoree */}
+              
                 <img
                   src="https://ik.imagekit.io/v6xwevpjp/Elegentize/Logo_Wezoree_Black-01.png"
                   alt="Wezoree"
-                  className="h-8 w-auto object-contain brightness-0 invert"
+                  className="h-8 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity"
                 />
-                <span className="text-[10px] text-gray-400 group-hover:text-primary transition-colors uppercase tracking-widest text-center mt-2">
-                  Wezoree
-                </span>
-              </a>
+
+              
             </div>
           </motion.div>
         </div>

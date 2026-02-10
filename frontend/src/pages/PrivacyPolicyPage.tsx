@@ -1,11 +1,16 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/common/Button";
 
-export const PrivacyPolicyPage: React.FC = () => {
+import { SEO } from "../components/common/SEO";
+
+export const PrivacyPolicyPage = () => {
   return (
-    <div className="bg-stone-50 min-h-screen pt-32 pb-20 px-8">
-      <div className="max-w-4xl mx-auto bg-white p-12 shadow-sm border border-stone-100">
+    <div className="bg-white min-h-screen pt-[60px] md:pt-[50px]">
+      <SEO
+        title="Privacy Policy"
+        description="Privacy Policy for Elegantize Weddings."
+      />
+      <div className="max-w-4xl mx-auto px-6 py-12 md:py-20 shadow-sm border border-stone-100">
         <h1 className="text-4xl font-serif text-stone-900 mb-8">
           Privacy Policy
         </h1>
@@ -189,8 +194,7 @@ export const PrivacyPolicyPage: React.FC = () => {
               <strong>Phone:</strong> +1 (347) 686-4562
             </p>
             <p>
-              <strong>Address:</strong> 10 Millers Lane New Hyde Park, New York
-              11040
+              <strong>Address:</strong> 8 Di Tomas Ct, Copiague, NY, 11726
             </p>
           </div>
           <p className="mt-6 italic">

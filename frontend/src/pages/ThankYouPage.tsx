@@ -47,11 +47,11 @@ const ThankYouPage = () => {
         <h1 className="text-4xl font-display text-gray-900 mb-6">Thank You!</h1>
 
         <p className="text-xl text-gray-600 mb-4 font-light">
-          Your enquiry has been successfully received.
+          Your inquiry has been successfully received.
         </p>
 
         <p className="text-gray-500 mb-10 leading-relaxed">
-          We appreciate you reaching out to Elegantize. Our tea will review your
+          We appreciate you reaching out to Elegantize. Our team will review your
           details and get back to you within 24 hours to discuss your vision.
         </p>
 
