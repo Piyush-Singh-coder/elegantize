@@ -13,6 +13,8 @@ export const HorizontalEnquiryForm = () => {
     date: "",
     phone: "",
     message: "",
+    venue: "",
+    budget: "",
   });
 
   const handleSubmit = async () => {
@@ -21,7 +23,9 @@ export const HorizontalEnquiryForm = () => {
       !formData.email ||
       !formData.phone ||
       !formData.date ||
-      !formData.message
+      !formData.message ||
+      !formData.venue ||
+      !formData.budget
     ) {
       alert("Please fill in all fields including the Message.");
       return;
@@ -35,6 +39,8 @@ export const HorizontalEnquiryForm = () => {
         phone: formData.phone,
         eventDate: formData.date,
         message: formData.message,
+        venue: formData.venue,
+        budget: formData.budget,
         serviceName: "Inquiry Started",
       });
 
@@ -46,6 +52,8 @@ export const HorizontalEnquiryForm = () => {
         date: "",
         phone: "",
         message: "",
+        venue: "",
+        budget: "",
       });
     } catch (error) {
       console.error("Submission error", error);
@@ -112,6 +120,32 @@ export const HorizontalEnquiryForm = () => {
                 }
                 className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
               />
+              <input
+                type="text"
+                placeholder="Event Venue"
+                required
+                value={formData.venue}
+                onChange={(e) =>
+                  setFormData({ ...formData, venue: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600"
+              />
+              <select
+                required
+                value={formData.budget}
+                onChange={(e) =>
+                  setFormData({ ...formData, budget: e.target.value })
+                }
+                className="w-full bg-stone-50 border-none px-4 py-3 focus:ring-1 focus:ring-primary text-gray-600 appearance-none"
+              >
+                <option value="" disabled>
+                  Budget Range
+                </option>
+                <option value="$10k - $15k">$10k – $15k</option>
+                <option value="$15k - $20k">$15k – $20k</option>
+                <option value="$20k - $30k">$20k – $30k</option>
+                <option value="$30k and above">$30k and above</option>
+              </select>
               <div className="relative">
                 <input
                   type="text"

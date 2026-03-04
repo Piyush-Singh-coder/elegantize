@@ -5,6 +5,8 @@ export interface EnquiryData {
   eventDate?: string;
   message?: string;
   serviceName?: string;
+   venue?: string;   
+  budget?: string;  
 }
 
 export const submitToGoogleSheets = async (
